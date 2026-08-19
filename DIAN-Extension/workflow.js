@@ -221,8 +221,11 @@ async function processSingleCufe(tabId, pendiente, onProgress) {
 
     notifyProgress(onProgress, { currentCufe: cufe, message: 'Leyendo el detalle del documento...' });
 
+    // Hasta 30s (30 x 1000ms) esperando el detalle: la DIAN a veces tarda más
+    // que unos pocos segundos en renderizar los paneles del documento,
+    // sobre todo con consultas seguidas. Si hay "sinResultado" se corta antes.
     let datos = null;
-    for (let i = 0; i < 12; i += 1) {
+    for (let i = 0; i < 30; i += 1) {
       const respuesta = await executeContentAction(tabId, 'extraer');
       const data = respuesta.data || {};
 
@@ -236,7 +239,7 @@ async function processSingleCufe(tabId, pendiente, onProgress) {
         break;
       }
 
-      await esperar(700);
+      await esperar(1000);
     }
 
     if (!datos || !Array.isArray(datos.docs) || datos.docs.length === 0) {
