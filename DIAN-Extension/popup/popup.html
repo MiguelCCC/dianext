@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DIAN Consulta CUFE</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">Chrome Extension</p>
+          <h1>DIAN Consulta CUFE</h1>
+        </div>
+      </header>
+
+      <section class="panel">
+        <label class="file-picker" for="excelFileInput">
+          <span class="file-picker__label">Seleccionar Excel</span>
+          <input id="excelFileInput" type="file" accept=".xlsx,.xls" />
+        </label>
+
+        <div class="stats">
+          <div class="stat-card">
+            <span class="stat-card__label">Cantidad de CUFEs encontrados</span>
+            <strong id="cufeCount">0</strong>
+          </div>
+        </div>
+
+        <button id="startButton" class="primary-button" type="button" disabled>
+          Iniciar
+        </button>
+
+        <div class="status-block" aria-live="polite">
+          <div class="status-row">
+            <span>CUFE actual</span>
+            <strong id="currentCufe">-</strong>
+          </div>
+          <div class="status-row">
+            <span>Factura encontrada</span>
+            <strong id="facturaFound">-</strong>
+          </div>
+          <div class="status-row">
+            <span>Nota crédito encontrada</span>
+            <strong id="notaFound">-</strong>
+          </div>
+          <div class="status-row progress-row">
+            <span>Progreso</span>
+            <strong id="progressText">0 / 0</strong>
+          </div>
+          <div class="progress-bar">
+            <div id="progressBar" class="progress-bar__fill"></div>
+          </div>
+        </div>
+
+        <div id="message" class="message" role="status"></div>
+      </section>
+    </main>
+
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>
