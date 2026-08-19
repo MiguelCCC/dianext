@@ -173,12 +173,14 @@ async function asegurarBuscadorConToken(tabId, cufe, onProgress) {
 /**
  * Construye un objeto ResultModel para un CUFE.
  * @param {string} cufe - CUFE consultado.
+ * @param {string} nit - NIT del emisor o receptor asociado al CUFE.
  * @param {object} [data={}] - Datos extraídos.
  * @returns {ResultModel}
  */
-function createResultModel(cufe, data = {}) {
+function createResultModel(cufe, nit, data = {}) {
   return new ResultModel({
     cufe,
+    nit,
     numeroFactura: data.numeroFactura || '',
     valorFactura: data.valorFactura || '',
     numeroNotaCredito: data.numeroNotaCredito || '',
@@ -191,11 +193,13 @@ function createResultModel(cufe, data = {}) {
 /**
  * Ejecuta el flujo completo para una sola CUFE.
  * @param {number} tabId - Pestaña activa donde se ejecuta la automatización.
- * @param {string} cufe - CUFE a consultar.
+ * @param {{ cufe: string, nit: string }} pendiente - CUFE y NIT a consultar.
  * @param {(payload: object) => void} [onProgress] - Callback para el popup.
  * @returns {Promise<ResultModel>}
  */
-async function processSingleCufe(tabId, cufe, onProgress) {
+async function processSingleCufe(tabId, pendiente, onProgress) {
+  const { cufe, nit } = pendiente;
+
   try {
     notifyProgress(onProgress, {
       currentCufe: cufe,
@@ -209,7 +213,7 @@ async function processSingleCufe(tabId, cufe, onProgress) {
     notifyProgress(onProgress, { currentCufe: cufe, message: 'Buscando CUFE en la DIAN...' });
 
     const navegacion = waitForTabComplete(tabId);
-    const busqueda = await executeContentAction(tabId, 'buscarCUFE', { cufe }, { intentos: 2 });
+    const busqueda = await executeContentAction(tabId, 'buscarCUFE', { cufe, nit }, { intentos: 2 });
     if (!busqueda.success) {
       throw new Error(busqueda.error || 'No se pudo enviar la búsqueda del CUFE.');
     }
@@ -251,7 +255,7 @@ async function processSingleCufe(tabId, cufe, onProgress) {
       || {};
     const notas = datos.docs.filter((doc) => doc !== factura && doc.folio);
 
-    const resultado = createResultModel(cufe, {
+    const resultado = createResultModel(cufe, nit, {
       numeroFactura: factura.folio || '',
       valorFactura: factura.total || '',
       numeroNotaCredito: notas.map((nota) => nota.folio).filter(Boolean).join(' | '),
@@ -280,7 +284,7 @@ async function processSingleCufe(tabId, cufe, onProgress) {
       message: mensaje,
     });
 
-    return createResultModel(cufe, { estado: 'ERROR', error: mensaje });
+    return createResultModel(cufe, nit, { estado: 'ERROR', error: mensaje });
   } finally {
     try {
       await gotoSearchPage(tabId);
@@ -292,7 +296,7 @@ async function processSingleCufe(tabId, cufe, onProgress) {
 
 /**
  * Obtiene la siguiente CUFE pendiente según el estado del proceso.
- * @param {{ listaCUFEs: Array<{ cufe: string }>, procesados: number }} state - Estado actual.
+ * @param {{ listaCUFEs: Array<{ cufe: string, nit: string }>, procesados: number }} state - Estado actual.
  * @returns {{ cufe: string } | null}
  */
 function getNextPendingCufe(state) {
@@ -311,21 +315,27 @@ function syncState(state, processedCount) {
 
 /**
  * Ejecuta el flujo completo para todos los CUFEs pendientes.
- * @param {{ total: number, procesados: number, pendientes: number, listaCUFEs: Array<{ cufe: string }> }} state - Estado global.
+ * @param {{ total: number, procesados: number, pendientes: number, listaCUFEs: Array<{ cufe: string, nit: string }> }} state - Estado global.
  * @param {(payload: object) => void} [onProgress] - Callback de progreso.
+ * @param {() => boolean} [shouldStop] - Se consulta antes de cada CUFE; si devuelve true, el lote se detiene.
  * @returns {Promise<Array<ResultModel>>}
  */
-async function executeWorkflow(state, onProgress) {
+async function executeWorkflow(state, onProgress, shouldStop) {
   const tabId = await obtenerTabDian();
   const results = [];
 
   while (state.procesados < state.total) {
+    if (typeof shouldStop === 'function' && shouldStop()) {
+      notifyProgress(onProgress, { message: 'Proceso detenido por el usuario.' });
+      break;
+    }
+
     const pendiente = getNextPendingCufe(state);
     if (!pendiente) {
       break;
     }
 
-    const resultado = await processSingleCufe(tabId, pendiente.cufe, onProgress);
+    const resultado = await processSingleCufe(tabId, pendiente, onProgress);
     results.push(resultado);
 
     syncState(state, state.procesados + 1);

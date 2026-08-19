@@ -131,16 +131,42 @@ function extraerDocumentos() {
 }
 
 /**
- * Diligencia el CUFE y envía el formulario de búsqueda.
+ * Espera a que aparezca el campo NIT en el DOM. La DIAN solo lo revela
+ * después de que el CUFE queda diligenciado (no está presente de entrada).
+ * @param {number} [timeoutMs=8000] - Tiempo máximo de espera.
+ * @returns {Promise<HTMLInputElement | null>}
+ */
+async function esperarInputNit(timeoutMs = 8000) {
+  const limite = Date.now() + timeoutMs;
+  while (Date.now() < limite) {
+    const inputNit = document.getElementById('SearchDocumentNit');
+    if (inputNit) {
+      return inputNit;
+    }
+    await esperar(200);
+  }
+  return null;
+}
+
+/**
+ * Diligencia el CUFE, espera a que la DIAN revele el campo NIT y lo
+ * diligencia también, y envía el formulario de búsqueda.
  * Responde ANTES de enviar el formulario: el submit navega a otra página y
  * destruye este content script, así que el sendResponse debe salir primero.
  * @param {string} cufe - CUFE a consultar.
+ * @param {string} nit - NIT del emisor o receptor asociado al CUFE.
  * @param {(response: object) => void} sendResponse - Callback de respuesta.
  */
-function buscarCufe(cufe, sendResponse) {
-  const valor = String(cufe || '').trim();
-  if (!valor) {
+async function buscarCufe(cufe, nit, sendResponse) {
+  const valorCufe = String(cufe || '').trim();
+  const valorNit = String(nit || '').trim();
+
+  if (!valorCufe) {
     sendResponse({ success: false, error: 'El CUFE recibido está vacío.' });
+    return;
+  }
+  if (!valorNit) {
+    sendResponse({ success: false, error: 'El NIT recibido está vacío.' });
     return;
   }
 
@@ -161,9 +187,20 @@ function buscarCufe(cufe, sendResponse) {
     return;
   }
 
-  input.value = valor;
+  input.value = valorCufe;
   input.dispatchEvent(new Event('input', { bubbles: true }));
   input.dispatchEvent(new Event('change', { bubbles: true }));
+  input.dispatchEvent(new Event('blur', { bubbles: true }));
+
+  const inputNit = await esperarInputNit();
+  if (!inputNit) {
+    sendResponse({ success: false, error: 'El campo NIT (#SearchDocumentNit) no apareció después de diligenciar el CUFE.' });
+    return;
+  }
+
+  inputNit.value = valorNit;
+  inputNit.dispatchEvent(new Event('input', { bubbles: true }));
+  inputNit.dispatchEvent(new Event('change', { bubbles: true }));
 
   sendResponse({ success: true, data: { submitted: true } });
   setTimeout(() => form.submit(), 50);
@@ -197,8 +234,8 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
         return true;
 
       case 'buscarCUFE':
-        buscarCufe(payload.cufe, sendResponse);
-        return false;
+        buscarCufe(payload.cufe, payload.nit, sendResponse);
+        return true;
 
       case 'extraer':
         sendResponse({ success: true, data: extraerDocumentos() });

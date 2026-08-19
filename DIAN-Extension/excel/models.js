@@ -2,6 +2,7 @@
  * Modelo único para representar cada resultado procesado por la extensión.
  * @typedef {Object} ResultModel
  * @property {string} cufe - CUFE consultado.
+ * @property {string} nit - NIT del emisor o receptor asociado al CUFE.
  * @property {string} numeroFactura - Número de factura asociado al CUFE.
  * @property {string} valorFactura - Valor total de la factura.
  * @property {string} numeroNotaCredito - Número de la nota de crédito, si aplica.
@@ -13,6 +14,7 @@ class ResultModel {
   /**
    * @param {object} [data={}]
    * @param {string} [data.cufe='']
+   * @param {string} [data.nit='']
    * @param {string} [data.numeroFactura='']
    * @param {string} [data.valorFactura='']
    * @param {string} [data.numeroNotaCredito='']
@@ -22,6 +24,7 @@ class ResultModel {
    */
   constructor(data = {}) {
     this.cufe = data.cufe || '';
+    this.nit = data.nit || '';
     this.numeroFactura = data.numeroFactura || '';
     this.valorFactura = data.valorFactura || '';
     this.numeroNotaCredito = data.numeroNotaCredito || '';

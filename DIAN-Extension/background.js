@@ -27,6 +27,7 @@ const state = {
   notaEncontrada: '',
   message: '',
   enProceso: false,
+  detener: false,
 };
 
 /**
@@ -156,25 +157,31 @@ async function startAutomation() {
   }, 20000);
 
   state.enProceso = true;
+  state.detener = false;
 
   try {
-    const results = await executeWorkflow(state, pushProgress);
+    const results = await executeWorkflow(state, pushProgress, () => state.detener);
     state.results = results;
+
+    const detenidoPorUsuario = state.detener;
 
     await writeWorkbook(results, 'resultado.xlsx');
 
     pushProgress({
       currentCufe: '',
-      message: 'Proceso finalizado. Se generó resultado.xlsx.',
-      processedCount: state.total,
+      message: detenidoPorUsuario
+        ? `Proceso detenido por el usuario. Se generó resultado.xlsx con ${results.length} de ${state.total} CUFE(s) procesados.`
+        : 'Proceso finalizado. Se generó resultado.xlsx.',
+      processedCount: state.procesados,
     });
 
     return {
       success: true,
       data: {
         total: state.total,
-        procesados: state.total,
-        pendientes: 0,
+        procesados: state.procesados,
+        pendientes: state.pendientes,
+        detenido: detenidoPorUsuario,
       },
     };
   } catch (error) {
@@ -189,7 +196,23 @@ async function startAutomation() {
   } finally {
     clearInterval(keepAlive);
     state.enProceso = false;
+    state.detener = false;
   }
+}
+
+/**
+ * Marca el lote en curso para que se detenga tras el CUFE actual.
+ * @returns {{ success: boolean, error?: string }}
+ */
+function requestStop() {
+  if (!state.enProceso) {
+    return { success: false, error: 'No hay ningún proceso en curso para detener.' };
+  }
+
+  state.detener = true;
+  pushProgress({ message: 'Deteniendo el proceso... se detendrá al terminar el CUFE actual.' });
+
+  return { success: true };
 }
 
 /**
@@ -204,6 +227,10 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
 
       if (request?.type === 'START_PROCESS') {
         return await startAutomation();
+      }
+
+      if (request?.type === 'STOP_PROCESS') {
+        return requestStop();
       }
 
       if (request?.type === 'GET_STATE') {

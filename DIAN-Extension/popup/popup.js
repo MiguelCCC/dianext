@@ -9,6 +9,7 @@ import { readCuFesFromWorkbook } from '../excel/reader.js';
 const excelFileInput = document.getElementById('excelFileInput');
 const cufeCount = document.getElementById('cufeCount');
 const startButton = document.getElementById('startButton');
+const stopButton = document.getElementById('stopButton');
 const currentCufe = document.getElementById('currentCufe');
 const facturaFound = document.getElementById('facturaFound');
 const notaFound = document.getElementById('notaFound');
@@ -139,6 +140,7 @@ async function startProcessing() {
   try {
     isProcessing = true;
     startButton.disabled = true;
+    stopButton.disabled = false;
     setMessage('Procesando... puedes cerrar este popup, el proceso sigue en segundo plano.', '');
 
     const response = await sendToBackground({ type: 'START_PROCESS' });
@@ -147,12 +149,40 @@ async function startProcessing() {
       throw new Error(response?.error || 'No se pudo iniciar el proceso.');
     }
 
-    setMessage('Proceso finalizado. Se descargó resultado.xlsx.', 'success');
+    setMessage(
+      response.data?.detenido
+        ? 'Proceso detenido por el usuario. Se descargó resultado.xlsx con lo procesado hasta el momento.'
+        : 'Proceso finalizado. Se descargó resultado.xlsx.',
+      'success',
+    );
   } catch (error) {
     setMessage(error.message || 'Error durante el proceso.', 'error');
   } finally {
     isProcessing = false;
     startButton.disabled = loadedCufeCount === 0;
+    stopButton.disabled = true;
+  }
+}
+
+/**
+ * Solicita al background detener el lote en curso tras el CUFE actual.
+ */
+async function stopProcessing() {
+  if (!isProcessing) {
+    return;
+  }
+
+  try {
+    stopButton.disabled = true;
+    setMessage('Deteniendo el proceso...', '');
+
+    const response = await sendToBackground({ type: 'STOP_PROCESS' });
+    if (!response?.success) {
+      throw new Error(response?.error || 'No se pudo detener el proceso.');
+    }
+  } catch (error) {
+    setMessage(error.message || 'Error al detener el proceso.', 'error');
+    stopButton.disabled = !isProcessing;
   }
 }
 
@@ -176,6 +206,7 @@ async function restoreState() {
       applyState(response.data);
       isProcessing = Boolean(response.data.enProceso);
       startButton.disabled = isProcessing || (response.data.total || 0) === 0;
+      stopButton.disabled = !isProcessing;
     }
   } catch (error) {
     // Si el background aún no responde, se mantiene el estado inicial.
@@ -184,6 +215,7 @@ async function restoreState() {
 
 excelFileInput.addEventListener('change', handleFileSelection);
 startButton.addEventListener('click', startProcessing);
+stopButton.addEventListener('click', stopProcessing);
 
 currentCufe.textContent = '-';
 facturaFound.textContent = '-';

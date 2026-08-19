@@ -96,9 +96,10 @@ function bytesToDataUrl(bytes, mime) {
  */
 async function writeWorkbook(results, outputFileName = 'resultado.xlsx') {
   const filas = [
-    ['CUFE', 'FACTURA', 'VALOR FACTURA', 'NUMERO NOTA CREDITO', 'VALOR NOTA CREDITO', 'ESTADO', 'ERROR'],
+    ['CUFE', 'NIT', 'FACTURA', 'VALOR FACTURA', 'NUMERO NOTA CREDITO', 'VALOR NOTA CREDITO', 'ESTADO', 'ERROR'],
     ...results.map((item) => [
       item.cufe || '',
+      item.nit || '',
       item.numeroFactura || '',
       item.valorFactura || '',
       item.numeroNotaCredito || '',
