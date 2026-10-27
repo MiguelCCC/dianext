@@ -249,14 +249,17 @@ async function processSingleCufe(tabId, pendiente, onProgress) {
       throw new Error('No se pudo leer el detalle del documento en la DIAN.');
     }
 
-    // Clasificación determinística: el panel cuyo id (CUFE) coincide con el
-    // CUFE buscado es la factura; cualquier otro panel es una nota crédito.
-    // No depende de detectar textos en paneles ocultos (frágil).
+    // Clasificación: la factura es el documento que NO es nota crédito (en la
+    // página real es el panel `#home`); se prefiere el que además coincide con
+    // el CUFE buscado. Las notas crédito son el resto de documentos marcados
+    // como nota. NO se usa el id del panel como CUFE (la factura usa id "home").
     const cufeBuscado = String(cufe).trim().toLowerCase();
-    const factura = datos.docs.find((doc) => doc.cufe === cufeBuscado)
+    const factura = datos.docs.find((doc) => !doc.esNota && doc.cufe === cufeBuscado)
       || datos.docs.find((doc) => !doc.esNota)
+      || datos.docs.find((doc) => doc.cufe === cufeBuscado)
+      || datos.docs[0]
       || {};
-    const notas = datos.docs.filter((doc) => doc !== factura && doc.folio);
+    const notas = datos.docs.filter((doc) => doc !== factura && doc.esNota && doc.folio);
 
     const resultado = createResultModel(cufe, nit, {
       numeroFactura: factura.folio || '',

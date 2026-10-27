@@ -7,8 +7,10 @@
  * navega con POST completo al buscar (el script se recarga en cada página).
  *
  * Estructura real de la página de detalle de la DIAN (verificada):
- * - Cada documento (factura y nota(s) crédito) vive en un div `.tab-pane`
- *   cuyo id es el CUFE/CUDE de 96 caracteres hexadecimales.
+ * - El documento consultado vive en el panel `.tab-pane#home` (id literal
+ *   "home", NO el CUFE). Los documentos relacionados (p. ej. la nota crédito)
+ *   viven en su propio `.tab-pane` cuyo id es su CUFE/CUDE de 96 hex. El CUFE
+ *   real de cada panel está además en un `span.cufe-text` dentro del panel.
  * - Los campos visibles son "Folio: <número>" y "Total: $<valor>".
  * - Las notas crédito incluyen la sección "CONCEPTO DE CORRECCIÓN" con
  *   "Descripción: <concepto>".
@@ -37,10 +39,20 @@ function obtenerToken() {
 
 /**
  * Devuelve los paneles de documento (factura / notas crédito) presentes en el DOM.
+ *
+ * OJO: no se puede filtrar por el id del panel. En la página real de la DIAN
+ * el documento consultado vive en `.tab-pane#home` (id literal "home", NO el
+ * CUFE), mientras que los documentos relacionados (p. ej. la nota crédito)
+ * llevan como id su CUFE/CUDE de 96 hex. Filtrar por 96-hex descartaba la
+ * factura y rompía la clasificación. Un panel de documento se reconoce por
+ * tener los campos "Folio:" y "Total:".
  * @returns {Element[]}
  */
 function obtenerPanes() {
-  return Array.from(document.querySelectorAll('.tab-pane')).filter((pane) => HEX96.test(pane.id));
+  return Array.from(document.querySelectorAll('.tab-pane')).filter((pane) => {
+    const texto = pane.textContent || '';
+    return /Folio:/i.test(texto) && /Total:/i.test(texto);
+  });
 }
 
 /**
@@ -117,8 +129,16 @@ function extraerDocumentos() {
     const esNota = /Nota de cr[eé]dito electr[oó]nica/i.test(texto) && /CONCEPTO DE CORRECCI/i.test(texto);
     const concepto = ((texto.match(/Descripci[oó]n:\s*([^\n]{1,100})/) || [])[1] || '').trim();
 
+    // El CUFE/CUDE real del documento NO se puede tomar de `pane.id`: la
+    // factura consultada vive en `#home`. Se lee del `span.cufe-text` del
+    // panel y, como respaldo, del id cuando ya es un hash de 96 hex.
+    const cufeSpan = (pane.querySelector('.cufe-text')?.textContent || '').replace(/\s+/g, '').toLowerCase();
+    const cufe = HEX96.test(cufeSpan)
+      ? cufeSpan
+      : (HEX96.test(pane.id) ? pane.id.toLowerCase() : '');
+
     return {
-      cufe: pane.id.toLowerCase(),
+      cufe,
       folio,
       serie,
       total: totalCrudo.replace(/[^\d]/g, ''),
