@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEIDE IPS - Web Institucional</title>
+
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Carga de Iconos Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Estilos Personalizados y Animaciones -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        body, html {
+            font-family: var(--font-sans);
+            scroll-behavior: smooth;
+            background-color: #ffffff;
+            overflow-x: hidden;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .font-poppins { font-family: var(--font-sans); }
+
+        /* Banners institucionales y Fondos Dinámicos */
+        .hero-bg {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .corporate-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Clases Dinámicas e Interactivas Mejoradas */
+        .dynamic-card {
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .dynamic-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(2, 132, 199, 0.15), 0 10px 10px -5px rgba(2, 132, 199, 0.1);
+            border-color: #7dd3fc;
+            z-index: 10;
+        }
+
+        @keyframes float-icon {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-6px) scale(1.1); }
+        }
+        .animate-float-icon {
+            animation: float-icon 3s ease-in-out infinite;
+        }
+
+        @keyframes float-slow {
+            0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+            33% { transform: translate(15px, -15px) rotate(5deg); }
+            66% { transform: translate(-10px, 10px) rotate(-5deg); }
+        }
+        .animate-float-slow {
+            animation: float-slow 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+        }
+        .animate-pulse-soft {
+            animation: pulse-soft 4s infinite;
+        }
+
+        .hover-scale { transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .hover-scale:hover { transform: scale(1.05); }
+
+        /* Clases base para animaciones Reveal */
+        .reveal {
+            opacity: 0;
+            transition: all 900ms cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .reveal-active {
+            opacity: 1 !important;
+            transform: translate(0, 0) scale(1) !important;
+        }
+
+        /* Tipos de animaciones */
+        .reveal-fade-up { transform: translateY(3rem) scale(0.95); }
+        .reveal-fade-left { transform: translateX(-4rem); }
+        .reveal-fade-right { transform: translateX(4rem); }
+        .reveal-zoom-in { transform: scale(0.85); }
+
+        /* Animación para títulos */
+        .title-animate {
+            background-size: 200% auto;
+            transition: all 0.5s ease;
+        }
+        .title-animate:hover {
+            background-position: right center;
+            transform: scale(1.02);
+        }
+
+        /* Menu activo indicador */
+        .nav-item-active { color: #1d4ed8; font-weight: 700; transform: scale(1.05); }
+        .nav-indicator { opacity: 0; transition: opacity 0.3s; }
+        .nav-item-active .nav-indicator { opacity: 1; }
+    </style>
+</head>
+<body class="font-poppins min-h-screen text-slate-700 bg-white selection:bg-blue-200 selection:text-blue-900 w-full overflow-x-hidden">
+
+    <!-- ================= CONTENEDOR MENÚ FIJO ================= -->
+    <div class="fixed top-0 left-0 w-full z-50 flex flex-col shadow-md">
+        <!-- ================= BARRA SUPERIOR (TOP BAR) ================= -->
+        <div class="bg-blue-900 text-white text-xs py-2 hidden md:block w-full transition-all duration-300 hover:bg-blue-950">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
+                <div class="flex items-center gap-6">
+                    <span class="flex items-center gap-2 hover:text-gray-200 transition-colors cursor-default">
+                        <i data-lucide="phone" width="14" height="14" class="animate-pulse"></i> PBX: 333 033 3555 - 300 914 7197
+                    </span>
+                    <span class="flex items-center gap-2 hover:text-gray-200 transition-colors cursor-default">
+                        <i data-lucide="mail" width="14" height="14" class="animate-float-icon"></i> contactanos_fomag@meide.com.co
+                    </span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <span class="flex items-center gap-2 font-bold tracking-widest text-sky-100 uppercase transition-transform hover:scale-105 duration-300">
+                        <i data-lucide="users" width="14" height="14"></i> IPS Exclusiva FOMAG
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= HEADER PRINCIPAL ================= -->
+        <header id="main-header" class="bg-white w-full border-b border-gray-100 py-1.5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <!-- Estructura Flex dividida para alinear logo, menú central y botón a la derecha -->
+                <div class="flex justify-between items-center h-16 md:h-20 w-full">
+
+                    <!-- 1. Izquierda: Logo e Identificador -->
+                    <div class="flex items-center h-full py-1 lg:w-1/4">
+                        <div class="flex items-center cursor-pointer h-full" onclick="scrollToSection('inicio')">
+                            <img
+                                src="/IMAGENES/LOGOMEIDESAS.png"
+                                alt="MEIDE IPS"
+                                class="max-h-14 md:max-h-20 w-auto object-contain transition-transform duration-500 hover:scale-110 drop-shadow-sm"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- 2. Centro: Menú Desktop -->
+                    <nav class="hidden lg:flex items-center justify-center space-x-6 h-full lg:w-2/4">
+                        <button onclick="scrollToSection('inicio')" data-target="inicio" class="nav-btn relative font-semibold text-sm xl:text-base transition-all py-2 px-1 hover:-translate-y-1 transform duration-300 text-gray-600 hover:text-blue-600">
+                            Inicio
+                            <span class="nav-indicator absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 shadow-[0_0_8px_rgba(37,99,235,0.6)] rounded-t-md"></span>
+                        </button>
+                        <button onclick="scrollToSection('nosotros')" data-target="nosotros" class="nav-btn relative font-semibold text-sm xl:text-base transition-all py-2 px-1 hover:-translate-y-1 transform duration-300 text-gray-600 hover:text-blue-600">
+                            Institucional
+                            <span class="nav-indicator absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 shadow-[0_0_8px_rgba(37,99,235,0.6)] rounded-t-md"></span>
+                        </button>
+                        <button onclick="scrollToSection('servicios')" data-target="servicios" class="nav-btn relative font-semibold text-sm xl:text-base transition-all py-2 px-1 hover:-translate-y-1 transform duration-300 text-gray-600 hover:text-blue-600">
+                            Servicios
+                            <span class="nav-indicator absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 shadow-[0_0_8px_rgba(37,99,235,0.6)] rounded-t-md"></span>
+                        </button>
+                        <button onclick="scrollToSection('novedades')" data-target="novedades" class="nav-btn relative font-semibold text-sm xl:text-base transition-all py-2 px-1 hover:-translate-y-1 transform duration-300 text-gray-600 hover:text-blue-600">
+                            Novedades
+                            <span class="nav-indicator absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 shadow-[0_0_8px_rgba(37,99,235,0.6)] rounded-t-md"></span>
+                        </button>
+                        <button onclick="scrollToSection('sedes')" data-target="sedes" class="nav-btn relative font-semibold text-sm xl:text-base transition-all py-2 px-1 hover:-translate-y-1 transform duration-300 text-gray-600 hover:text-blue-600">
+                            Sedes
+                            <span class="nav-indicator absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 shadow-[0_0_8px_rgba(37,99,235,0.6)] rounded-t-md"></span>
+                        </button>
+                        <button onclick="scrollToSection('siau')" data-target="siau" class="nav-btn relative font-semibold text-sm xl:text-base transition-all py-2 px-1 hover:-translate-y-1 transform duration-300 text-gray-600 hover:text-blue-600">
+                            SIAU
+                            <span class="nav-indicator absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 shadow-[0_0_8px_rgba(37,99,235,0.6)] rounded-t-md"></span>
+                        </button>
+                        <button onclick="scrollToSection('transparencia')" data-target="transparencia" class="nav-btn relative font-semibold text-sm xl:text-base transition-all py-2 px-1 hover:-translate-y-1 transform duration-300 text-gray-600 hover:text-blue-600">
+                            Transparencia
+                            <span class="nav-indicator absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 shadow-[0_0_8px_rgba(37,99,235,0.6)] rounded-t-md"></span>
+                        </button>
+                        <!-- ===== NUEVO BOTÓN: SALUD CENTRAL UT (página externa) ===== -->
+                        <a href="saludcentralut.html" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 font-bold text-sm xl:text-base py-2 px-3 rounded-lg border border-teal-200 text-teal-700 hover:bg-teal-600 hover:text-white hover:border-teal-600 hover:-translate-y-1 transform transition-all duration-300 whitespace-nowrap shadow-sm">
+                            Salud Central UT <i data-lucide="external-link" width="14" height="14"></i>
+                        </a>
+                    </nav>
+
+                    <!-- 3. Derecha: Botón Resultados y Menú Móvil -->
+                    <div class="flex items-center justify-end gap-4 h-full lg:w-1/4">
+                        <!-- Botón Resultados (Visible solo en PC) -->
+                        <a href="http://181.48.212.43/resultados/" target="_blank" class="hidden lg:inline-flex items-center justify-center bg-gradient-to-r from-blue-700 to-blue-900 text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300 border border-blue-600">
+                            Resultados
+                        </a>
+
+                        <!-- Menú Móvil Toggle -->
+                        <button
+                            id="mobile-menu-btn"
+                            class="lg:hidden text-blue-900 p-2.5 bg-sky-50 border border-sky-100 rounded-lg hover:bg-sky-100 active:scale-90 transition-all shadow-sm"
+                            onclick="toggleMobileMenu()"
+                        >
+                            <i id="menu-icon-open" data-lucide="menu" width="24" height="24"></i>
+                            <i id="menu-icon-close" data-lucide="x" width="24" height="24" class="hidden"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menú Móvil Desplegable a Pantalla Completa -->
+            <div id="mobile-menu" class="lg:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-xl shadow-2xl transition-all duration-700 overflow-y-auto max-h-0 flex flex-col items-center">
+                <div class="flex flex-col w-full px-8 py-10 space-y-6">
+                    <button onclick="scrollToSection('inicio')" class="mobile-nav-btn text-center w-full px-6 py-4 rounded-2xl font-black text-xl transition-all duration-300 text-gray-600 hover:bg-blue-50 hover:text-blue-700 hover:scale-105 shadow-sm border border-transparent hover:border-blue-100">Inicio</button>
+                    <button onclick="scrollToSection('nosotros')" class="mobile-nav-btn text-center w-full px-6 py-4 rounded-2xl font-black text-xl transition-all duration-300 text-gray-600 hover:bg-blue-50 hover:text-blue-700 hover:scale-105 shadow-sm border border-transparent hover:border-blue-100">Institucional</button>
+                    <button onclick="scrollToSection('servicios')" class="mobile-nav-btn text-center w-full px-6 py-4 rounded-2xl font-black text-xl transition-all duration-300 text-gray-600 hover:bg-blue-50 hover:text-blue-700 hover:scale-105 shadow-sm border border-transparent hover:border-blue-100">Servicios</button>
+                    <button onclick="scrollToSection('novedades')" class="mobile-nav-btn text-center w-full px-6 py-4 rounded-2xl font-black text-xl transition-all duration-300 text-gray-600 hover:bg-blue-50 hover:text-blue-700 hover:scale-105 shadow-sm border border-transparent hover:border-blue-100">Novedades</button>
+                    <button onclick="scrollToSection('sedes')" class="mobile-nav-btn text-center w-full px-6 py-4 rounded-2xl font-black text-xl transition-all duration-300 text-gray-600 hover:bg-blue-50 hover:text-blue-700 hover:scale-105 shadow-sm border border-transparent hover:border-blue-100">Sedes</button>
+                    <button onclick="scrollToSection('siau')" class="mobile-nav-btn text-center w-full px-6 py-4 rounded-2xl font-black text-xl transition-all duration-300 text-gray-600 hover:bg-blue-50 hover:text-blue-700 hover:scale-105 shadow-sm border border-transparent hover:border-blue-100">SIAU</button>
+                    <button onclick="scrollToSection('transparencia')" class="mobile-nav-btn text-center w-full px-6 py-4 rounded-2xl font-black text-xl transition-all duration-300 text-gray-600 hover:bg-blue-50 hover:text-blue-700 hover:scale-105 shadow-sm border border-transparent hover:border-blue-100">Transparencia</button>
+                    <!-- ===== NUEVO BOTÓN MÓVIL: SALUD CENTRAL UT (página externa) ===== -->
+                    <a href="saludcentralut.html" target="_blank" rel="noopener" class="block text-center w-full px-6 py-4 rounded-2xl font-black text-xl transition-all duration-300 text-teal-700 bg-teal-50 border border-teal-100 hover:bg-teal-600 hover:text-white hover:scale-105 shadow-sm flex items-center justify-center gap-2">Salud Central UT <i data-lucide="external-link" width="18" height="18"></i></a>
+                    <!-- Botón Resultados para Móvil Destacado -->
+                    <a href="http://181.48.212.43/resultados/" target="_blank" class="block text-center w-full px-6 py-4 rounded-2xl font-black text-xl transition-all duration-300 bg-gradient-to-r from-blue-700 to-blue-900 text-white hover:shadow-lg hover:scale-105 shadow-md">Resultados</a>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <!-- Espaciador para evitar que el contenido quede oculto bajo el menú fijo -->
+    <div class="h-[76px] md:h-[124px] w-full bg-white"></div>
+
+    <main class="w-full">
+        <!-- ================= HERO SECTION ================= -->
+        <section id="inicio" class="hero-bg py-8 md:py-10 lg:py-12 border-b border-gray-200 relative overflow-hidden w-full">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-8 items-center">
+
+                <!-- Texto Hero -->
+                <div class="relative z-10">
+                    <div class="reveal reveal-fade-right">
+                        <span class="inline-flex items-center gap-2 bg-white text-sky-800 text-xs md:text-sm font-bold px-4 py-2 rounded-full uppercase tracking-widest mb-4 shadow-md border border-sky-100 animate-pulse-soft">
+                            <i data-lucide="heart-pulse" width="16" height="16" class="text-sky-500"></i>
+                            Atención en el Eje Cafetero
+                        </span>
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-blue-950 mb-5 leading-[1.1] tracking-tight title-animate">
+                            Atención Integral en Salud con <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-blue-600">Dignidad y Calidez</span>
+                        </h2>
+                        <p class="text-base md:text-lg text-gray-700 mb-6 font-medium leading-relaxed max-w-xl transition-all hover:text-gray-900 duration-300">
+                            Somos una Institución Prestadora de Salud (IPS) dedicada a su bienestar. Combinamos profesionales expertos, tecnología e instalaciones modernas para un trato seguro y humano.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                            <button onclick="scrollToSection('servicios')" class="bg-gradient-to-r from-blue-700 to-blue-800 text-white px-6 py-3 rounded-xl font-bold transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/30 flex items-center justify-center gap-2 group text-sm md:text-base">
+                                Conocer Servicios <i data-lucide="arrow-right" width="18" height="18" class="group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                            <button onclick="scrollToSection('siau')" class="bg-white/80 backdrop-blur-sm border-2 border-blue-200 text-blue-900 px-6 py-3 rounded-xl font-bold hover:bg-white transition-all hover:-translate-y-1 hover:shadow-lg flex items-center justify-center text-sm md:text-base">
+                                Atención al Usuario
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bloque de Imagen / Visual -->
+                <div class="relative mt-6 lg:mt-0">
+                    <div class="reveal reveal-zoom-in" style="transition-delay: 200ms;">
+                        <div class="bg-white p-2.5 md:p-3 rounded-[1.5rem] corporate-shadow border border-white relative z-10 hover-scale duration-700 group">
+                            <div class="aspect-[4/3] bg-gray-100 rounded-[1.2rem] overflow-hidden relative flex items-center justify-center shadow-inner">
+                                <img
+                                    src="/IMAGENES/BANNERMEIDE.jpg"
+                                    alt="Equipo Médico MEIDE IPS"
+                                    class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                                />
+                                <div class="absolute inset-0 bg-gradient-to-t from-blue-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            </div>
+                        </div>
+                        <!-- Cuadros de acento traseros animados -->
+                        <div class="absolute -bottom-6 -right-6 w-full h-full bg-sky-500 rounded-[1.5rem] -z-10 opacity-20 animate-pulse"></div>
+                        <div class="absolute top-8 -left-8 w-20 h-20 md:w-28 md:h-28 bg-blue-300 rounded-full -z-10 opacity-30 filter blur-xl animate-bounce-slow"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= FRANJA FOMAG (Compacta) ================= -->
+        <div class="bg-gradient-to-r from-sky-700 to-blue-800 text-white py-3 shadow-inner w-full relative overflow-hidden group">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2 pointer-events-none group-hover:opacity-10 transition-opacity duration-700"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
+                <!-- Logo Izquierda -->
+                <div class="reveal reveal-fade-right w-full md:w-1/4 flex justify-center md:justify-start flex-shrink-0">
+                    <div class="bg-white p-2 rounded-xl shadow-md hover-scale transition-transform duration-500 inline-block">
+                        <img src="/IMAGENES/LOGOFOMAG.png" alt="Logo FOMAG" class="h-[35px] md:h-[44px] lg:h-[53px] w-auto object-contain" />
+                    </div>
+                </div>
+
+                <!-- Textos Centro -->
+                <div class="reveal reveal-fade-up w-full md:w-2/4 flex flex-col justify-center items-center text-center" style="transition-delay: 100ms;">
+                    <h3 class="text-base md:text-lg lg:text-xl font-black leading-tight tracking-wide drop-shadow-md mb-0.5 hover:scale-105 transition-transform duration-300">
+                        IPS exclusiva para el magisterio FOMAG
+                    </h3>
+                    <p class="text-sky-100 text-xs md:text-sm font-medium leading-snug">
+                        Garantizando la salud y bienestar de nuestros usuarios en el eje cafetero.
+                    </p>
+                </div>
+
+                <!-- Boton Derecha -->
+                <div class="reveal reveal-fade-left w-full md:w-1/4 flex justify-center md:justify-end flex-shrink-0" style="transition-delay: 200ms;">
+                    <button onclick="scrollToSection('siau')" class="bg-white text-blue-900 hover:bg-sky-50 border border-transparent hover:border-sky-200 px-4 py-2 rounded-lg font-black text-xs md:text-sm transition-all hover:-translate-y-1 shadow-md whitespace-nowrap">
+                        Agendar Cita
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= IDENTIDAD (Nosotros) ================= -->
+        <section id="nosotros" class="py-10 md:py-12 bg-white w-full relative overflow-hidden">
+            <!-- Formas de salud sutiles -->
+            <div class="absolute top-5 left-10 opacity-[0.03] animate-float-slow text-sky-800 pointer-events-none"><i data-lucide="plus" width="80" height="80"></i></div>
+            <div class="absolute bottom-10 right-10 opacity-[0.03] animate-float-slow text-blue-800 pointer-events-none" style="animation-delay: 2s;"><i data-lucide="circle-dashed" width="100" height="100"></i></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+                <div class="text-center max-w-3xl mx-auto mb-8 md:mb-10 reveal reveal-zoom-in">
+                    <span class="text-sky-600 font-bold tracking-[0.2em] uppercase text-xs mb-3 block animate-pulse">Identidad Corporativa</span>
+                    <h3 class="text-3xl md:text-4xl font-black text-blue-950 mb-4 title-animate">Plataforma Institucional</h3>
+                    <div class="w-20 h-1.5 bg-gradient-to-r from-sky-400 to-blue-600 mx-auto mb-4 rounded-full"></div>
+                    <p class="text-gray-600 text-base md:text-lg leading-relaxed font-medium">
+                        Como Institución Prestadora de Salud (IPS), consolidamos un equipo multidisciplinario enfocado en transformar la experiencia médica mediante la calidad técnica y el trato humano.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-8 md:mb-10">
+                    <!-- Misión -->
+                    <div class="reveal reveal-fade-right" style="transition-delay: 100ms;">
+                        <div class="bg-gradient-to-br from-gray-50 to-white border border-gray-100 p-6 md:p-8 rounded-[1.5rem] h-full dynamic-card">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="bg-blue-100 text-blue-700 p-3 rounded-xl animate-float-icon shadow-sm">
+                                    <i data-lucide="book-open" width="28" height="28"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl md:text-2xl font-black text-blue-950">Misión</h4>
+                                    <div class="h-1 w-10 bg-sky-400 rounded-full mt-1"></div>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 text-sm md:text-base leading-relaxed font-medium">
+                                Brindar atención integral en salud con calidad y calidez, priorizando el bienestar de nuestros usuarios y familias, mediante un equipo profesional comprometido y en mejora continua.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Visión -->
+                    <div class="reveal reveal-fade-left" style="transition-delay: 200ms;">
+                        <div class="bg-gradient-to-br from-blue-900 to-blue-950 text-white p-6 md:p-8 rounded-[1.5rem] h-full dynamic-card shadow-xl shadow-blue-900/20 border border-blue-800">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="bg-blue-800 text-sky-300 p-3 rounded-xl border border-blue-700 animate-float-icon shadow-inner">
+                                    <i data-lucide="globe" width="28" height="28"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl md:text-2xl font-black">Visión</h4>
+                                    <div class="h-1 w-10 bg-sky-400 rounded-full mt-1"></div>
+                                </div>
+                            </div>
+                            <p class="text-blue-100 text-sm md:text-base leading-relaxed font-medium">
+                                Para el 2028 seremos una IPS líder en servicios de mediana complejidad, reconocida por su eficiencia, accesibilidad y oportunidad, fortalecida por programas de promoción y prevención.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Valores Institucionales -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="reveal reveal-zoom-in" style="transition-delay: 0ms;">
+                        <div class="border border-gray-100 p-5 rounded-[1.5rem] text-center bg-white dynamic-card h-full flex flex-col justify-center items-center group cursor-pointer">
+                            <div class="flex items-center justify-center mb-3 p-3 rounded-xl border text-rose-500 bg-rose-50 border-rose-100 group-hover:bg-rose-500 group-hover:text-white transition-colors duration-300 shadow-sm">
+                                <i data-lucide="heart-handshake" width="28" height="28" class="group-hover:scale-110 transition-transform"></i>
+                            </div>
+                            <h5 class="font-bold text-gray-800 text-sm group-hover:text-blue-900 transition-colors">Calidez Humana</h5>
+                        </div>
+                    </div>
+                    <div class="reveal reveal-zoom-in" style="transition-delay: 150ms;">
+                        <div class="border border-gray-100 p-5 rounded-[1.5rem] text-center bg-white dynamic-card h-full flex flex-col justify-center items-center group cursor-pointer">
+                            <div class="flex items-center justify-center mb-3 p-3 rounded-xl border text-sky-600 bg-sky-50 border-sky-100 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+                                <i data-lucide="shield-plus" width="28" height="28" class="group-hover:scale-110 transition-transform"></i>
+                            </div>
+                            <h5 class="font-bold text-gray-800 text-sm group-hover:text-blue-900 transition-colors">Seguridad y Calidad</h5>
+                        </div>
+                    </div>
+                    <div class="reveal reveal-zoom-in" style="transition-delay: 300ms;">
+                        <div class="border border-gray-100 p-5 rounded-[1.5rem] text-center bg-white dynamic-card h-full flex flex-col justify-center items-center group cursor-pointer">
+                            <div class="flex items-center justify-center mb-3 p-3 rounded-xl border text-indigo-600 bg-indigo-50 border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+                                <i data-lucide="trending-up" width="28" height="28" class="group-hover:scale-110 transition-transform"></i>
+                            </div>
+                            <h5 class="font-bold text-gray-800 text-sm group-hover:text-blue-900 transition-colors">Mejora Continua</h5>
+                        </div>
+                    </div>
+                    <div class="reveal reveal-zoom-in" style="transition-delay: 450ms;">
+                        <div class="border border-gray-100 p-5 rounded-[1.5rem] text-center bg-white dynamic-card h-full flex flex-col justify-center items-center group cursor-pointer">
+                            <div class="flex items-center justify-center mb-3 p-3 rounded-xl border text-teal-600 bg-teal-50 border-teal-100 group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+                                <i data-lucide="stethoscope" width="28" height="28" class="group-hover:scale-110 transition-transform"></i>
+                            </div>
+                            <h5 class="font-bold text-gray-800 text-sm group-hover:text-blue-900 transition-colors">Atención Integral</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SERVICIOS MÉDICOS ================= -->
+        <section id="servicios" class="py-10 md:py-12 bg-gray-50 border-t border-gray-200 w-full relative overflow-hidden">
+            <div class="absolute top-1/4 right-5 opacity-[0.04] animate-float-slow text-indigo-600 pointer-events-none"><i data-lucide="heart" width="100" height="100"></i></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+                <div class="reveal reveal-fade-up mb-8 md:mb-10 text-center">
+                    <span class="text-sky-600 font-bold tracking-[0.2em] uppercase text-xs mb-3 block animate-pulse">Nuestro Alcance</span>
+                    <h3 class="text-3xl md:text-4xl font-black text-blue-950 mb-4 title-animate">Portafolio de Servicios</h3>
+                    <div class="w-20 h-1.5 bg-gradient-to-r from-sky-400 to-blue-600 mb-4 mx-auto rounded-full"></div>
+                    <p class="text-gray-600 text-base md:text-lg max-w-3xl mx-auto font-medium leading-relaxed">
+                        Modelo de atención integral diseñado para brindar respuestas clínicas y preventivas según las necesidades de nuestra población afiliada.
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-6 mb-8">
+
+                    <!-- Consulta Externa -->
+                    <div class="reveal reveal-fade-right" style="transition-delay: 100ms;">
+                        <div class="bg-white p-6 md:p-8 rounded-[1.5rem] h-full dynamic-card border border-gray-100 shadow-sm relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 w-20 h-20 bg-sky-50 rounded-bl-[100%] -z-10 group-hover:scale-150 transition-transform duration-700"></div>
+                            <h4 class="text-xl md:text-2xl font-bold text-blue-900 mb-4 border-b border-gray-100 pb-3 flex items-center gap-3">
+                                <div class="bg-sky-50 p-2.5 rounded-lg text-sky-600 group-hover:bg-sky-500 group-hover:text-white transition-colors duration-300"><i data-lucide="stethoscope" width="20" height="20" class="group-hover:rotate-12 transition-transform"></i></div> Consulta Externa
+                            </h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-center gap-3 text-gray-700 text-sm md:text-base font-semibold hover:text-sky-600 hover:translate-x-1 transition-transform cursor-default"><i data-lucide="heart-pulse" width="16" height="16" class="text-blue-500"></i> Odontología general</li>
+                                <li class="flex items-center gap-3 text-gray-700 text-sm md:text-base font-semibold hover:text-sky-600 hover:translate-x-1 transition-transform cursor-default"><i data-lucide="brain" width="16" height="16" class="text-blue-500"></i> Psicología</li>
+                                <li class="flex items-center gap-3 text-gray-700 text-sm md:text-base font-semibold hover:text-sky-600 hover:translate-x-1 transition-transform cursor-default"><i data-lucide="stethoscope" width="16" height="16" class="text-blue-500"></i> Medicina general</li>
+                                <li class="flex items-center gap-3 text-gray-700 text-sm md:text-base font-semibold hover:text-sky-600 hover:translate-x-1 transition-transform cursor-default"><i data-lucide="activity" width="16" height="16" class="text-blue-500"></i> Enfermería</li>
+                                <li class="flex items-center gap-3 text-gray-700 text-sm md:text-base font-semibold hover:text-sky-600 hover:translate-x-1 transition-transform cursor-default"><i data-lucide="syringe" width="16" height="16" class="text-blue-500"></i> Vacunación</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Especialidades -->
+                    <div class="reveal reveal-fade-left" style="transition-delay: 200ms;">
+                        <div class="bg-white p-6 md:p-8 rounded-[1.5rem] h-full dynamic-card border border-gray-100 shadow-sm relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 w-20 h-20 bg-blue-50 rounded-bl-[100%] -z-10 group-hover:scale-150 transition-transform duration-700"></div>
+                            <h4 class="text-xl md:text-2xl font-bold text-blue-900 mb-4 border-b border-gray-100 pb-3 flex items-center gap-3">
+                                <div class="bg-blue-50 p-2.5 rounded-lg text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300"><i data-lucide="users" width="20" height="20" class="group-hover:scale-110 transition-transform"></i></div> Especialidades
+                            </h4>
+                            <ul class="grid sm:grid-cols-2 gap-3">
+                                <li class="flex items-center gap-3 text-gray-700 text-sm md:text-base font-semibold hover:text-blue-600 hover:translate-x-1 transition-transform cursor-default"><i data-lucide="users" width="16" height="16" class="text-blue-500"></i> Medicina familiar</li>
+                                <li class="flex items-center gap-3 text-gray-700 text-sm md:text-base font-semibold hover:text-blue-600 hover:translate-x-1 transition-transform cursor-default"><i data-lucide="activity" width="16" height="16" class="text-blue-500"></i> Medicina interna</li>
+                                <li class="flex items-center gap-3 text-gray-700 text-sm md:text-base font-semibold hover:text-blue-600 hover:translate-x-1 transition-transform cursor-default"><i data-lucide="baby" width="16" height="16" class="text-blue-500"></i> Ginecobstetricia</li>
+                                <li class="flex items-center gap-3 text-gray-700 text-sm md:text-base font-semibold hover:text-blue-600 hover:translate-x-1 transition-transform cursor-default"><i data-lucide="baby" width="16" height="16" class="text-blue-500"></i> Pediatría</li>
+                                <li class="flex items-center gap-3 text-gray-700 text-sm md:text-base font-semibold sm:col-span-2 hover:text-blue-600 hover:translate-x-1 transition-transform cursor-default"><i data-lucide="heart-pulse" width="16" height="16" class="text-blue-500"></i> Nutrición y dietética</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Apoyo diagnostico -->
+                    <div class="reveal reveal-fade-right" style="transition-delay: 300ms;">
+                        <div class="bg-white p-6 md:p-8 rounded-[1.5rem] h-full dynamic-card border border-gray-100 shadow-sm relative overflow-hidden group">
+                            <div class="absolute top-0 left-0 w-20 h-20 bg-indigo-50 rounded-br-[100%] -z-10 group-hover:scale-150 transition-transform duration-700"></div>
+                            <h4 class="text-lg md:text-xl font-bold text-blue-900 mb-4 border-b border-gray-100 pb-3 flex items-center gap-3">
+                                <div class="bg-indigo-50 p-2.5 rounded-lg text-indigo-600 group-hover:bg-indigo-500 group-hover:text-white transition-colors duration-300"><i data-lucide="hand-heart" width="20" height="20" class="group-hover:scale-110 transition-transform"></i></div> <span class="leading-tight">Apoyo y Complementación</span>
+                            </h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-center gap-3 text-gray-700 text-sm md:text-base font-semibold hover:text-indigo-600 hover:translate-x-1 transition-transform cursor-default"><i data-lucide="bone" width="16" height="16" class="text-blue-500"></i> Fisioterapia</li>
+                                <li class="flex items-center gap-3 text-gray-700 text-sm md:text-base font-semibold hover:text-indigo-600 hover:translate-x-1 transition-transform cursor-default"><i data-lucide="hand-heart" width="16" height="16" class="text-blue-500"></i> Terapia Ocupacional</li>
+                                <li class="flex items-center gap-3 text-gray-700 text-sm md:text-base font-semibold hover:text-indigo-600 hover:translate-x-1 transition-transform cursor-default"><i data-lucide="wind" width="16" height="16" class="text-blue-500"></i> Terapia Respiratoria</li>
+                                <li class="flex items-center gap-3 text-gray-700 text-sm md:text-base font-semibold hover:text-indigo-600 hover:translate-x-1 transition-transform cursor-default"><i data-lucide="message-circle" width="16" height="16" class="text-blue-500"></i> Fonoaudiología</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Más Apoyo diagnostico -->
+                    <div class="reveal reveal-fade-left" style="transition-delay: 400ms;">
+                        <div class="bg-white p-6 md:p-8 rounded-[1.5rem] h-full dynamic-card border border-gray-100 shadow-sm relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 w-20 h-20 bg-teal-50 rounded-bl-[100%] -z-10 group-hover:scale-150 transition-transform duration-700"></div>
+                            <h4 class="text-xl md:text-2xl font-bold text-blue-900 mb-4 border-b border-gray-100 pb-3 flex items-center gap-3">
+                                <div class="bg-teal-50 p-2.5 rounded-lg text-teal-600 group-hover:bg-teal-500 group-hover:text-white transition-colors duration-300"><i data-lucide="microscope" width="20" height="20" class="group-hover:scale-110 transition-transform"></i></div> Apoyo diagnóstico
+                            </h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-center gap-3 text-gray-700 text-sm md:text-base font-semibold hover:text-teal-600 hover:translate-x-1 transition-transform cursor-default"><i data-lucide="test-tube" width="16" height="16" class="text-blue-500"></i> Laboratorio Clínico</li>
+                                <li class="flex items-start gap-3 text-gray-700 text-sm md:text-base font-semibold hover:text-teal-600 hover:translate-x-1 transition-transform cursor-default">
+                                    <i data-lucide="syringe" width="16" height="16" class="text-blue-500 mt-0.5"></i>
+                                    <span class="leading-tight">Toma de muestras<br/>(Lab y Ginecológicas)</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-gray-700 text-sm md:text-base font-semibold hover:text-teal-600 hover:translate-x-1 transition-transform cursor-default">
+                                    <i data-lucide="activity" width="16" height="16" class="text-blue-500 mt-0.5"></i>
+                                    <span class="leading-tight">Imágenes Diagnósticas<br/><span class="text-xs font-medium text-gray-500">(ecografías y rx periapicales)</span></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Programas PyM (Diseño Exacto Solicitado) + NUEVO CARRUSEL -->
+                    <div class="reveal reveal-fade-up lg:col-span-2" style="transition-delay: 500ms;">
+                        <div class="bg-gradient-to-br from-[#ecfdf5] to-[#d1fae5] rounded-[2.5rem] corporate-shadow border border-[#a7f3d0] p-8 md:p-12 lg:p-16 text-emerald-950 dynamic-card relative overflow-hidden">
+                            <!-- Decoración de fondo -->
+                            <div class="absolute right-0 top-0 opacity-[0.05] pointer-events-none transform translate-x-1/4 -translate-y-1/4 hidden md:block">
+                                <i data-lucide="shield-check" width="400" height="400"></i>
+                            </div>
+
+                            <!-- CONTENIDO ORIGINAL PyM -->
+                            <div class="relative z-10 flex flex-col items-center text-center">
+                                <div class="inline-flex items-center justify-center gap-2 bg-emerald-100 text-emerald-800 text-xs md:text-sm font-bold px-4 py-2 rounded-full uppercase tracking-widest mb-6 shadow-sm border border-emerald-200 mx-auto animate-pulse-soft">
+                                    <i data-lucide="sparkles" width="16" height="16"></i> Prevención
+                                </div>
+                                <h4 class="text-2xl md:text-4xl lg:text-5xl font-black mb-6 md:mb-8 flex items-center justify-center gap-4 text-emerald-900 leading-tight w-full title-animate">
+                                    Programas de Promoción y Mantenimiento de la Salud (PyM)
+                                </h4>
+                                <p class="text-emerald-800 mb-10 md:mb-12 max-w-4xl text-base md:text-xl leading-relaxed font-medium mx-auto">
+                                    Contamos con programas orientados a prevenir la aparición de enfermedades y a fomentar hábitos de vida saludables. A través de actividades educativas, valoración médica y seguimiento, los usuarios reciben una atención integral que contribuye a mejorar su calidad de vida y bienestar general.
+                                </p>
+
+                                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 w-full text-left">
+                                    <div class="bg-white border-2 border-emerald-100 p-6 md:p-8 rounded-2xl shadow-sm hover:-translate-y-2 hover:shadow-xl hover:border-emerald-300 transition-all duration-300 group">
+                                        <div class="bg-emerald-50 p-4 rounded-xl w-max mb-4 md:mb-5 group-hover:bg-emerald-500 group-hover:text-white transition-colors text-emerald-600">
+                                            <i data-lucide="baby" width="28" height="28" class="md:w-[32px] md:h-[32px] group-hover:scale-110 transition-transform"></i>
+                                        </div>
+                                        <h5 class="font-bold text-xl md:text-2xl text-emerald-900 mb-2 md:mb-3 group-hover:text-emerald-700 transition-colors">Programa del Menor</h5>
+                                        <p class="text-base md:text-lg text-emerald-700 font-medium">Crecimiento, desarrollo y vacunación (PAI).</p>
+                                    </div>
+
+                                    <div class="bg-white border-2 border-emerald-100 p-6 md:p-8 rounded-2xl shadow-sm hover:-translate-y-2 hover:shadow-xl hover:border-emerald-300 transition-all duration-300 group">
+                                        <div class="bg-emerald-50 p-4 rounded-xl w-max mb-4 md:mb-5 group-hover:bg-emerald-500 group-hover:text-white transition-colors text-emerald-600">
+                                            <i data-lucide="users" width="28" height="28" class="md:w-[32px] md:h-[32px] group-hover:scale-110 transition-transform"></i>
+                                        </div>
+                                        <h5 class="font-bold text-xl md:text-2xl text-emerald-900 mb-2 md:mb-3 group-hover:text-emerald-700 transition-colors">Programa del Joven</h5>
+                                        <p class="text-base md:text-lg text-emerald-700 font-medium">Detección temprana de alteraciones y salud sexual.</p>
+                                    </div>
+
+                                    <div class="bg-white border-2 border-emerald-100 p-6 md:p-8 rounded-2xl shadow-sm hover:-translate-y-2 hover:shadow-xl hover:border-emerald-300 transition-all duration-300 group">
+                                        <div class="bg-emerald-50 p-4 rounded-xl w-max mb-4 md:mb-5 group-hover:bg-emerald-500 group-hover:text-white transition-colors text-emerald-600">
+                                            <i data-lucide="heart-pulse" width="28" height="28" class="md:w-[32px] md:h-[32px] group-hover:scale-110 transition-transform"></i>
+                                        </div>
+                                        <h5 class="font-bold text-xl md:text-2xl text-emerald-900 mb-2 md:mb-3 group-hover:text-emerald-700 transition-colors">Programa del Adulto</h5>
+                                        <p class="text-base md:text-lg text-emerald-700 font-medium">Manejo de pacientes crónicos y detección de cáncer.</p>
+                                    </div>
+
+                                    <div class="bg-white border-2 border-emerald-100 p-6 md:p-8 rounded-2xl shadow-sm hover:-translate-y-2 hover:shadow-xl hover:border-emerald-300 transition-all duration-300 group">
+                                        <div class="bg-emerald-50 p-4 rounded-xl w-max mb-4 md:mb-5 group-hover:bg-emerald-500 group-hover:text-white transition-colors text-emerald-600">
+                                            <i data-lucide="users" width="28" height="28" class="md:w-[32px] md:h-[32px] group-hover:scale-110 transition-transform"></i>
+                                        </div>
+                                        <h5 class="font-bold text-xl md:text-2xl text-emerald-900 mb-2 md:mb-3 group-hover:text-emerald-700 transition-colors">Programa de la Mujer</h5>
+                                        <p class="text-base md:text-lg text-emerald-700 font-medium">Control prenatal y detección de cáncer de cérvix y mama.</p>
+                                    </div>
+
+                                    <div class="bg-emerald-600 border-2 border-emerald-500 p-6 md:p-8 rounded-2xl shadow-md hover:-translate-y-2 hover:shadow-xl transition-all duration-300 lg:col-span-2 text-white flex flex-col justify-center relative overflow-hidden group">
+                                        <div class="absolute right-0 bottom-0 opacity-[0.15] transform translate-x-1/4 translate-y-1/4 pointer-events-none group-hover:scale-110 group-hover:rotate-12 transition-transform duration-700"><i data-lucide="sparkles" width="100" height="100" class="md:w-[150px] md:h-[150px]"></i></div>
+                                        <div class="relative z-10">
+                                            <div class="bg-white/20 p-3 md:p-4 rounded-xl w-max mb-4 md:mb-5 backdrop-blur-sm group-hover:bg-white/30 transition-colors">
+                                                <i data-lucide="sparkles" width="28" height="28" class="md:w-[32px] md:h-[32px] text-white"></i>
+                                            </div>
+                                            <h5 class="font-bold text-xl md:text-3xl mb-2 md:mb-3">Programas Adicionales</h5>
+                                            <p class="text-base md:text-lg text-emerald-50 font-medium max-w-xl">Y programas de Planificación Familiar y Salud Bucal para todos.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- NUEVO: CARRUSEL INFORMATIVO DENTRO DE PyM -->
+                            <div id="novedades" class="mt-12 md:mt-16 w-full pt-10 md:pt-12 border-t-2 border-emerald-200/50 relative z-10">
+                                <div class="text-center mb-8">
+                                    <h4 class="text-2xl md:text-3xl font-black text-emerald-950 mb-2 title-animate">Información de interés</h4>
+                                    <p class="text-emerald-800 text-base md:text-lg font-medium">¡Actualízate con MEIDE SAS!</p>
+                                </div>
+
+                                <div class="relative w-full max-w-4xl mx-auto rounded-[2rem] overflow-hidden corporate-shadow border-4 border-white bg-white group">
+                                    <!-- Carousel Track -->
+                                    <div id="carousel-track" class="flex transition-transform duration-700 ease-in-out h-[350px] sm:h-[450px] md:h-[550px] bg-emerald-50/50">
+                                        <!-- Imágenes Configuradas para que no se recorten (object-contain) -->
+                                        <div class="min-w-full h-full p-2 md:p-4 flex items-center justify-center"><img src="/IMAGENES/PIEZA1.png" class="w-full h-full object-contain drop-shadow-md"></div>
+                                        <div class="min-w-full h-full p-2 md:p-4 flex items-center justify-center"><img src="/IMAGENES/PIEZA2.png" class="w-full h-full object-contain drop-shadow-md"></div>
+                                        <div class="min-w-full h-full p-2 md:p-4 flex items-center justify-center"><img src="/IMAGENES/PIEZA3.png" class="w-full h-full object-contain drop-shadow-md"></div>
+                                        <div class="min-w-full h-full p-2 md:p-4 flex items-center justify-center"><img src="/IMAGENES/PIEZA4.png" class="w-full h-full object-contain drop-shadow-md"></div>
+                                        <div class="min-w-full h-full p-2 md:p-4 flex items-center justify-center"><img src="/IMAGENES/PIEZA5.png" class="w-full h-full object-contain drop-shadow-md"></div>
+                                        <div class="min-w-full h-full p-2 md:p-4 flex items-center justify-center"><img src="/IMAGENES/PIEZA6.png" class="w-full h-full object-contain drop-shadow-md"></div>
+                                        <div class="min-w-full h-full p-2 md:p-4 flex items-center justify-center"><img src="/IMAGENES/PIEZA7.png" class="w-full h-full object-contain drop-shadow-md"></div>
+                                        <div class="min-w-full h-full p-2 md:p-4 flex items-center justify-center"><img src="/IMAGENES/PIEZA8.png" class="w-full h-full object-contain drop-shadow-md"></div>
+                                        <div class="min-w-full h-full p-2 md:p-4 flex items-center justify-center"><img src="/IMAGENES/PIEZA9.png" class="w-full h-full object-contain drop-shadow-md"></div>
+                                        <div class="min-w-full h-full p-2 md:p-4 flex items-center justify-center"><img src="/IMAGENES/PIEZA10.png" class="w-full h-full object-contain drop-shadow-md"></div>
+                                        <div class="min-w-full h-full p-2 md:p-4 flex items-center justify-center"><img src="/IMAGENES/PIEZA11.png" class="w-full h-full object-contain drop-shadow-md"></div>
+                                    </div>
+
+                                    <!-- Overlay Degradado para mejor visibilidad de controles -->
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+
+                                    <!-- Controls (Botones Laterales) -->
+                                    <button id="prev-slide" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white hover:scale-110 text-emerald-900 p-2.5 md:p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 z-10 focus:outline-none border border-emerald-100">
+                                        <i data-lucide="chevron-left" width="24" height="24"></i>
+                                    </button>
+                                    <button id="next-slide" class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white hover:scale-110 text-emerald-900 p-2.5 md:p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 z-10 focus:outline-none border border-emerald-100">
+                                        <i data-lucide="chevron-right" width="24" height="24"></i>
+                                    </button>
+
+                                    <!-- Dots (Indicadores Inferiores) -->
+                                    <div class="absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-wrap justify-center gap-2 px-4 z-10 w-full" id="carousel-dots">
+                                        <!-- Generados por JS -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- FIN NUEVO CARRUSEL -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CITA PRIORITARIA ================= -->
+        <section class="py-10 md:py-12 bg-sky-50 border-t border-sky-100 w-full relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+                <div class="bg-white border border-sky-200 rounded-[2rem] p-6 md:p-10 corporate-shadow">
+                    <div class="reveal reveal-fade-up text-center mb-8">
+                        <span class="inline-block bg-sky-100 text-sky-800 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest mb-3 animate-pulse-soft">Atención Oportuna</span>
+                        <h3 class="text-2xl md:text-4xl font-black text-blue-950 title-animate">Cómo solicitar tu <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-blue-600">Cita Prioritaria</span></h3>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6 mb-8 relative">
+                        <div class="hidden md:block absolute top-10 left-[15%] w-[70%] h-1 bg-gradient-to-r from-sky-100 via-sky-200 to-sky-100 -z-10 rounded-full"></div>
+
+                        <div class="reveal reveal-zoom-in text-center bg-white p-5 rounded-2xl group h-full hover:border hover:border-sky-200 hover:shadow-lg transition-all duration-300">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-700 to-blue-900 text-white rounded-full flex items-center justify-center text-2xl font-black mx-auto mb-4 border-4 border-white shadow-md group-hover:scale-110 transition-transform">1</div>
+                            <p class="text-gray-700 font-semibold text-sm md:text-base group-hover:text-blue-800 transition-colors">Dirígete a cualquiera de nuestras sedes o comunícate a nuestro call center.</p>
+                        </div>
+                        <div class="reveal reveal-zoom-in text-center bg-white p-5 rounded-2xl group h-full hover:border hover:border-sky-200 hover:shadow-lg transition-all duration-300" style="transition-delay: 200ms;">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-700 to-blue-900 text-white rounded-full flex items-center justify-center text-2xl font-black mx-auto mb-4 border-4 border-white shadow-md group-hover:scale-110 transition-transform">2</div>
+                            <p class="text-gray-700 font-semibold text-sm md:text-base group-hover:text-blue-800 transition-colors">Pregunta a nuestro orientador o agente la disponibilidad de la cita deseada.</p>
+                        </div>
+                        <div class="reveal reveal-zoom-in text-center bg-white p-5 rounded-2xl group h-full hover:border hover:border-sky-200 hover:shadow-lg transition-all duration-300" style="transition-delay: 400ms;">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-700 to-blue-900 text-white rounded-full flex items-center justify-center text-2xl font-black mx-auto mb-4 border-4 border-white shadow-md group-hover:scale-110 transition-transform">3</div>
+                            <p class="text-gray-700 font-semibold text-sm md:text-base group-hover:text-blue-800 transition-colors">Espera la asignación y regístrate en admisiones.</p>
+                        </div>
+                    </div>
+
+                    <div class="reveal reveal-fade-up">
+                        <div class="bg-gradient-to-r from-sky-50 to-blue-50 border-l-4 border-sky-500 p-5 md:p-6 rounded-r-xl shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex flex-col sm:flex-row items-start gap-4">
+                                <div class="bg-sky-200 p-2.5 rounded-full flex-shrink-0 animate-pulse-soft"><i data-lucide="info" width="24" height="24" class="text-sky-700"></i></div>
+                                <div>
+                                    <h5 class="font-black text-lg md:text-xl text-blue-950 mb-2">IMPORTANTE</h5>
+                                    <p class="text-gray-700 text-sm md:text-base mb-2 font-medium">Recuerda contar con disponibilidad de tiempo. La atención no es inmediata y está sujeta a disponibilidad de agenda y/u orden de llegada.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SEDES INSTITUCIONALES ================= -->
+        <section id="sedes" class="py-10 md:py-12 bg-white w-full relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+                <div class="reveal reveal-fade-up text-center mb-8 md:mb-10">
+                    <span class="text-sky-600 font-bold tracking-[0.2em] uppercase text-xs mb-3 block animate-pulse">Ubicaciones</span>
+                    <h3 class="text-3xl md:text-4xl font-black text-blue-950 mb-4 title-animate">Nuestras Sedes</h3>
+                    <div class="w-20 h-1.5 bg-gradient-to-r from-sky-400 to-blue-600 mx-auto mb-4 rounded-full"></div>
+                </div>
+
+                <div class="mb-10">
+                    <div class="reveal reveal-fade-up flex justify-center w-full mb-6">
+                        <h4 class="text-2xl font-black text-blue-900 border-b-4 border-sky-400 pb-2 inline-block px-4 hover:scale-105 transition-transform duration-300">CALDAS</h4>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center max-w-6xl mx-auto">
+                        <!-- Manizales Arboleda -->
+                        <div class="reveal reveal-zoom-in border border-gray-100 rounded-[1.5rem] h-full flex flex-col bg-white overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 group">
+                            <div class="overflow-hidden relative h-40">
+                                <img src="/IMAGENES/SEDEMANIZALESARBOLEDA.jpeg" alt="Sede Arboleda" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                            </div>
+                            <div class="p-5 flex flex-col flex-grow relative">
+                                <h5 class="text-xl font-black text-blue-950 mb-1">Manizales</h5>
+                                <p class="text-sky-600 font-bold text-sm mb-4 bg-sky-50 inline-block px-3 py-1 rounded-lg w-max border border-sky-100 group-hover:bg-sky-100 transition-colors">Sede Arboleda</p>
+                                <div class="mt-auto space-y-3">
+                                    <div class="flex items-start gap-2"><i data-lucide="map-pin" width="16" height="16" class="text-gray-400 mt-0.5 group-hover:text-blue-500 transition-colors"></i><p class="text-gray-800 text-sm font-semibold">Calle 54 # 25-64</p></div>
+                                    <div class="flex items-start gap-2"><i data-lucide="clock" width="16" height="16" class="text-gray-400 mt-0.5 group-hover:text-blue-500 transition-colors"></i><p class="text-gray-700 text-xs font-medium">Lun-Vie: 7am - 7pm<br/>Sáb: 7am - 12pm</p></div>
+                                    <a href="https://maps.google.com/?q=Calle+54+%23+25-64,+Manizales" target="_blank" class="inline-flex items-center justify-center gap-2 w-full text-white font-bold transition-all mt-3 bg-gradient-to-r from-sky-500 to-blue-600 px-4 py-2 rounded-xl text-sm hover:-translate-y-1 hover:shadow-lg">
+                                        <i data-lucide="map" width="16" height="16"></i> Ver en Maps
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Manizales Belén -->
+                        <div class="reveal reveal-zoom-in border border-gray-100 rounded-[1.5rem] h-full flex flex-col bg-white overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 group" style="transition-delay: 150ms;">
+                            <div class="overflow-hidden relative h-40">
+                                <img src="/IMAGENES/SEDEMANIZALESBELEN.jpeg" alt="Sede Belén" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                            </div>
+                            <div class="p-5 flex flex-col flex-grow relative">
+                                <h5 class="text-xl font-black text-blue-950 mb-1">Manizales</h5>
+                                <p class="text-sky-600 font-bold text-sm mb-4 bg-sky-50 inline-block px-3 py-1 rounded-lg w-max border border-sky-100 group-hover:bg-sky-100 transition-colors">Sede Belén</p>
+                                <div class="mt-auto space-y-3">
+                                    <div class="flex items-start gap-2"><i data-lucide="map-pin" width="16" height="16" class="text-gray-400 mt-0.5 group-hover:text-blue-500 transition-colors"></i><p class="text-gray-800 text-sm font-semibold">Cra 57 # 24A-25</p></div>
+                                    <div class="flex items-start gap-2"><i data-lucide="clock" width="16" height="16" class="text-gray-400 mt-0.5 group-hover:text-blue-500 transition-colors"></i><p class="text-gray-700 text-xs font-medium">Lun-Sáb: 7am - 7pm</p></div>
+                                    <a href="https://maps.google.com/?q=Cra+57+%23+24A-25,+Manizales" target="_blank" class="inline-flex items-center justify-center gap-2 w-full text-white font-bold transition-all mt-3 bg-gradient-to-r from-sky-500 to-blue-600 px-4 py-2 rounded-xl text-sm hover:-translate-y-1 hover:shadow-lg">
+                                        <i data-lucide="map" width="16" height="16"></i> Ver en Maps
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La Dorada -->
+                        <div class="reveal reveal-zoom-in border border-gray-100 rounded-[1.5rem] h-full flex flex-col bg-white overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 group" style="transition-delay: 300ms;">
+                            <div class="overflow-hidden relative h-40">
+                                <img src="/IMAGENES/SEDELADORADA.jpeg" alt="Sede La Dorada" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                            </div>
+                            <div class="p-5 flex flex-col flex-grow relative">
+                                <h5 class="text-xl font-black text-blue-950 mb-1">La Dorada</h5>
+                                <p class="text-sky-600 font-bold text-sm mb-4 bg-sky-50 inline-block px-3 py-1 rounded-lg w-max border border-sky-100 group-hover:bg-sky-100 transition-colors">Sede Las Ferias</p>
+                                <div class="mt-auto space-y-3">
+                                    <div class="flex items-start gap-2"><i data-lucide="map-pin" width="16" height="16" class="text-gray-400 mt-0.5 group-hover:text-blue-500 transition-colors"></i><p class="text-gray-800 text-sm font-semibold">Calle 47 # 3-43</p></div>
+                                    <div class="flex items-start gap-2"><i data-lucide="clock" width="16" height="16" class="text-gray-400 mt-0.5 group-hover:text-blue-500 transition-colors"></i><p class="text-gray-700 text-xs font-medium">06:30 am a 06:00 pm<br/>sábados de 06:30 am a 12:00 p.m.</p></div>
+                                    <a href="https://maps.google.com/?q=Calle+47+%23+3-43,+La+Dorada" target="_blank" class="inline-flex items-center justify-center gap-2 w-full text-white font-bold transition-all mt-3 bg-gradient-to-r from-sky-500 to-blue-600 px-4 py-2 rounded-xl text-sm hover:-translate-y-1 hover:shadow-lg">
+                                        <i data-lucide="map" width="16" height="16"></i> Ver en Maps
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bloque Quindío -->
+                <div>
+                    <div class="reveal reveal-fade-up flex justify-center w-full mb-6">
+                        <h4 class="text-2xl font-black text-blue-900 border-b-4 border-sky-400 pb-2 inline-block px-4 hover:scale-105 transition-transform duration-300">QUINDIO</h4>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center max-w-4xl mx-auto">
+                        <!-- Armenia Fundadores -->
+                        <div class="reveal reveal-zoom-in border border-gray-100 rounded-[1.5rem] h-full flex flex-col bg-white overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 group">
+                            <div class="overflow-hidden relative h-40">
+                                <img src="/IMAGENES/SEDEARMENIAFUNDADORES.jpeg" alt="Sede Armenia" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                            </div>
+                            <div class="p-6 flex flex-col flex-grow relative">
+                                <div class="absolute -top-6 md:-top-8 right-6 md:right-8 bg-sky-500 text-white p-3 md:p-4 rounded-2xl shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-transform">
+                                    <i data-lucide="map-pin" width="24" height="24" class="md:w-[28px] md:h-[28px]"></i>
+                                </div>
+                                <h5 class="text-xl font-black text-blue-950 mb-1">Armenia</h5>
+                                <p class="text-sky-600 font-bold text-sm mb-4 bg-sky-50 inline-block px-3 py-1 rounded-lg w-max border border-sky-100 group-hover:bg-sky-100 transition-colors">Sede Fundadores</p>
+                                <div class="mt-auto space-y-3">
+                                    <div class="flex items-start gap-2"><i data-lucide="map-pin" width="16" height="16" class="text-gray-400 mt-0.5 group-hover:text-blue-500 transition-colors"></i><p class="text-gray-800 text-sm font-semibold">Carrera 14 # 1-23</p></div>
+                                    <div class="flex items-start gap-2"><i data-lucide="clock" width="16" height="16" class="text-gray-400 mt-0.5 group-hover:text-blue-500 transition-colors"></i><p class="text-gray-700 text-xs font-medium">Lun-Sáb: 7am - 7pm</p></div>
+                                    <a href="https://maps.google.com/?q=Carrera+14+%23+1-23,+Armenia" target="_blank" class="inline-flex items-center justify-center gap-2 w-full text-white font-bold transition-all mt-3 bg-gradient-to-r from-sky-500 to-blue-600 px-4 py-2 rounded-xl text-sm hover:-translate-y-1 hover:shadow-lg">
+                                        <i data-lucide="map" width="16" height="16"></i> Ver en Maps
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Armenia Berlín -->
+                        <div class="reveal reveal-zoom-in border border-gray-100 rounded-[1.5rem] h-full flex flex-col bg-white overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 group" style="transition-delay: 150ms;">
+                            <div class="overflow-hidden relative h-40">
+                                <img src="/IMAGENES/SEDEARMENIABERLIN.jpeg" alt="Sede Berlín" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                            </div>
+                            <div class="p-6 flex flex-col flex-grow relative">
+                                <div class="absolute -top-6 md:-top-8 right-6 md:right-8 bg-sky-500 text-white p-3 md:p-4 rounded-2xl shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-transform">
+                                    <i data-lucide="map-pin" width="24" height="24" class="md:w-[28px] md:h-[28px]"></i>
+                                </div>
+                                <h5 class="text-xl font-black text-blue-950 mb-1">Armenia</h5>
+                                <p class="text-sky-600 font-bold text-sm mb-4 bg-sky-50 inline-block px-3 py-1 rounded-lg w-max border border-sky-100 group-hover:bg-sky-100 transition-colors">Sede Berlín</p>
+                                <div class="mt-auto space-y-3">
+                                    <div class="flex items-start gap-2"><i data-lucide="map-pin" width="16" height="16" class="text-gray-400 mt-0.5 group-hover:text-blue-500 transition-colors"></i><p class="text-gray-800 text-sm font-semibold">Carrera 21A # 22-30</p></div>
+                                    <div class="flex items-start gap-2"><i data-lucide="clock" width="16" height="16" class="text-gray-400 mt-0.5 group-hover:text-blue-500 transition-colors"></i><p class="text-gray-700 text-xs font-medium">Lun-Sáb: 7am - 7pm</p></div>
+                                    <a href="https://maps.google.com/?q=Carrera+21A+%23+22-30,+Armenia" target="_blank" class="inline-flex items-center justify-center gap-2 w-full text-white font-bold transition-all mt-3 bg-gradient-to-r from-sky-500 to-blue-600 px-4 py-2 rounded-xl text-sm hover:-translate-y-1 hover:shadow-lg">
+                                        <i data-lucide="map" width="16" height="16"></i> Ver en Maps
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= ATENCIÓN SIAU ================= -->
+        <section id="siau" class="py-10 md:py-12 bg-gray-50 border-y border-gray-200 w-full relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+                <div class="reveal reveal-fade-up mb-8 text-center">
+                    <h3 class="text-3xl md:text-4xl font-black text-blue-950 mb-4 title-animate">Atención al Usuario (SIAU)</h3>
+                    <div class="w-20 h-1.5 bg-gradient-to-r from-sky-400 to-blue-600 mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid lg:grid-cols-12 gap-6 md:gap-8">
+
+                    <!-- Bloque Contacto -->
+                    <div class="lg:col-span-5 flex flex-col gap-6">
+                        <div class="reveal reveal-fade-right">
+                            <div class="bg-gradient-to-br from-blue-500 to-sky-400 text-white p-6 md:p-8 rounded-[1.5rem] shadow-xl shadow-sky-500/20 dynamic-card group">
+                                <h4 class="text-xl md:text-2xl font-black mb-6 flex items-center justify-center gap-2 text-center w-full">
+                                    <i data-lucide="phone" width="24" height="24" class="group-hover:rotate-12 transition-transform duration-300"></i> Canales de Contacto
+                                </h4>
+
+                                <!-- Horarios Unificados y Centrados -->
+                                <div class="text-center mb-6 bg-white/10 p-4 rounded-xl backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-colors duration-300 cursor-default">
+                                    <p class="text-xs text-sky-100 font-bold uppercase tracking-widest mb-1">Horario de Atención</p>
+                                    <p class="text-sm text-white font-medium">Lun-Sáb: 6:00 a.m. a 8:00 p.m. <br> Dom y Festivos: 7:00 a.m. a 2:00 p.m.</p>
+                                </div>
+
+                                <div class="space-y-6">
+                                    <div class="flex flex-col items-center text-center gap-2 group/item">
+                                        <div class="bg-white/20 p-2.5 rounded-xl group-hover/item:scale-110 transition-transform"><i data-lucide="phone" width="20" height="20"></i></div>
+                                        <div>
+                                            <p class="text-xs text-sky-100 font-bold uppercase">Call Center (PBX)</p>
+                                            <p class="text-lg md:text-xl font-black drop-shadow-sm">333 033 3555 - 300 914 7197</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex flex-col items-center text-center gap-3 w-full group/item">
+                                        <div class="bg-[#25D366] p-2.5 rounded-xl shadow-lg group-hover/item:scale-110 transition-transform"><i data-lucide="message-circle" width="20" height="20"></i></div>
+                                        <div class="w-full">
+                                            <p class="text-xs text-sky-100 font-bold uppercase mb-2">Línea de WhatsApp</p>
+                                            <div class="flex flex-col gap-2 items-center">
+                                                <a href="https://wa.me/573009147197" target="_blank" class="w-full max-w-[220px] inline-flex items-center justify-center gap-2 bg-white text-[#128C7E] px-4 py-2 rounded-lg font-bold shadow-sm hover:scale-105 transition-transform duration-300">300 914 7197</a>
+                                                <a href="https://wa.me/573102316559" target="_blank" class="w-full max-w-[220px] inline-flex items-center justify-center gap-2 bg-white text-[#128C7E] px-4 py-2 rounded-lg font-bold shadow-sm hover:scale-105 transition-transform duration-300">310 231 6559</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex flex-col items-center text-center gap-2 group/item">
+                                        <div class="bg-white/20 p-2.5 rounded-xl group-hover/item:scale-110 transition-transform"><i data-lucide="mail" width="20" height="20"></i></div>
+                                        <div>
+                                            <p class="text-xs text-sky-100 font-bold uppercase mb-1">Correo Electrónico</p>
+                                            <p class="text-sm font-bold break-all hover:text-sky-200 transition-colors cursor-pointer">contactanos_fomag@meide.com.co</p>
+                                            <p class="text-sm font-bold break-all hover:text-sky-200 transition-colors cursor-pointer">pqr_fomag@meide.com.co</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Acordeón / Tarjetas -->
+                    <div class="lg:col-span-7 flex flex-col gap-6">
+                        <div class="reveal reveal-fade-left">
+                            <div class="bg-white p-6 md:p-8 border border-gray-200 rounded-[1.5rem] corporate-shadow dynamic-card h-full">
+                                <h4 class="text-xl md:text-2xl font-black text-blue-950 mb-4 flex items-center gap-3">
+                                    <div class="bg-sky-50 p-2.5 rounded-lg text-sky-600 animate-float-icon"><i data-lucide="shield-check" width="24" height="24"></i></div> Política de Seguridad
+                                </h4>
+                                <p class="text-gray-700 mb-5 text-sm md:text-base font-medium">Gestionamos los riesgos para prevenir eventos adversos mediante:</p>
+                                <div class="grid sm:grid-cols-2 gap-3 md:gap-4">
+                                    <div class="flex items-center gap-3 bg-gray-50 p-3 rounded-lg border border-gray-100 hover:border-sky-200 hover:shadow-sm transition-all duration-300">
+                                        <i data-lucide="check-circle-2" width="18" height="18" class="text-sky-600"></i><span class="text-sm font-bold text-gray-800">Identificación del paciente</span>
+                                    </div>
+                                    <div class="flex items-center gap-3 bg-gray-50 p-3 rounded-lg border border-gray-100 hover:border-sky-200 hover:shadow-sm transition-all duration-300">
+                                        <i data-lucide="check-circle-2" width="18" height="18" class="text-sky-600"></i><span class="text-sm font-bold text-gray-800">Prevención de caídas</span>
+                                    </div>
+                                    <div class="flex items-center gap-3 bg-gray-50 p-3 rounded-lg border border-gray-100 hover:border-sky-200 hover:shadow-sm transition-all duration-300 sm:col-span-2">
+                                        <i data-lucide="check-circle-2" width="18" height="18" class="text-sky-600"></i><span class="text-sm font-bold text-gray-800">Control de Infecciones asociadas a la salud</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="reveal reveal-fade-up">
+                            <div class="bg-gradient-to-r from-blue-50 to-sky-50 p-6 md:p-8 border border-blue-100 rounded-[1.5rem] corporate-shadow flex flex-col sm:flex-row items-center gap-6 group hover:shadow-xl transition-all duration-500">
+                                <div class="bg-white p-4 rounded-full shadow-md text-blue-600 border-4 border-blue-50 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-500 animate-float-icon">
+                                    <i data-lucide="scale" width="36" height="36"></i>
+                                </div>
+                                <div class="text-center sm:text-left flex-1">
+                                    <h4 class="text-xl md:text-2xl font-black text-blue-950 mb-2">Deberes y Derechos</h4>
+                                    <p class="text-sm text-gray-700 font-medium mb-4">Conozca en detalle las normativas y derechos de nuestra IPS.</p>
+                                    <a href="/PDF/DEBERESYDERECHOS.pdf" target="_blank" class="inline-flex items-center gap-2 bg-blue-700 text-white px-5 py-2.5 rounded-lg font-bold text-sm hover:bg-blue-800 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                                        <i data-lucide="download" width="16" height="16" class="animate-pulse"></i> Manual del Usuario
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= POLÍTICA DE PARTICIPACIÓN SOCIAL EN SALUD (PPSS) ================= -->
+        <section id="ppss" class="py-10 md:py-12 bg-white border-b border-gray-100 w-full relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+                <div class="reveal reveal-fade-up text-center mb-8">
+                    <span class="text-sky-600 font-bold tracking-[0.2em] uppercase text-xs mb-3 block animate-pulse">Empoderamiento Comunitario</span>
+                    <h3 class="text-3xl md:text-4xl font-black text-blue-950 mb-4 title-animate">Política (PPSS)</h3>
+                    <div class="w-20 h-1.5 bg-gradient-to-r from-sky-400 to-blue-600 mx-auto mb-4 rounded-full"></div>
+                    <p class="text-gray-600 text-sm md:text-base max-w-3xl mx-auto font-medium leading-relaxed">
+                        Garantizamos el derecho de la ciudadanía a intervenir en las decisiones de salud. Buscando fortalecer la participación y el control social. <strong class="text-blue-900">Te mostramos nuestras actividades del 2025.</strong>
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+                    <div class="reveal reveal-fade-right">
+                        <!-- Tarjeta Armenia -->
+                        <div class="flex flex-col bg-gradient-to-r from-sky-50 to-blue-50 border border-blue-100 p-5 rounded-2xl hover:shadow-lg transition-all duration-300 group h-full">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="bg-blue-600 text-white p-3 rounded-xl shadow-md group-hover:scale-110 transition-transform"><i data-lucide="file-text" width="24" height="24"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-blue-950 text-sm md:text-base group-hover:text-blue-700 transition-colors">PPSS ARMENIA</h4>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 mt-auto">
+                                <a href="https://meidesas-my.sharepoint.com/:b:/g/personal/liderdemandainducida_meide_com_co/IQDAgiNnR5SBS6rcMRYtLWNWAepv7fcWiX8hdv64mbscqtk" target="_blank" class="bg-white border border-blue-200 text-blue-700 text-[10px] md:text-xs font-bold py-2 px-1 rounded-lg text-center hover:bg-blue-600 hover:text-white transition-colors flex items-center justify-center gap-1 shadow-sm">
+                                    FUNCIONARIOS <i data-lucide="download" width="12" height="12"></i>
+                                </a>
+                                <a href="https://meidesas-my.sharepoint.com/:b:/g/personal/liderdemandainducida_meide_com_co/IQBRhZKAyu9oSbztr73uS_5EAdIbav9WwFsTGHXUAz_6zb4" target="_blank" class="bg-white border border-blue-200 text-blue-700 text-[10px] md:text-xs font-bold py-2 px-1 rounded-lg text-center hover:bg-blue-600 hover:text-white transition-colors flex items-center justify-center gap-1 shadow-sm">
+                                    USUARIOS <i data-lucide="download" width="12" height="12"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reveal reveal-fade-left">
+                        <!-- Tarjeta Manizales -->
+                        <div class="flex flex-col bg-gradient-to-r from-sky-50 to-blue-50 border border-blue-100 p-5 rounded-2xl hover:shadow-lg transition-all duration-300 group h-full">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="bg-blue-600 text-white p-3 rounded-xl shadow-md group-hover:scale-110 transition-transform"><i data-lucide="file-text" width="24" height="24"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-blue-950 text-sm md:text-base group-hover:text-blue-700 transition-colors">PPSS MANIZALES</h4>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 mt-auto">
+                                <a href="https://meidesas-my.sharepoint.com/:b:/g/personal/liderdemandainducida_meide_com_co/IQAD5j_Z3K96Qok5ci8WrEICAfqBHQw52hN_1sI_8VsX03Q" target="_blank" class="bg-white border border-blue-200 text-blue-700 text-[10px] md:text-xs font-bold py-2 px-1 rounded-lg text-center hover:bg-blue-600 hover:text-white transition-colors flex items-center justify-center gap-1 shadow-sm">
+                                    FUNCIONARIOS <i data-lucide="download" width="12" height="12"></i>
+                                </a>
+                                <a href="https://meidesas-my.sharepoint.com/:b:/g/personal/liderdemandainducida_meide_com_co/IQAGwIHTxb6bS5LWLURp2CpZAZrze2Mxis-uPCbbun-hv7I" target="_blank" class="bg-white border border-blue-200 text-blue-700 text-[10px] md:text-xs font-bold py-2 px-1 rounded-lg text-center hover:bg-blue-600 hover:text-white transition-colors flex items-center justify-center gap-1 shadow-sm">
+                                    USUARIOS <i data-lucide="download" width="12" height="12"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TRANSPARENCIA INSTITUCIONAL ================= -->
+        <section id="transparencia" class="py-10 md:py-12 bg-gray-50 border-t border-gray-200 w-full relative overflow-hidden">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+                <div class="reveal reveal-zoom-in text-center mb-8">
+                    <h3 class="text-3xl md:text-4xl font-black text-blue-950 mb-4 title-animate">Estados Financieros</h3>
+                    <div class="w-20 h-1.5 bg-gradient-to-r from-sky-400 to-blue-600 mx-auto mb-4 rounded-full"></div>
+                    <p class="text-gray-600 text-sm md:text-base max-w-2xl mx-auto font-medium">Información financiera a disposición del público en cumplimiento de la Transparencia Institucional.</p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/PDF/EEFF2025MEIDESAS.pdf" target="_blank" class="flex items-center gap-3 bg-white border border-gray-200 text-blue-950 px-6 py-4 rounded-xl hover:bg-blue-50 transition-all font-black text-base corporate-shadow group hover:-translate-y-1">
+                        <div class="bg-sky-50 p-2 rounded-lg group-hover:bg-blue-100 text-sky-600 transition-colors"><i data-lucide="file-bar-chart" width="20" height="20" class="group-hover:scale-110 transition-transform"></i></div>
+                        Año 2025
+                        <i data-lucide="download" width="16" height="16" class="ml-auto text-gray-300 group-hover:text-blue-500 transition-colors"></i>
+                    </a>
+
+                    <a href="/PDF/EEFF2024MEIDESAS.pdf" target="_blank" class="flex items-center gap-3 bg-white border border-gray-200 text-blue-950 px-6 py-4 rounded-xl hover:bg-blue-50 transition-all font-black text-base corporate-shadow group hover:-translate-y-1">
+                        <div class="bg-sky-50 p-2 rounded-lg group-hover:bg-blue-100 text-sky-600 transition-colors"><i data-lucide="file-bar-chart" width="20" height="20" class="group-hover:scale-110 transition-transform"></i></div>
+                        Año 2024
+                        <i data-lucide="download" width="16" height="16" class="ml-auto text-gray-300 group-hover:text-blue-500 transition-colors"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= FOOTER INSTITUCIONAL ================= -->
+    <footer class="bg-gray-900 text-gray-300 pt-8 pb-4 w-full overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-6 border-b border-gray-700/50 pb-6">
+
+                <!-- Info Institucional -->
+                <div class="md:col-span-2">
+                    <div class="reveal reveal-fade-right">
+                        <div class="flex items-center mb-4">
+                            <!-- Logo del footer exacto y ajustado -->
+                            <img src="/IMAGENES/LOGOMEIDESAS.png" alt="MEIDE IPS" class="h-10 md:h-14 w-auto object-contain hover:scale-105 transition-transform duration-300" />
+                        </div>
+                        <p class="text-gray-400 text-sm md:text-base font-medium leading-relaxed max-w-md">
+                            Institución de salud de mediana complejidad, comprometida con la satisfaction integral de nuestros usuarios brindando atención médica con un enfoque humano y de calidad.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Enlaces Rápidos -->
+                <div>
+                    <div class="reveal reveal-fade-up" style="transition-delay: 100ms;">
+                        <h3 class="text-white font-black mb-4 tracking-widest uppercase text-xs md:text-sm title-animate inline-block">Menú Principal</h3>
+                        <ul class="space-y-3">
+                            <li><button onclick="scrollToSection('inicio')" class="text-sm md:text-base font-medium text-gray-400 hover:text-white transition-all flex items-center gap-2 group"><i data-lucide="chevron-right" width="14" height="14" class="group-hover:translate-x-1 transition-transform"></i> Inicio</button></li>
+                            <li><button onclick="scrollToSection('nosotros')" class="text-sm md:text-base font-medium text-gray-400 hover:text-white transition-all flex items-center gap-2 group"><i data-lucide="chevron-right" width="14" height="14" class="group-hover:translate-x-1 transition-transform"></i> Institucional</button></li>
+                            <li><button onclick="scrollToSection('servicios')" class="text-sm md:text-base font-medium text-gray-400 hover:text-white transition-all flex items-center gap-2 group"><i data-lucide="chevron-right" width="14" height="14" class="group-hover:translate-x-1 transition-transform"></i> Servicios</button></li>
+                            <li><button onclick="scrollToSection('novedades')" class="text-sm md:text-base font-medium text-gray-400 hover:text-white transition-all flex items-center gap-2 group"><i data-lucide="chevron-right" width="14" height="14" class="group-hover:translate-x-1 transition-transform"></i> Novedades</button></li>
+                            <li><button onclick="scrollToSection('sedes')" class="text-sm md:text-base font-medium text-gray-400 hover:text-white transition-all flex items-center gap-2 group"><i data-lucide="chevron-right" width="14" height="14" class="group-hover:translate-x-1 transition-transform"></i> Sedes</button></li>
+                            <li><button onclick="scrollToSection('siau')" class="text-sm md:text-base font-medium text-gray-400 hover:text-white transition-all flex items-center gap-2 group"><i data-lucide="chevron-right" width="14" height="14" class="group-hover:translate-x-1 transition-transform"></i> SIAU</button></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Legal -->
+                <div>
+                    <div class="reveal reveal-fade-left" style="transition-delay: 200ms;">
+                        <h3 class="text-white font-black mb-4 tracking-widest uppercase text-xs md:text-sm title-animate inline-block">Legal</h3>
+                        <ul class="space-y-3 text-sm md:text-base font-medium text-gray-400">
+                            <li><button class="hover:text-white hover:translate-x-1 transition-all">Política de Datos Personales</button></li>
+                            <li><button class="hover:text-white hover:translate-x-1 transition-all">Aviso de Privacidad</button></li>
+                        </ul>
+
+                        <div class="mt-6 bg-gray-800 p-3 md:p-4 rounded-xl border border-gray-700 hover:border-gray-500 transition-colors duration-300">
+                            <p class="text-gray-400 font-bold text-[10px] uppercase tracking-widest mb-0.5">Razón Social</p>
+                            <p class="text-white font-black text-base">MEIDE S.A.S.</p>
+                            <p class="text-gray-300 font-medium text-xs mt-1">NIT. 900.300.358-3</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Derechos Reservados y Supersalud: Fijos y siempre visibles -->
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 text-gray-400 font-medium text-xs md:text-sm pt-2">
+                <p class="text-center md:text-left leading-relaxed max-w-2xl">
+                    © Institución Prestadora de Salud <strong class="text-white">MEIDE S.A.S.</strong> Todos los derechos reservados desde el 2024.
+                </p>
+                <!-- Logo Supersalud 100% transparente y original -->
+                <div>
+                    <img
+                        src="/IMAGENES/LOGOSUPERSALUD.png"
+                        alt="Vigilado Supersalud"
+                        class="h-10 md:h-14 w-auto object-contain"
+                    />
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LÓGICA JAVASCRIPT NATIVA -->
+    <script>
+        // Iniciar Iconos Lucide
+        lucide.createIcons();
+
+        // Variables de estado
+        let isMobileMenuOpen = false;
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+        const navBtns = document.querySelectorAll('.nav-btn');
+
+        // Función Scroll a Sección
+        function scrollToSection(id) {
+            if (isMobileMenuOpen) toggleMobileMenu();
+            const element = document.getElementById(id);
+            if (element) {
+                // Se calcula la altura del encabezado dinámicamente para ajustar el scroll
+                const headerHeight = document.querySelector('.fixed.top-0').offsetHeight;
+                window.scrollTo({ top: element.offsetTop - headerHeight, behavior: 'smooth' });
+            }
+        }
+
+        // Toggle Menú Móvil - Pantalla Completa
+        function toggleMobileMenu() {
+            isMobileMenuOpen = !isMobileMenuOpen;
+            if (isMobileMenuOpen) {
+                mobileMenu.classList.remove('max-h-0');
+                mobileMenu.classList.add('max-h-screen', 'h-screen', 'pb-20', 'border-t', 'border-gray-100');
+                iconOpen.classList.add('hidden');
+                iconClose.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            } else {
+                mobileMenu.classList.add('max-h-0');
+                mobileMenu.classList.remove('max-h-screen', 'h-screen', 'pb-20', 'border-t', 'border-gray-100');
+                iconOpen.classList.remove('hidden');
+                iconClose.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+        }
+
+        // Detectar Scroll Activo para Indicadores del Menú
+        window.addEventListener('scroll', () => {
+            const sections = ['inicio', 'nosotros', 'servicios', 'novedades', 'sedes', 'siau', 'ppss', 'transparencia'];
+            const scrollPosition = window.scrollY + 150;
+
+            for (let i = sections.length - 1; i >= 0; i--) {
+                const sectionId = sections[i];
+                const sectionEl = document.getElementById(sectionId);
+                if (sectionEl && sectionEl.offsetTop <= scrollPosition) {
+                    navBtns.forEach(btn => {
+                        if (btn.getAttribute('data-target') === sectionId) {
+                            btn.classList.add('nav-item-active');
+                            btn.classList.remove('text-gray-600');
+                        } else {
+                            btn.classList.remove('nav-item-active');
+                            btn.classList.add('text-gray-600');
+                        }
+                    });
+                    break;
+                }
+            }
+        });
+
+        // Intersection Observer para las animaciones Reveal
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal-active');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            });
+
+            reveals.forEach(reveal => observer.observe(reveal));
+            navBtns[0].classList.add('nav-item-active');
+            navBtns[0].classList.remove('text-gray-600');
+
+            // Lógica del Carrusel
+            const track = document.getElementById('carousel-track');
+            const prevBtn = document.getElementById('prev-slide');
+            const nextBtn = document.getElementById('next-slide');
+            const dotsContainer = document.getElementById('carousel-dots');
+
+            if(track && prevBtn && nextBtn && dotsContainer) {
+                let currentSlide = 0;
+                const slidesCount = track.children.length;
+
+                // Crear indicadores (dots)
+                for (let i = 0; i < slidesCount; i++) {
+                    const dot = document.createElement('button');
+                    dot.className = `w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === 0 ? 'bg-emerald-600 w-6' : 'bg-gray-300 hover:bg-emerald-400'}`;
+                    dot.onclick = () => goToSlide(i);
+                    dotsContainer.appendChild(dot);
+                }
+
+                function goToSlide(index) {
+                    currentSlide = index;
+                    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+                    // Actualizar estilos de los dots
+                    Array.from(dotsContainer.children).forEach((dot, i) => {
+                        dot.className = `w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === currentSlide ? 'bg-emerald-600 w-6' : 'bg-gray-300 hover:bg-emerald-400'}`;
+                    });
+                }
+
+                function nextSlide() {
+                    goToSlide((currentSlide + 1) % slidesCount);
+                }
+
+                function prevSlide() {
+                    goToSlide((currentSlide - 1 + slidesCount) % slidesCount);
+                }
+
+                nextBtn.addEventListener('click', nextSlide);
+                prevBtn.addEventListener('click', prevSlide);
+
+                // Auto reproducción cada 4 segundos
+                setInterval(nextSlide, 4000);
+            }
+        });
+    </script>
+</body>
+</html>
