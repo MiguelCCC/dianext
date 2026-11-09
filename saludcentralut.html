@@ -93,25 +93,6 @@
 
     <!-- ================= MENÚ FIJO ================= -->
     <div class="fixed top-0 left-0 w-full z-50 flex flex-col shadow-md">
-        <!-- Top Bar -->
-        <div class="bg-indigo-950 text-white text-xs py-2 hidden md:block w-full transition-all duration-300 hover:bg-indigo-900">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
-                <div class="flex items-center gap-6">
-                    <span class="flex items-center gap-2 hover:text-teal-200 transition-colors cursor-default">
-                        <i data-lucide="phone" width="14" height="14" class="animate-pulse"></i> Contacto: 316 470 8457
-                    </span>
-                    <span class="flex items-center gap-2 hover:text-teal-200 transition-colors cursor-default">
-                        <i data-lucide="mail" width="14" height="14" class="animate-float-icon"></i> pqr.interno@saludcentralut.com
-                    </span>
-                </div>
-                <div class="flex items-center gap-6">
-                    <span class="flex items-center gap-2 font-bold tracking-widest text-teal-200 uppercase transition-transform hover:scale-105 duration-300">
-                        <i data-lucide="shield-check" width="14" height="14"></i> Unión Temporal · Regional Central
-                    </span>
-                </div>
-            </div>
-        </div>
-
         <!-- Header Principal -->
         <header id="main-header" class="bg-white w-full border-b border-gray-100 py-1.5">
             <div class="max-w-7xl mx-auto px-4 sm:px-6">
@@ -147,6 +128,10 @@
                             Misión y Visión
                             <span class="nav-indicator absolute bottom-0 left-0 w-full h-0.5 bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.6)] rounded-t-md"></span>
                         </button>
+                        <button onclick="scrollToSection('trabaja')" data-target="trabaja" class="nav-btn relative font-semibold text-sm xl:text-base transition-all py-2 px-1 hover:-translate-y-1 transform duration-300 text-gray-600 hover:text-teal-600">
+                            Trabaja con Nosotros
+                            <span class="nav-indicator absolute bottom-0 left-0 w-full h-0.5 bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.6)] rounded-t-md"></span>
+                        </button>
                         <button onclick="scrollToSection('contacto')" data-target="contacto" class="nav-btn relative font-semibold text-sm xl:text-base transition-all py-2 px-1 hover:-translate-y-1 transform duration-300 text-gray-600 hover:text-teal-600">
                             Contacto
                             <span class="nav-indicator absolute bottom-0 left-0 w-full h-0.5 bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.6)] rounded-t-md"></span>
@@ -173,6 +158,7 @@
                     <button onclick="scrollToSection('quienes-somos')" class="mobile-nav-btn text-center w-full px-6 py-4 rounded-2xl font-black text-xl transition-all duration-300 text-gray-600 hover:bg-teal-50 hover:text-teal-700 hover:scale-105 shadow-sm border border-transparent hover:border-teal-100">Quiénes Somos</button>
                     <button onclick="scrollToSection('que-hacemos')" class="mobile-nav-btn text-center w-full px-6 py-4 rounded-2xl font-black text-xl transition-all duration-300 text-gray-600 hover:bg-teal-50 hover:text-teal-700 hover:scale-105 shadow-sm border border-transparent hover:border-teal-100">Qué Hacemos</button>
                     <button onclick="scrollToSection('mision-vision')" class="mobile-nav-btn text-center w-full px-6 py-4 rounded-2xl font-black text-xl transition-all duration-300 text-gray-600 hover:bg-teal-50 hover:text-teal-700 hover:scale-105 shadow-sm border border-transparent hover:border-teal-100">Misión y Visión</button>
+                    <button onclick="scrollToSection('trabaja')" class="mobile-nav-btn text-center w-full px-6 py-4 rounded-2xl font-black text-xl transition-all duration-300 text-gray-600 hover:bg-teal-50 hover:text-teal-700 hover:scale-105 shadow-sm border border-transparent hover:border-teal-100">Trabaja con Nosotros</button>
                     <button onclick="scrollToSection('contacto')" class="mobile-nav-btn text-center w-full px-6 py-4 rounded-2xl font-black text-xl transition-all duration-300 text-gray-600 hover:bg-teal-50 hover:text-teal-700 hover:scale-105 shadow-sm border border-transparent hover:border-teal-100">Contacto</button>
                     <a href="tel:3164708457" class="block text-center w-full px-6 py-4 rounded-2xl font-black text-xl transition-all duration-300 bg-gradient-to-r from-indigo-700 to-teal-600 text-white hover:shadow-lg hover:scale-105 shadow-md">Llámanos: 316 470 8457</a>
                 </div>
@@ -181,7 +167,7 @@
     </div>
 
     <!-- Espaciador -->
-    <div class="h-[76px] md:h-[124px] w-full bg-white"></div>
+    <div class="h-[76px] md:h-[96px] w-full bg-white"></div>
 
     <main class="w-full">
         <!-- ================= HERO ================= -->
@@ -267,13 +253,13 @@
                                 <div class="bg-indigo-100 text-indigo-700 p-3 rounded-xl animate-float-icon shadow-sm">
                                     <i data-lucide="users" width="28" height="28"></i>
                                 </div>
-                                <h3 class="text-xl md:text-2xl font-black text-indigo-950">Unión Temporal Salud Central</h3>
+                                <h3 class="text-xl md:text-2xl font-black text-indigo-950">Unión Temporal UT Salud USPEC 2</h3>
                             </div>
                             <p class="text-gray-700 text-sm md:text-base leading-relaxed font-medium mb-4">
-                                <strong class="text-indigo-900">SALUD CENTRAL UT</strong> es una Unión Temporal encargada de la prestación de servicios de salud a las Personas Privadas de la Libertad (PPL) afiliadas al Fondo Nacional de Salud de las Personas Privadas de la Libertad, en la Regional Central. Nuestro compromiso es garantizar una atención médica integral, oportuna, continua y de calidad, orientada a la protección del derecho fundamental a la salud de la población privada de la libertad.
+                                <strong class="text-indigo-900">UNIÓN TEMPORAL UT SALUD USPEC 2</strong>, somos una Unión Temporal conformada por diversas empresas, responsable de ejecutar el servicio integral de salud intramural en los <strong class="text-indigo-900">39 Establecimientos de Reclusión (ERON)</strong> de la Regional Central. Este proyecto se realiza en el marco del contrato adjudicado por la <strong class="text-indigo-900">USPEC</strong>, cuya ejecución y administración de recursos se gestiona a través de la fiduciaria <strong class="text-indigo-900">Fiduprevisora S.A.</strong>
                             </p>
                             <p class="text-gray-700 text-sm md:text-base leading-relaxed font-medium">
-                                Para ello, gestionamos y brindamos servicios de atención en salud que incluyen consultas médicas generales y especializadas, atención de urgencias, suministro de medicamentos, seguimiento a remisiones médicas, gestión de procedimientos y apoyo en la coordinación de servicios asistenciales, de acuerdo con nuestras competencias, el modelo de atención establecido y las condiciones contractuales vigentes, contribuyendo al bienestar y a la calidad de vida de las personas bajo nuestra cobertura.
+                                Nuestra labor se fundamenta en cinco valores clave que guían cada una de nuestras acciones: la <strong class="text-indigo-900">Integralidad</strong> en cada valoración, el <strong class="text-indigo-900">Compromiso</strong> con el bienestar de nuestros usuarios, la <strong class="text-indigo-900">Diligencia</strong> en la gestión de procesos, la <strong class="text-indigo-900">Articulación</strong> efectiva para garantizar la continuidad del cuidado y, por encima de todo, el <strong class="text-indigo-900">Humanismo</strong>.
                             </p>
                         </div>
                     </div>
@@ -283,15 +269,15 @@
                         <div class="reveal reveal-fade-left">
                             <div class="bg-gradient-to-br from-indigo-900 to-indigo-950 text-white p-6 rounded-[1.5rem] dynamic-card shadow-xl shadow-indigo-900/20 border border-indigo-800">
                                 <div class="bg-indigo-800 text-teal-300 p-3 rounded-xl border border-indigo-700 w-max mb-3 animate-float-icon"><i data-lucide="landmark" width="24" height="24"></i></div>
-                                <h4 class="font-black text-lg mb-1">Cobertura Nacional</h4>
-                                <p class="text-indigo-100 text-sm font-medium">Atención a PPL en la Regional Central dentro del esquema de salud a nivel nacional.</p>
+                                <h4 class="font-black text-lg mb-1">39 ERON · Regional Central</h4>
+                                <p class="text-indigo-100 text-sm font-medium">Servicio integral de salud intramural en los 39 Establecimientos de Reclusión de la Regional Central.</p>
                             </div>
                         </div>
                         <div class="reveal reveal-fade-left" style="transition-delay: 150ms;">
                             <div class="bg-gradient-to-br from-teal-600 to-teal-700 text-white p-6 rounded-[1.5rem] dynamic-card shadow-xl shadow-teal-900/20 border border-teal-500">
                                 <div class="bg-teal-500/40 text-white p-3 rounded-xl border border-teal-400 w-max mb-3 animate-float-icon"><i data-lucide="shield-check" width="24" height="24"></i></div>
-                                <h4 class="font-black text-lg mb-1">Derecho a la Salud</h4>
-                                <p class="text-teal-50 text-sm font-medium">Protegemos el derecho fundamental a la salud con un modelo de atención humanizado.</p>
+                                <h4 class="font-black text-lg mb-1">Contrato USPEC</h4>
+                                <p class="text-teal-50 text-sm font-medium">Ejecución y administración de recursos a través de la fiduciaria Fiduprevisora S.A.</p>
                             </div>
                         </div>
                     </div>
@@ -405,7 +391,7 @@
                                 </div>
                             </div>
                             <p class="text-gray-700 text-sm md:text-base leading-relaxed font-medium">
-                                Garantizar la prestación de servicios de salud integrales, oportunos y de calidad a las Personas Privadas de la Libertad de la Regional Central, protegiendo su derecho fundamental a la salud mediante un modelo de atención humanizado, continuo y centrado en la dignidad de cada persona.
+                                Brindar servicios de salud integrales, humanizados y oportunos a la población privada de la libertad (PPL), a través de un modelo de atención enfocado en la gestión proactiva del riesgo, la promoción de la salud y la prevención, garantizando la continuidad del cuidado intramural y una articulación efectiva con la red extramural.
                             </p>
                         </div>
                     </div>
@@ -420,7 +406,7 @@
                                 </div>
                             </div>
                             <p class="text-indigo-100 text-sm md:text-base leading-relaxed font-medium">
-                                Para el 2030, ser la Unión Temporal líder y referente nacional en la gestión y prestación de servicios de salud para la población privada de la libertad, reconocida por su humanización, eficiencia, cobertura y compromiso con el bienestar y la calidad de vida de las personas bajo nuestra cobertura.
+                                Ser un modelo a seguir en los servicios de salud intramurales, demostrando que una atención que clasifica a la población según su estado de salud y nivel de riesgo puede mejorar de forma real y humana el bienestar de las personas bajo nuestro cuidado.
                             </p>
                         </div>
                     </div>
@@ -431,29 +417,113 @@
                     <h3 class="text-xl md:text-2xl font-black text-indigo-950">Nuestros Valores</h3>
                     <p class="text-gray-500 text-sm font-medium">Los principios que guían nuestra atención.</p>
                 </div>
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
                     <div class="reveal reveal-zoom-in">
-                        <div class="border border-gray-100 p-5 rounded-[1.5rem] text-center bg-white dynamic-card h-full flex flex-col justify-center items-center group cursor-pointer">
-                            <div class="flex items-center justify-center mb-3 p-3 rounded-xl border text-rose-500 bg-rose-50 border-rose-100 group-hover:bg-rose-500 group-hover:text-white transition-colors duration-300 shadow-sm"><i data-lucide="heart-handshake" width="28" height="28" class="group-hover:scale-110 transition-transform"></i></div>
-                            <h4 class="font-bold text-gray-800 text-sm group-hover:text-indigo-900 transition-colors">Dignidad Humana</h4>
+                        <div class="border border-gray-100 p-6 rounded-[1.5rem] bg-white dynamic-card h-full group">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="p-3 rounded-xl border text-indigo-600 bg-indigo-50 border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300 shadow-sm"><i data-lucide="scale" width="24" height="24"></i></div>
+                                <h4 class="font-black text-indigo-950 text-base">Integridad</h4>
+                            </div>
+                            <p class="text-gray-600 text-sm font-medium leading-relaxed">Actuamos con rectitud y honestidad en todo momento. Cada decisión y acción se basa en el criterio médico y en los principios éticos, garantizando transparencia y equidad en la atención para toda la población.</p>
                         </div>
                     </div>
-                    <div class="reveal reveal-zoom-in" style="transition-delay: 150ms;">
-                        <div class="border border-gray-100 p-5 rounded-[1.5rem] text-center bg-white dynamic-card h-full flex flex-col justify-center items-center group cursor-pointer">
-                            <div class="flex items-center justify-center mb-3 p-3 rounded-xl border text-teal-600 bg-teal-50 border-teal-100 group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300 shadow-sm"><i data-lucide="scale" width="28" height="28" class="group-hover:scale-110 transition-transform"></i></div>
-                            <h4 class="font-bold text-gray-800 text-sm group-hover:text-indigo-900 transition-colors">Equidad e Inclusión</h4>
+                    <div class="reveal reveal-zoom-in" style="transition-delay: 100ms;">
+                        <div class="border border-gray-100 p-6 rounded-[1.5rem] bg-white dynamic-card h-full group">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="p-3 rounded-xl border text-rose-600 bg-rose-50 border-rose-100 group-hover:bg-rose-600 group-hover:text-white transition-colors duration-300 shadow-sm"><i data-lucide="heart-handshake" width="24" height="24"></i></div>
+                                <h4 class="font-black text-indigo-950 text-base">Humanismo</h4>
+                            </div>
+                            <p class="text-gray-600 text-sm font-medium leading-relaxed">Reconocemos la dignidad de cada persona, brindando un trato respetuoso y empático en cada una de nuestras interacciones.</p>
+                        </div>
+                    </div>
+                    <div class="reveal reveal-zoom-in" style="transition-delay: 200ms;">
+                        <div class="border border-gray-100 p-6 rounded-[1.5rem] bg-white dynamic-card h-full group">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="p-3 rounded-xl border text-teal-600 bg-teal-50 border-teal-100 group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300 shadow-sm"><i data-lucide="layers" width="24" height="24"></i></div>
+                                <h4 class="font-black text-indigo-950 text-base">Integralidad</h4>
+                            </div>
+                            <p class="text-gray-600 text-sm font-medium leading-relaxed">Concebimos la salud como un todo, asegurando una valoración completa que abarca desde la prevención hasta el tratamiento.</p>
                         </div>
                     </div>
                     <div class="reveal reveal-zoom-in" style="transition-delay: 300ms;">
-                        <div class="border border-gray-100 p-5 rounded-[1.5rem] text-center bg-white dynamic-card h-full flex flex-col justify-center items-center group cursor-pointer">
-                            <div class="flex items-center justify-center mb-3 p-3 rounded-xl border text-indigo-600 bg-indigo-50 border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300 shadow-sm"><i data-lucide="shield-plus" width="28" height="28" class="group-hover:scale-110 transition-transform"></i></div>
-                            <h4 class="font-bold text-gray-800 text-sm group-hover:text-indigo-900 transition-colors">Calidad y Seguridad</h4>
+                        <div class="border border-gray-100 p-6 rounded-[1.5rem] bg-white dynamic-card h-full group">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="p-3 rounded-xl border text-amber-600 bg-amber-50 border-amber-100 group-hover:bg-amber-600 group-hover:text-white transition-colors duration-300 shadow-sm"><i data-lucide="clipboard-check" width="24" height="24"></i></div>
+                                <h4 class="font-black text-indigo-950 text-base">Diligencia</h4>
+                            </div>
+                            <p class="text-gray-600 text-sm font-medium leading-relaxed">Actuamos con método y rigurosidad, basando nuestra atención en la programación y ejecución de rutas de atención claras y efectivas.</p>
                         </div>
                     </div>
-                    <div class="reveal reveal-zoom-in" style="transition-delay: 450ms;">
-                        <div class="border border-gray-100 p-5 rounded-[1.5rem] text-center bg-white dynamic-card h-full flex flex-col justify-center items-center group cursor-pointer">
-                            <div class="flex items-center justify-center mb-3 p-3 rounded-xl border text-amber-600 bg-amber-50 border-amber-100 group-hover:bg-amber-500 group-hover:text-white transition-colors duration-300 shadow-sm"><i data-lucide="clock" width="28" height="28" class="group-hover:scale-110 transition-transform"></i></div>
-                            <h4 class="font-bold text-gray-800 text-sm group-hover:text-indigo-900 transition-colors">Oportunidad</h4>
+                    <div class="reveal reveal-zoom-in" style="transition-delay: 400ms;">
+                        <div class="border border-gray-100 p-6 rounded-[1.5rem] bg-white dynamic-card h-full group">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="p-3 rounded-xl border text-violet-600 bg-violet-50 border-violet-100 group-hover:bg-violet-600 group-hover:text-white transition-colors duration-300 shadow-sm"><i data-lucide="target" width="24" height="24"></i></div>
+                                <h4 class="font-black text-indigo-950 text-base">Compromiso</h4>
+                            </div>
+                            <p class="text-gray-600 text-sm font-medium leading-relaxed">Vamos más allá de la consulta, realizando un seguimiento continuo y búsquedas activas para garantizar el acceso y la oportunidad en la atención.</p>
+                        </div>
+                    </div>
+                    <div class="reveal reveal-zoom-in" style="transition-delay: 500ms;">
+                        <div class="border border-gray-100 p-6 rounded-[1.5rem] bg-white dynamic-card h-full group">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="p-3 rounded-xl border text-sky-600 bg-sky-50 border-sky-100 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-300 shadow-sm"><i data-lucide="network" width="24" height="24"></i></div>
+                                <h4 class="font-black text-indigo-950 text-base">Articulación</h4>
+                            </div>
+                            <p class="text-gray-600 text-sm font-medium leading-relaxed">Trabajamos en equipo, coordinando de manera fluida la atención entre nuestros niveles y con la red externa para asegurar la continuidad del cuidado.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TRABAJA CON NOSOTROS ================= -->
+        <section id="trabaja" class="py-12 md:py-16 bg-white w-full relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+                <div class="reveal reveal-zoom-in">
+                    <div class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-indigo-800 via-indigo-900 to-teal-800 p-8 md:p-12 lg:p-16 shadow-2xl shadow-indigo-900/30">
+                        <div class="absolute -top-16 -right-16 w-72 h-72 bg-teal-400 rounded-full opacity-20 blur-3xl animate-pulse-soft pointer-events-none"></div>
+                        <div class="absolute -bottom-20 -left-10 w-80 h-80 bg-indigo-400 rounded-full opacity-20 blur-3xl animate-float-slow pointer-events-none"></div>
+
+                        <div class="relative z-10 grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                            <div>
+                                <span class="inline-flex items-center gap-2 bg-white/15 text-white text-xs md:text-sm font-bold px-4 py-2 rounded-full uppercase tracking-widest mb-5 border border-white/20 backdrop-blur-sm animate-pulse-soft">
+                                    <i data-lucide="briefcase" width="16" height="16"></i> Únete al equipo
+                                </span>
+                                <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 leading-tight title-animate">Trabaja con Nosotros</h2>
+                                <p class="text-indigo-100 text-base md:text-lg font-medium leading-relaxed mb-6 max-w-xl">
+                                    Súmate a un equipo humano comprometido con el bienestar de nuestros pacientes.
+                                </p>
+                                <div class="flex flex-wrap gap-2.5 mb-2">
+                                    <span class="inline-flex items-center gap-2 bg-white/10 text-white text-sm font-semibold px-4 py-2 rounded-xl border border-white/20 cursor-default"><i data-lucide="stethoscope" width="16" height="16" class="text-teal-300"></i> Enfermería</span>
+                                    <span class="inline-flex items-center gap-2 bg-white/10 text-white text-sm font-semibold px-4 py-2 rounded-xl border border-white/20 cursor-default"><i data-lucide="user-round" width="16" height="16" class="text-teal-300"></i> Médicos Generales</span>
+                                    <span class="inline-flex items-center gap-2 bg-white/10 text-white text-sm font-semibold px-4 py-2 rounded-xl border border-white/20 cursor-default"><i data-lucide="brain" width="16" height="16" class="text-teal-300"></i> Psiquiatras</span>
+                                    <span class="inline-flex items-center gap-2 bg-white/10 text-white text-sm font-semibold px-4 py-2 rounded-xl border border-white/20 cursor-default"><i data-lucide="pill" width="16" height="16" class="text-teal-300"></i> Regentes de Farmacia</span>
+                                    <span class="inline-flex items-center gap-2 bg-teal-400/30 text-white text-sm font-bold px-4 py-2 rounded-xl border border-teal-300/40 cursor-default"><i data-lucide="sparkles" width="16" height="16"></i> Y mucho más</span>
+                                </div>
+                            </div>
+
+                            <div class="bg-white/95 backdrop-blur-sm rounded-[1.5rem] p-6 md:p-8 shadow-xl">
+                                <h3 class="text-xl md:text-2xl font-black text-indigo-950 mb-1 flex items-center gap-2"><i data-lucide="folder-open" width="24" height="24" class="text-teal-600"></i> Conócenos</h3>
+                                <p class="text-gray-600 text-sm font-medium mb-5">Descarga nuestros documentos institucionales.</p>
+                                <div class="flex flex-col gap-3">
+                                    <a href="PRESENTACION-CORPORATIVA-SALUDCENTRALUT.pdf" target="_blank" rel="noopener" class="group flex items-center gap-4 bg-gray-50 hover:bg-indigo-600 border border-gray-100 hover:border-indigo-600 p-4 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                                        <div class="bg-indigo-100 text-indigo-700 p-3 rounded-xl group-hover:bg-white/20 group-hover:text-white transition-colors flex-shrink-0"><i data-lucide="file-text" width="24" height="24"></i></div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-bold text-indigo-950 text-sm md:text-base group-hover:text-white transition-colors">Presentación Empresarial Corporativa</p>
+                                            <p class="text-gray-500 text-xs font-medium group-hover:text-indigo-100 transition-colors">SALUD CENTRAL UT · PDF</p>
+                                        </div>
+                                        <i data-lucide="download" width="20" height="20" class="text-gray-400 group-hover:text-white transition-colors flex-shrink-0"></i>
+                                    </a>
+                                    <a href="REGLAMENTO-INTERNO-TRABAJO.pdf" target="_blank" rel="noopener" class="group flex items-center gap-4 bg-gray-50 hover:bg-teal-600 border border-gray-100 hover:border-teal-600 p-4 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                                        <div class="bg-teal-100 text-teal-700 p-3 rounded-xl group-hover:bg-white/20 group-hover:text-white transition-colors flex-shrink-0"><i data-lucide="book-open-check" width="24" height="24"></i></div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-bold text-indigo-950 text-sm md:text-base group-hover:text-white transition-colors">Reglamento Interno de Trabajo</p>
+                                            <p class="text-gray-500 text-xs font-medium group-hover:text-teal-50 transition-colors">SALUD CENTRAL UT · PDF</p>
+                                        </div>
+                                        <i data-lucide="download" width="20" height="20" class="text-gray-400 group-hover:text-white transition-colors flex-shrink-0"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -466,7 +536,10 @@
                 <div class="reveal reveal-fade-up mb-10 text-center">
                     <span class="text-teal-600 font-bold tracking-[0.2em] uppercase text-xs mb-3 block animate-pulse">Estamos para Servirte</span>
                     <h2 class="text-3xl md:text-4xl font-black text-indigo-950 mb-4 title-animate">Contáctanos</h2>
-                    <div class="w-20 h-1.5 bg-gradient-to-r from-indigo-500 to-teal-500 mx-auto rounded-full"></div>
+                    <div class="w-20 h-1.5 bg-gradient-to-r from-indigo-500 to-teal-500 mx-auto mb-5 rounded-full"></div>
+                    <p class="text-gray-600 text-base md:text-lg max-w-3xl mx-auto font-medium leading-relaxed">
+                        Ante cualquier comunicación, novedad o alguna <strong class="text-indigo-900">PQRS</strong> relacionada con el proceso de atención, o para solicitar información adicional, comuníquese con nosotros a través de las siguientes líneas:
+                    </p>
                 </div>
 
                 <div class="grid lg:grid-cols-3 gap-6">
@@ -547,6 +620,7 @@
                             <li><button onclick="scrollToSection('quienes-somos')" class="text-sm font-medium text-indigo-300 hover:text-white transition-all flex items-center gap-2 group"><i data-lucide="chevron-right" width="14" height="14" class="group-hover:translate-x-1 transition-transform"></i> Quiénes Somos</button></li>
                             <li><button onclick="scrollToSection('que-hacemos')" class="text-sm font-medium text-indigo-300 hover:text-white transition-all flex items-center gap-2 group"><i data-lucide="chevron-right" width="14" height="14" class="group-hover:translate-x-1 transition-transform"></i> Qué Hacemos</button></li>
                             <li><button onclick="scrollToSection('mision-vision')" class="text-sm font-medium text-indigo-300 hover:text-white transition-all flex items-center gap-2 group"><i data-lucide="chevron-right" width="14" height="14" class="group-hover:translate-x-1 transition-transform"></i> Misión y Visión</button></li>
+                            <li><button onclick="scrollToSection('trabaja')" class="text-sm font-medium text-indigo-300 hover:text-white transition-all flex items-center gap-2 group"><i data-lucide="chevron-right" width="14" height="14" class="group-hover:translate-x-1 transition-transform"></i> Trabaja con Nosotros</button></li>
                             <li><button onclick="scrollToSection('contacto')" class="text-sm font-medium text-indigo-300 hover:text-white transition-all flex items-center gap-2 group"><i data-lucide="chevron-right" width="14" height="14" class="group-hover:translate-x-1 transition-transform"></i> Contacto</button></li>
                         </ul>
                     </div>
@@ -610,7 +684,7 @@
         }
 
         window.addEventListener('scroll', () => {
-            const sections = ['inicio', 'quienes-somos', 'que-hacemos', 'mision-vision', 'contacto'];
+            const sections = ['inicio', 'quienes-somos', 'que-hacemos', 'mision-vision', 'trabaja', 'contacto'];
             const scrollPosition = window.scrollY + 150;
             for (let i = sections.length - 1; i >= 0; i--) {
                 const sectionEl = document.getElementById(sections[i]);
