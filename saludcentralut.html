@@ -140,9 +140,9 @@
 
                     <!-- Derecha: CTA + Menú Móvil -->
                     <div class="flex items-center justify-end gap-3 h-full lg:w-auto lg:flex-shrink-0">
-                        <a href="tel:3164708457" class="hidden lg:inline-flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-700 to-teal-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300 border border-indigo-500">
-                            <i data-lucide="phone-call" width="16" height="16"></i> Llámanos
-                        </a>
+                        <button onclick="scrollToSection('contacto')" class="hidden lg:inline-flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-700 to-teal-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300 border border-indigo-500">
+                            <i data-lucide="mail" width="16" height="16"></i> Contáctanos
+                        </button>
                         <button id="mobile-menu-btn" class="lg:hidden text-indigo-900 p-2.5 bg-teal-50 border border-teal-100 rounded-lg hover:bg-teal-100 active:scale-90 transition-all shadow-sm" onclick="toggleMobileMenu()">
                             <i id="menu-icon-open" data-lucide="menu" width="24" height="24"></i>
                             <i id="menu-icon-close" data-lucide="x" width="24" height="24" class="hidden"></i>
@@ -160,7 +160,7 @@
                     <button onclick="scrollToSection('mision-vision')" class="mobile-nav-btn text-center w-full px-6 py-4 rounded-2xl font-black text-xl transition-all duration-300 text-gray-600 hover:bg-teal-50 hover:text-teal-700 hover:scale-105 shadow-sm border border-transparent hover:border-teal-100">Misión y Visión</button>
                     <button onclick="scrollToSection('trabaja')" class="mobile-nav-btn text-center w-full px-6 py-4 rounded-2xl font-black text-xl transition-all duration-300 text-gray-600 hover:bg-teal-50 hover:text-teal-700 hover:scale-105 shadow-sm border border-transparent hover:border-teal-100">Trabaja con Nosotros</button>
                     <button onclick="scrollToSection('contacto')" class="mobile-nav-btn text-center w-full px-6 py-4 rounded-2xl font-black text-xl transition-all duration-300 text-gray-600 hover:bg-teal-50 hover:text-teal-700 hover:scale-105 shadow-sm border border-transparent hover:border-teal-100">Contacto</button>
-                    <a href="tel:3164708457" class="block text-center w-full px-6 py-4 rounded-2xl font-black text-xl transition-all duration-300 bg-gradient-to-r from-indigo-700 to-teal-600 text-white hover:shadow-lg hover:scale-105 shadow-md">Llámanos: 316 470 8457</a>
+                    <button onclick="scrollToSection('contacto')" class="block text-center w-full px-6 py-4 rounded-2xl font-black text-xl transition-all duration-300 bg-gradient-to-r from-indigo-700 to-teal-600 text-white hover:shadow-lg hover:scale-105 shadow-md">Contáctanos</button>
                 </div>
             </div>
         </header>
@@ -234,7 +234,9 @@
         </div>
 
         <!-- ================= QUIÉNES SOMOS ================= -->
-        <section id="quienes-somos" class="py-12 md:py-16 bg-white w-full relative overflow-hidden">
+        <section id="quienes-somos" class="py-12 md:py-16 bg-gradient-to-br from-indigo-50 via-white to-white w-full relative overflow-hidden">
+            <div class="absolute -top-24 -left-24 w-80 h-80 bg-indigo-200 rounded-full opacity-30 blur-3xl pointer-events-none animate-pulse-soft"></div>
+            <div class="absolute top-1/2 -right-24 w-96 h-96 bg-teal-200 rounded-full opacity-25 blur-3xl pointer-events-none animate-float-slow"></div>
             <div class="absolute top-5 left-10 opacity-[0.03] animate-float-slow text-indigo-800 pointer-events-none"><i data-lucide="plus" width="80" height="80"></i></div>
             <div class="absolute bottom-10 right-10 opacity-[0.03] animate-float-slow text-teal-800 pointer-events-none" style="animation-delay: 2s;"><i data-lucide="circle-dashed" width="100" height="100"></i></div>
 
@@ -268,7 +270,9 @@
         </section>
 
         <!-- ================= QUÉ HACEMOS ================= -->
-        <section id="que-hacemos" class="py-12 md:py-16 bg-gray-50 border-t border-gray-200 w-full relative overflow-hidden">
+        <section id="que-hacemos" class="py-12 md:py-16 bg-gradient-to-br from-teal-50 via-white to-indigo-50/40 border-t border-teal-100 w-full relative overflow-hidden">
+            <div class="absolute -top-20 -right-24 w-80 h-80 bg-teal-200 rounded-full opacity-30 blur-3xl pointer-events-none animate-pulse-soft"></div>
+            <div class="absolute bottom-0 -left-24 w-96 h-96 bg-indigo-200 rounded-full opacity-25 blur-3xl pointer-events-none animate-float-slow"></div>
             <div class="absolute top-1/4 right-5 opacity-[0.04] animate-float-slow text-teal-600 pointer-events-none"><i data-lucide="stethoscope" width="100" height="100"></i></div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
@@ -353,7 +357,9 @@
         </section>
 
         <!-- ================= MISIÓN Y VISIÓN ================= -->
-        <section id="mision-vision" class="py-12 md:py-16 bg-white w-full relative overflow-hidden">
+        <section id="mision-vision" class="py-12 md:py-16 bg-gradient-to-br from-indigo-50 via-white to-teal-50/40 border-t border-indigo-100 w-full relative overflow-hidden">
+            <div class="absolute -top-24 right-10 w-80 h-80 bg-indigo-200 rounded-full opacity-25 blur-3xl pointer-events-none animate-float-slow"></div>
+            <div class="absolute -bottom-24 -left-20 w-96 h-96 bg-teal-200 rounded-full opacity-25 blur-3xl pointer-events-none animate-pulse-soft"></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
                 <div class="text-center max-w-3xl mx-auto mb-10 reveal reveal-zoom-in">
                     <span class="text-teal-600 font-bold tracking-[0.2em] uppercase text-xs mb-3 block animate-pulse">Nuestro Norte</span>
@@ -459,7 +465,9 @@
         </section>
 
         <!-- ================= TRABAJA CON NOSOTROS ================= -->
-        <section id="trabaja" class="py-12 md:py-16 bg-white w-full relative overflow-hidden">
+        <section id="trabaja" class="py-12 md:py-16 bg-gradient-to-b from-white to-indigo-50/50 border-t border-gray-100 w-full relative overflow-hidden">
+            <div class="absolute top-10 -left-20 w-72 h-72 bg-teal-200 rounded-full opacity-20 blur-3xl pointer-events-none animate-float-slow"></div>
+            <div class="absolute bottom-10 -right-20 w-80 h-80 bg-indigo-200 rounded-full opacity-20 blur-3xl pointer-events-none animate-pulse-soft"></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
                 <div class="reveal reveal-zoom-in">
                     <div class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-indigo-800 via-indigo-900 to-teal-800 p-8 md:p-12 lg:p-16 shadow-2xl shadow-indigo-900/30">
@@ -519,7 +527,9 @@
         </section>
 
         <!-- ================= CONTACTO ================= -->
-        <section id="contacto" class="py-12 md:py-16 bg-gray-50 border-t border-gray-200 w-full relative overflow-hidden">
+        <section id="contacto" class="py-12 md:py-16 bg-gradient-to-br from-teal-50 via-white to-indigo-50 border-t border-indigo-100 w-full relative overflow-hidden">
+            <div class="absolute -top-20 -left-24 w-80 h-80 bg-teal-200 rounded-full opacity-30 blur-3xl pointer-events-none animate-pulse-soft"></div>
+            <div class="absolute -bottom-20 -right-24 w-96 h-96 bg-indigo-200 rounded-full opacity-25 blur-3xl pointer-events-none animate-float-slow"></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
                 <div class="reveal reveal-fade-up mb-10 text-center">
                     <span class="text-teal-600 font-bold tracking-[0.2em] uppercase text-xs mb-3 block animate-pulse">Estamos para Servirte</span>
@@ -530,21 +540,9 @@
                     </p>
                 </div>
 
-                <div class="grid lg:grid-cols-3 gap-6">
-                    <!-- Teléfono -->
-                    <div class="reveal reveal-fade-right">
-                        <div class="bg-gradient-to-br from-indigo-700 to-teal-600 text-white p-6 md:p-8 rounded-[1.5rem] h-full dynamic-card shadow-xl shadow-indigo-500/20 group">
-                            <div class="bg-white/20 p-3 rounded-xl w-max mb-5 group-hover:scale-110 transition-transform"><i data-lucide="phone" width="28" height="28"></i></div>
-                            <p class="text-xs text-teal-100 font-bold uppercase tracking-widest mb-1">Línea de Contacto</p>
-                            <a href="tel:3164708457" class="text-2xl md:text-3xl font-black drop-shadow-sm hover:text-teal-100 transition-colors block mb-4">316 470 8457</a>
-                            <a href="https://wa.me/573164708457" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] text-white px-4 py-2 rounded-lg font-bold text-sm shadow-sm hover:scale-105 transition-transform">
-                                <i data-lucide="message-circle" width="16" height="16"></i> Escríbenos por WhatsApp
-                            </a>
-                        </div>
-                    </div>
-
+                <div class="max-w-4xl mx-auto">
                     <!-- Correos -->
-                    <div class="reveal reveal-fade-up lg:col-span-2">
+                    <div class="reveal reveal-fade-up">
                         <div class="bg-white border border-gray-200 p-6 md:p-8 rounded-[1.5rem] h-full corporate-shadow dynamic-card">
                             <h3 class="text-xl md:text-2xl font-black text-indigo-950 mb-6 flex items-center gap-3">
                                 <div class="bg-teal-50 p-2.5 rounded-lg text-teal-600 animate-float-icon"><i data-lucide="mail" width="24" height="24"></i></div> Correos Electrónicos
@@ -619,7 +617,6 @@
                     <div class="reveal reveal-fade-left" style="transition-delay: 200ms;">
                         <h3 class="text-white font-black mb-4 tracking-widest uppercase text-xs md:text-sm">Contacto</h3>
                         <ul class="space-y-3 text-sm font-medium">
-                            <li class="flex items-center gap-2 text-indigo-300"><i data-lucide="phone" width="16" height="16" class="text-teal-400"></i> 316 470 8457</li>
                             <li class="flex items-center gap-2 text-indigo-300"><i data-lucide="mail" width="16" height="16" class="text-teal-400"></i> <span class="break-all">pqr.interno@saludcentralut.com</span></li>
                             <li class="flex items-center gap-2 text-indigo-300"><i data-lucide="mail" width="16" height="16" class="text-teal-400"></i> <span class="break-all">asesorjuridico@saludcentralut.com</span></li>
                         </ul>
