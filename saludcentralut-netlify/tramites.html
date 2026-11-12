@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atención al Usuario - SALUD CENTRAL UT</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        :root { --font-sans: 'Inter', sans-serif; }
+        body, html { font-family: var(--font-sans); scroll-behavior: smooth; background:#ffffff; overflow-x:hidden; margin:0; padding:0; width:100%; }
+
+        .corporate-shadow { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03); }
+        .dynamic-card { transition: all 0.4s cubic-bezier(0.25,0.8,0.25,1); }
+        .dynamic-card:hover { transform: translateY(-6px); box-shadow: 0 20px 25px -5px rgba(13,148,136,0.18), 0 10px 10px -5px rgba(49,46,129,0.12); }
+
+        @keyframes float-icon { 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-6px) scale(1.08);} }
+        .animate-float-icon { animation: float-icon 3s ease-in-out infinite; }
+        @keyframes float-slow { 0%,100%{transform:translate(0,0);} 33%{transform:translate(15px,-15px);} 66%{transform:translate(-10px,10px);} }
+        .animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
+        @keyframes pulse-soft { 0%,100%{transform:scale(1);opacity:1;} 50%{transform:scale(1.05);opacity:0.9;} }
+        .animate-pulse-soft { animation: pulse-soft 4s infinite; }
+
+        .reveal { opacity:0; transform: translateY(1.5rem); transition: all 700ms cubic-bezier(0.34,1.56,0.64,1); }
+        .reveal.on { opacity:1; transform:none; }
+
+        .form-panel { display:none; }
+        .form-panel.active { display:block; animation: panelIn .5s ease; }
+        @keyframes panelIn { from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:none;} }
+        @keyframes modalIn { from{opacity:0; transform:scale(.9);} to{opacity:1; transform:scale(1);} }
+        .modal-box { animation: modalIn .35s cubic-bezier(0.34,1.56,0.64,1); }
+
+        .field-input {
+            width:100%; border:1.5px solid #e5e7eb; border-radius:0.9rem; padding:0.7rem 0.9rem;
+            font-size:0.95rem; color:#1f2937; transition: all .25s; background:#fff; outline:none;
+        }
+        .field-input:focus { border-color:#14b8a6; box-shadow: 0 0 0 3px rgba(20,184,166,.15); }
+        .field-label { font-size:0.8rem; font-weight:700; color:#312e81; margin-bottom:0.35rem; display:block; }
+        .req { color:#e11d48; }
+        .chk-item { display:flex; align-items:flex-start; gap:0.6rem; background:#f9fafb; border:1px solid #f1f1f4; border-radius:0.8rem; padding:0.7rem 0.9rem; cursor:pointer; transition: all .2s; }
+        .chk-item:hover { border-color:#c7d2fe; background:#eef2ff; }
+        .radio-item { display:flex; align-items:center; gap:0.55rem; background:#f9fafb; border:1px solid #f1f1f4; border-radius:0.8rem; padding:0.65rem 0.9rem; cursor:pointer; transition: all .2s; font-size:0.9rem; font-weight:600; color:#374151; }
+        .radio-item:hover { border-color:#c7d2fe; background:#eef2ff; }
+    </style>
+</head>
+<body class="min-h-screen text-slate-700 bg-white selection:bg-teal-200 selection:text-teal-900 overflow-x-hidden">
+
+    <!-- ===== HEADER ===== -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-xl border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16 md:h-20">
+            <a href="index.html" class="flex items-center gap-3">
+                <img src="LOGOSALUDCENTRALUT.png" alt="SALUD CENTRAL UT" class="max-h-11 md:max-h-14 w-auto object-contain" />
+                <div class="hidden sm:flex flex-col leading-tight">
+                    <span class="font-black text-indigo-950 text-base md:text-lg tracking-tight">SALUD CENTRAL <span class="text-teal-500">UT</span></span>
+                    <span class="text-[10px] md:text-xs text-teal-600 font-semibold tracking-[0.2em] uppercase">Humanizando la Salud</span>
+                </div>
+            </a>
+            <a href="index.html" class="inline-flex items-center gap-2 bg-gray-100 hover:bg-indigo-600 hover:text-white text-gray-700 px-4 py-2.5 rounded-xl font-bold text-sm transition-all duration-300">
+                <i data-lucide="arrow-left" width="16" height="16"></i> <span class="hidden sm:inline">Volver al inicio</span><span class="sm:hidden">Inicio</span>
+            </a>
+        </div>
+    </header>
+    <div class="h-16 md:h-20 w-full"></div>
+
+    <!-- ===== HERO ===== -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-teal-50 py-12 md:py-16 border-b border-gray-100">
+        <div class="absolute -top-24 -left-24 w-80 h-80 bg-indigo-200 rounded-full opacity-30 blur-3xl pointer-events-none animate-pulse-soft"></div>
+        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-teal-200 rounded-full opacity-25 blur-3xl pointer-events-none animate-float-slow"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10 reveal">
+            <span class="inline-flex items-center gap-2 bg-white text-indigo-800 text-xs md:text-sm font-bold px-4 py-2 rounded-full uppercase tracking-widest mb-5 shadow-md border border-teal-100">
+                <i data-lucide="clipboard-list" width="16" height="16" class="text-teal-500"></i> Atención al Usuario
+            </span>
+            <h1 class="text-3xl md:text-5xl font-black text-indigo-950 mb-4 leading-tight">Trámites y <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-teal-500">Solicitudes</span></h1>
+            <p class="text-gray-600 text-base md:text-lg font-medium max-w-2xl mx-auto">
+                Selecciona la opción que necesitas, diligencia el formulario y nuestro equipo te dará respuesta a través del medio que registres.
+            </p>
+        </div>
+    </section>
+
+    <main class="w-full relative overflow-hidden bg-gradient-to-b from-white to-indigo-50/40">
+        <div class="absolute top-40 -left-20 w-72 h-72 bg-teal-200 rounded-full opacity-20 blur-3xl pointer-events-none animate-float-slow"></div>
+        <div class="absolute bottom-40 -right-20 w-80 h-80 bg-indigo-200 rounded-full opacity-20 blur-3xl pointer-events-none animate-pulse-soft"></div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-16 relative z-10">
+
+            <div id="banner-error" class="hidden mb-8 bg-rose-50 border border-rose-200 text-rose-800 rounded-2xl p-5 flex items-start gap-3 corporate-shadow">
+                <i data-lucide="alert-triangle" width="26" height="26" class="text-rose-600 flex-shrink-0 mt-0.5"></i>
+                <div>
+                    <p class="font-black text-rose-900">No pudimos enviar tu solicitud.</p>
+                    <p class="text-sm font-medium">Por favor verifica los datos e intenta nuevamente en unos minutos.</p>
+                </div>
+            </div>
+
+            <!-- ===== OPCIONES ===== -->
+            <div id="opciones">
+                <div class="grid md:grid-cols-3 gap-6">
+                    <button onclick="abrir('doc')" class="reveal text-left bg-white border border-gray-100 rounded-[1.5rem] p-6 md:p-7 dynamic-card group h-full flex flex-col">
+                        <div class="bg-indigo-50 text-indigo-600 p-4 rounded-2xl w-max mb-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors animate-float-icon"><i data-lucide="file-text" width="30" height="30"></i></div>
+                        <h3 class="text-lg md:text-xl font-black text-indigo-950 mb-2">Solicitar Documentación</h3>
+                        <p class="text-gray-600 text-sm font-medium mb-4 flex-grow">Solicitud de historia clínica y demás documentos médicos.</p>
+                        <span class="inline-flex items-center gap-2 text-indigo-700 font-bold text-sm group-hover:gap-3 transition-all">Diligenciar <i data-lucide="arrow-right" width="16" height="16"></i></span>
+                    </button>
+
+                    <a href="https://forms.cloud.microsoft/r/KjQaMSuLi8" target="_blank" rel="noopener" class="reveal text-left bg-white border border-gray-100 rounded-[1.5rem] p-6 md:p-7 dynamic-card group h-full flex flex-col" style="transition-delay:100ms;">
+                        <div class="bg-teal-50 text-teal-600 p-4 rounded-2xl w-max mb-4 group-hover:bg-teal-600 group-hover:text-white transition-colors animate-float-icon"><i data-lucide="star" width="30" height="30"></i></div>
+                        <h3 class="text-lg md:text-xl font-black text-indigo-950 mb-2">Encuesta de Satisfacción</h3>
+                        <p class="text-gray-600 text-sm font-medium mb-4 flex-grow">Califica la atención prestada del servicio.</p>
+                        <span class="inline-flex items-center gap-2 text-teal-700 font-bold text-sm group-hover:gap-3 transition-all">Responder <i data-lucide="external-link" width="16" height="16"></i></span>
+                    </a>
+
+                    <button onclick="abrir('buzon')" class="reveal text-left bg-white border border-gray-100 rounded-[1.5rem] p-6 md:p-7 dynamic-card group h-full flex flex-col" style="transition-delay:200ms;">
+                        <div class="bg-violet-50 text-violet-600 p-4 rounded-2xl w-max mb-4 group-hover:bg-violet-600 group-hover:text-white transition-colors animate-float-icon"><i data-lucide="message-square-heart" width="30" height="30"></i></div>
+                        <h3 class="text-lg md:text-xl font-black text-indigo-950 mb-2">Buzón de Sugerencias</h3>
+                        <p class="text-gray-600 text-sm font-medium mb-4 flex-grow">Radica tu petición, queja, reclamo, sugerencia o felicitación.</p>
+                        <span class="inline-flex items-center gap-2 text-violet-700 font-bold text-sm group-hover:gap-3 transition-all">Escribir <i data-lucide="arrow-right" width="16" height="16"></i></span>
+                    </button>
+                </div>
+            </div>
+
+            <button id="volver-opciones" onclick="cerrar()" class="hidden mb-6 inline-flex items-center gap-2 text-indigo-700 hover:text-indigo-900 font-bold text-sm">
+                <i data-lucide="arrow-left" width="18" height="18"></i> Volver a las opciones
+            </button>
+
+            <!-- ============ FORM: HISTORIA CLÍNICA / DOCUMENTOS ============ -->
+            <div id="panel-doc" class="form-panel">
+                <div class="bg-white border border-gray-100 rounded-[1.8rem] corporate-shadow overflow-hidden">
+                    <div class="bg-gradient-to-r from-indigo-700 to-indigo-900 p-6 md:p-8 text-white relative overflow-hidden">
+                        <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+                        <div class="relative z-10 flex items-center gap-4">
+                            <div class="bg-white/15 p-3 rounded-xl"><i data-lucide="file-text" width="28" height="28"></i></div>
+                            <div>
+                                <h2 class="text-lg md:text-2xl font-black">Solicitud de Historia Clínica y/o Documentos Médicos</h2>
+                                <p class="text-indigo-100 text-sm font-medium">Diligencia todos los campos requeridos</p>
+                            </div>
+                        </div>
+                    </div>
+                    <form action="enviar.php" method="POST" enctype="multipart/form-data" class="p-6 md:p-8 space-y-8">
+                        <input type="hidden" name="tipo_formulario" value="Solicitud de Historia Clínica y/o Documentos Médicos">
+
+                        <!-- 1. Datos del solicitante -->
+                        <div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 font-black text-sm">1</span>
+                                <h3 class="text-base md:text-lg font-black text-indigo-950">Datos del solicitante</h3>
+                            </div>
+                            <div class="grid sm:grid-cols-2 gap-4 md:gap-5">
+                                <div class="sm:col-span-2">
+                                    <label class="field-label">¿Quién realiza la solicitud? <span class="req">*</span></label>
+                                    <select name="quien_solicita" required class="field-input">
+                                        <option value="">Seleccione...</option>
+                                        <option>Paciente</option>
+                                        <option>Familiar del paciente</option>
+                                        <option>Representante legal</option>
+                                        <option>Tercero autorizado</option>
+                                    </select>
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label class="field-label">Nombres y apellidos completos <span class="req">*</span></label>
+                                    <input type="text" name="solicitante_nombres" required class="field-input" placeholder="Nombres y apellidos del solicitante">
+                                </div>
+                                <div>
+                                    <label class="field-label">Tipo de documento <span class="req">*</span></label>
+                                    <select name="solicitante_tipo_documento" required class="field-input">
+                                        <option value="">Seleccione...</option>
+                                        <option>Cédula de ciudadanía</option>
+                                        <option>Tarjeta de identidad</option>
+                                        <option>Cédula de extranjería</option>
+                                        <option>Pasaporte</option>
+                                        <option>Otro</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="field-label">Número de documento <span class="req">*</span></label>
+                                    <input type="text" name="solicitante_numero_documento" required class="field-input" placeholder="Número">
+                                </div>
+                                <div>
+                                    <label class="field-label">Número de contacto <span class="req">*</span></label>
+                                    <input type="tel" name="solicitante_contacto" required class="field-input" placeholder="Teléfono / Celular">
+                                </div>
+                                <div>
+                                    <label class="field-label">Correo electrónico <span class="req">*</span></label>
+                                    <input type="email" name="correo" required class="field-input" placeholder="correo@ejemplo.com">
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label class="field-label">Parentesco o relación con el paciente <span class="text-gray-400 font-medium normal-case">(si aplica)</span></label>
+                                    <input type="text" name="parentesco" class="field-input" placeholder="Ej: madre, hijo, representante legal...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. Datos del paciente -->
+                        <div class="pt-6 border-t border-gray-100">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 font-black text-sm">2</span>
+                                <h3 class="text-base md:text-lg font-black text-indigo-950">Datos del paciente</h3>
+                            </div>
+                            <div class="grid sm:grid-cols-2 gap-4 md:gap-5">
+                                <div class="sm:col-span-2">
+                                    <label class="field-label">Nombres y apellidos completos <span class="req">*</span></label>
+                                    <input type="text" name="paciente_nombres" required class="field-input" placeholder="Nombres y apellidos del paciente">
+                                </div>
+                                <div>
+                                    <label class="field-label">Tipo de documento <span class="req">*</span></label>
+                                    <select name="paciente_tipo_documento" required class="field-input">
+                                        <option value="">Seleccione...</option>
+                                        <option>Cédula de ciudadanía</option>
+                                        <option>Tarjeta de identidad</option>
+                                        <option>Cédula de extranjería</option>
+                                        <option>Pasaporte</option>
+                                        <option>Otro</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="field-label">Número de documento <span class="req">*</span></label>
+                                    <input type="text" name="paciente_numero_documento" required class="field-input" placeholder="Número">
+                                </div>
+                                <div>
+                                    <label class="field-label">Fecha de nacimiento <span class="text-gray-400 font-medium normal-case">(opcional)</span></label>
+                                    <input type="date" name="paciente_fecha_nacimiento" class="field-input">
+                                </div>
+                                <div>
+                                    <label class="field-label">Número de contacto <span class="text-gray-400 font-medium normal-case">(opcional)</span></label>
+                                    <input type="tel" name="paciente_contacto" class="field-input" placeholder="Teléfono / Celular">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. Documentación solicitada -->
+                        <div class="pt-6 border-t border-gray-100">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 font-black text-sm">3</span>
+                                <h3 class="text-base md:text-lg font-black text-indigo-950">Documentación solicitada</h3>
+                            </div>
+                            <label class="field-label">¿Qué documentos necesita? <span class="req">*</span></label>
+                            <div class="grid sm:grid-cols-2 gap-2.5 mb-5">
+                                <label class="chk-item"><input type="checkbox" name="documentos[]" value="Copia de historia clínica completa" class="mt-0.5 w-4 h-4 accent-indigo-600"><span class="text-sm text-gray-700 font-medium">Copia de historia clínica completa</span></label>
+                                <label class="chk-item"><input type="checkbox" name="documentos[]" value="Historia clínica de fecha específica" class="mt-0.5 w-4 h-4 accent-indigo-600"><span class="text-sm text-gray-700 font-medium">Historia clínica de una fecha específica</span></label>
+                                <label class="chk-item"><input type="checkbox" name="documentos[]" value="Epicrisis o resumen de atención" class="mt-0.5 w-4 h-4 accent-indigo-600"><span class="text-sm text-gray-700 font-medium">Epicrisis o resumen de atención</span></label>
+                                <label class="chk-item"><input type="checkbox" name="documentos[]" value="Evoluciones médicas" class="mt-0.5 w-4 h-4 accent-indigo-600"><span class="text-sm text-gray-700 font-medium">Evoluciones médicas</span></label>
+                                <label class="chk-item"><input type="checkbox" name="documentos[]" value="Órdenes médicas" class="mt-0.5 w-4 h-4 accent-indigo-600"><span class="text-sm text-gray-700 font-medium">Órdenes médicas</span></label>
+                                <label class="chk-item"><input type="checkbox" name="documentos[]" value="Fórmulas médicas" class="mt-0.5 w-4 h-4 accent-indigo-600"><span class="text-sm text-gray-700 font-medium">Fórmulas médicas</span></label>
+                                <label class="chk-item"><input type="checkbox" name="documentos[]" value="Resultados de exámenes o procedimientos" class="mt-0.5 w-4 h-4 accent-indigo-600"><span class="text-sm text-gray-700 font-medium">Resultados de exámenes o procedimientos</span></label>
+                                <label class="chk-item"><input type="checkbox" name="documentos[]" value="Certificados médicos" class="mt-0.5 w-4 h-4 accent-indigo-600"><span class="text-sm text-gray-700 font-medium">Certificados médicos</span></label>
+                                <label class="chk-item sm:col-span-2"><input type="checkbox" name="documentos[]" value="Otros documentos relacionados con la atención" class="mt-0.5 w-4 h-4 accent-indigo-600"><span class="text-sm text-gray-700 font-medium">Otros documentos relacionados con la atención en salud</span></label>
+                            </div>
+                            <div class="grid gap-4 md:gap-5">
+                                <div>
+                                    <label class="field-label">Periodo o fecha de atención requerida</label>
+                                    <input type="text" name="periodo_atencion" class="field-input" placeholder="Indique las fechas o el periodo de atención de los documentos que necesita">
+                                </div>
+                                <div>
+                                    <label class="field-label">Motivo de la solicitud <span class="text-gray-400 font-medium normal-case">(opcional)</span></label>
+                                    <textarea name="motivo_solicitud" rows="2" class="field-input" placeholder="Describa brevemente la finalidad de la solicitud"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Documentos para validación -->
+                        <div class="pt-6 border-t border-gray-100">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 font-black text-sm">4</span>
+                                <h3 class="text-base md:text-lg font-black text-indigo-950">Documentos para validación</h3>
+                            </div>
+                            <p class="text-sm text-gray-600 font-medium mb-3">Adjunte los documentos según su calidad de solicitante (documento de identidad del solicitante y del paciente, autorización del paciente, registro civil o parentesco, representación legal, etc.).</p>
+                            <label for="doc-soportes" class="block cursor-pointer border-2 border-dashed border-gray-200 hover:border-indigo-400 hover:bg-indigo-50/50 rounded-2xl p-6 text-center transition-all">
+                                <i data-lucide="upload-cloud" width="34" height="34" class="text-indigo-500 mx-auto mb-2"></i>
+                                <p class="text-sm font-bold text-indigo-950">Adjunta tus documentos</p>
+                                <p class="text-xs text-gray-500 font-medium mt-1">Puedes subir varios · PDF, imágenes o archivos de Office · Máx. 9 MB c/u</p>
+                                <p id="doc-soportes-nombre" class="text-xs font-bold text-indigo-700 mt-2"></p>
+                                <input id="doc-soportes" type="file" name="soportes[]" multiple class="hidden" accept=".pdf,.jpg,.jpeg,.png,.gif,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.msg,.zip" onchange="mostrarArchivos(this,'doc-soportes-nombre')">
+                            </label>
+                            <p class="text-xs text-gray-500 font-medium mt-3 flex items-start gap-2"><i data-lucide="info" width="15" height="15" class="text-gray-400 flex-shrink-0 mt-0.5"></i> La documentación requerida dependerá de las condiciones particulares de cada solicitud y de las disposiciones legales aplicables.</p>
+                        </div>
+
+                        <!-- 5. Medio de entrega -->
+                        <div class="pt-6 border-t border-gray-100">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 font-black text-sm">5</span>
+                                <h3 class="text-base md:text-lg font-black text-indigo-950">Medio de entrega</h3>
+                            </div>
+                            <label class="field-label">Correo electrónico para el envío <span class="req">*</span></label>
+                            <input type="email" name="correo_entrega" required class="field-input" placeholder="correo@ejemplo.com">
+                        </div>
+
+                        <!-- 6. Declaración y autorización -->
+                        <div class="pt-6 border-t border-gray-100">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 font-black text-sm">6</span>
+                                <h3 class="text-base md:text-lg font-black text-indigo-950">Declaración y autorización</h3>
+                            </div>
+                            <div class="bg-gray-50 border border-gray-100 rounded-2xl p-5 text-sm text-gray-600 font-medium space-y-2 mb-4">
+                                <p>• Declaro que la información suministrada en este formulario es veraz y corresponde a la solicitud que deseo realizar.</p>
+                                <p>• Manifiesto que cuento con la autorización o facultad legal necesaria para solicitar y recibir la información clínica del paciente, cuando actúo en nombre de otra persona.</p>
+                                <p>• Autorizo el tratamiento de mis datos personales para la gestión de esta solicitud, conforme a la política de tratamiento de datos personales de <strong>NP MEDICAL SAS</strong> y la normativa vigente.</p>
+                                <p>• Entiendo que la solicitud estará sujeta a la validación de identidad, legitimación y documentación correspondiente antes de autorizar la entrega de la información.</p>
+                            </div>
+                            <label class="flex items-start gap-3 cursor-pointer">
+                                <input type="checkbox" name="autorizacion" required class="mt-1 w-4 h-4 accent-indigo-600 flex-shrink-0">
+                                <span class="text-sm text-gray-700 font-bold">He leído y acepto las declaraciones y autorizaciones anteriores. <span class="req">*</span></span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-700 to-indigo-900 text-white font-bold px-8 py-3.5 rounded-xl hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                            <i data-lucide="send" width="18" height="18"></i> Enviar solicitud
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- ============ FORM: RADICACIÓN DE PQRS (BUZÓN) ============ -->
+            <div id="panel-buzon" class="form-panel">
+                <div class="bg-white border border-gray-100 rounded-[1.8rem] corporate-shadow overflow-hidden">
+                    <div class="bg-gradient-to-r from-violet-600 to-indigo-800 p-6 md:p-8 text-white relative overflow-hidden">
+                        <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+                        <div class="relative z-10 flex items-center gap-4">
+                            <div class="bg-white/15 p-3 rounded-xl"><i data-lucide="message-square-heart" width="28" height="28"></i></div>
+                            <div>
+                                <h2 class="text-xl md:text-2xl font-black">Radicación de PQRS</h2>
+                                <p class="text-violet-100 text-sm font-medium">Petición, queja, reclamo, sugerencia o felicitación</p>
+                            </div>
+                        </div>
+                    </div>
+                    <form action="enviar.php" method="POST" enctype="multipart/form-data" class="p-6 md:p-8 space-y-8">
+                        <input type="hidden" name="tipo_formulario" value="Radicación de PQRS">
+
+                        <!-- Información del afiliado -->
+                        <div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-100 text-violet-700 font-black text-sm">1</span>
+                                <h3 class="text-base md:text-lg font-black text-indigo-950">Información del afiliado</h3>
+                            </div>
+                            <label class="field-label">Tipo de persona <span class="req">*</span></label>
+                            <div class="grid grid-cols-3 gap-2.5 mb-5">
+                                <label class="radio-item justify-center"><input type="radio" name="tipo_persona" value="Natural" required class="w-4 h-4 accent-violet-600"> Natural</label>
+                                <label class="radio-item justify-center"><input type="radio" name="tipo_persona" value="Jurídica" class="w-4 h-4 accent-violet-600"> Jurídica</label>
+                                <label class="radio-item justify-center"><input type="radio" name="tipo_persona" value="Anónimo" class="w-4 h-4 accent-violet-600"> Anónimo</label>
+                            </div>
+                            <div class="grid sm:grid-cols-2 gap-4 md:gap-5">
+                                <div>
+                                    <label class="field-label">Teléfono fijo</label>
+                                    <input type="tel" name="telefono_fijo" class="field-input" placeholder="Número de teléfono del afectado">
+                                </div>
+                                <div>
+                                    <label class="field-label">Celular</label>
+                                    <input type="tel" name="celular" class="field-input" placeholder="Número de celular del afiliado">
+                                </div>
+                                <div>
+                                    <label class="field-label">Correo electrónico</label>
+                                    <input type="email" name="correo" class="field-input" placeholder="Correo electrónico del afiliado">
+                                </div>
+                                <div>
+                                    <label class="field-label">Ciudad</label>
+                                    <input type="text" name="ciudad" list="ciudades" class="field-input" placeholder="Escriba o seleccione la ciudad">
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label class="field-label">Dirección</label>
+                                    <input type="text" name="direccion" class="field-input" placeholder="Dirección del afiliado">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Datos de los hechos -->
+                        <div class="pt-6 border-t border-gray-100">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-100 text-violet-700 font-black text-sm">2</span>
+                                <h3 class="text-base md:text-lg font-black text-indigo-950">Datos de los hechos</h3>
+                            </div>
+                            <div class="grid sm:grid-cols-2 gap-4 md:gap-5">
+                                <div>
+                                    <label class="field-label">Producto <span class="req">*</span></label>
+                                    <input type="text" name="producto" list="productos" required class="field-input" placeholder="Escriba o seleccione el producto">
+                                    <p class="text-xs text-gray-400 font-medium mt-1">Conoce los diferentes tipos de solicitud y elige el que se ajuste a tu necesidad.</p>
+                                </div>
+                                <div>
+                                    <label class="field-label">Motivo <span class="req">*</span></label>
+                                    <input type="text" name="motivo" list="motivos" required class="field-input" placeholder="Escriba o seleccione el motivo de la PQR">
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label class="field-label">Descripción de los hechos <span class="req">*</span></label>
+                                    <textarea name="descripcion" id="descripcion" rows="5" maxlength="5000" required class="field-input" placeholder="Describe de manera clara y concreta tu solicitud. ¿Qué ocurrió? ¿Cuándo? ¿En dónde? ¿Qué servicio o medicamento?" oninput="document.getElementById('desc-count').textContent = this.value.length + '/5000'"></textarea>
+                                    <p class="text-xs text-gray-400 font-medium text-right mt-1"><span id="desc-count">0/5000</span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Datos sociodemográficos -->
+                        <div class="pt-6 border-t border-gray-100">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-100 text-violet-700 font-black text-sm">3</span>
+                                <h3 class="text-base md:text-lg font-black text-indigo-950">Datos sociodemográficos</h3>
+                            </div>
+                            <div class="grid sm:grid-cols-2 gap-4 md:gap-5 mb-5">
+                                <div>
+                                    <label class="field-label">Grupo étnico <span class="req">*</span></label>
+                                    <input type="text" name="grupo_etnico" list="etnias" required class="field-input" placeholder="Escriba o seleccione el grupo étnico">
+                                </div>
+                                <div>
+                                    <label class="field-label">Población especial <span class="req">*</span></label>
+                                    <input type="text" name="poblacion_especial" list="poblaciones" required class="field-input" placeholder="Escriba o seleccione la población especial">
+                                </div>
+                            </div>
+                            <label class="field-label">Selecciona el medio por el cual deseas recibir la respuesta <span class="req">*</span></label>
+                            <div class="grid sm:grid-cols-2 gap-2.5">
+                                <label class="radio-item"><input type="radio" name="medio_respuesta" value="Correo electrónico" required class="w-4 h-4 accent-violet-600"> Correo electrónico</label>
+                                <label class="radio-item"><input type="radio" name="medio_respuesta" value="Llamada telefónica" class="w-4 h-4 accent-violet-600"> Llamada telefónica</label>
+                                <label class="radio-item"><input type="radio" name="medio_respuesta" value="Carta física" class="w-4 h-4 accent-violet-600"> Carta física</label>
+                                <label class="radio-item"><input type="radio" name="medio_respuesta" value="No requiere respuesta" class="w-4 h-4 accent-violet-600"> No requiere respuesta</label>
+                            </div>
+                        </div>
+
+                        <!-- Adjuntar archivos -->
+                        <div class="pt-6 border-t border-gray-100">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-100 text-violet-700 font-black text-sm">4</span>
+                                <h3 class="text-base md:text-lg font-black text-indigo-950">Adjuntar archivos</h3>
+                            </div>
+                            <label for="buzon-soportes" class="block cursor-pointer border-2 border-dashed border-gray-200 hover:border-violet-400 hover:bg-violet-50/50 rounded-2xl p-6 text-center transition-all">
+                                <i data-lucide="upload-cloud" width="34" height="34" class="text-violet-500 mx-auto mb-2"></i>
+                                <p class="text-sm font-bold text-indigo-950">Adjunta tus archivos</p>
+                                <p class="text-xs text-gray-500 font-medium mt-1">Formatos: docx, pdf, txt, jpg, gif, xls, xlsx, jpeg, doc, png, msg, zip</p>
+                                <p class="text-xs text-gray-500 font-medium">Peso máximo por archivo: 9 MB · Máximo 30 documentos</p>
+                                <p id="buzon-soportes-nombre" class="text-xs font-bold text-violet-700 mt-2"></p>
+                                <input id="buzon-soportes" type="file" name="soportes[]" multiple class="hidden" accept=".docx,.pdf,.txt,.jpg,.gif,.xls,.xlsx,.jpeg,.doc,.png,.msg,.zip" onchange="mostrarArchivos(this,'buzon-soportes-nombre')">
+                            </label>
+                        </div>
+
+                        <!-- Términos y condiciones -->
+                        <div class="pt-6 border-t border-gray-100">
+                            <label class="flex items-start gap-3 cursor-pointer bg-gray-50 border border-gray-100 p-4 rounded-2xl">
+                                <input type="checkbox" name="autorizacion" required class="mt-1 w-4 h-4 accent-violet-600 flex-shrink-0">
+                                <span class="text-sm text-gray-600 font-medium"><strong class="text-indigo-900">Acepto los Términos y condiciones y el Tratamiento de datos personales.</strong> <span class="req">*</span> Al aceptar, autorizo la recolección y tratamiento de mis datos conforme a la política de tratamiento de datos personales de <strong>SALUD CENTRAL UT</strong> y la normativa vigente, así como la gestión de mi PQRS por parte de la Unión Temporal.</span>
+                            </label>
+
+                            <div class="mt-4 bg-violet-50 border-l-4 border-violet-400 p-4 rounded-r-xl">
+                                <p class="text-xs md:text-sm text-gray-700 font-medium leading-relaxed">
+                                    <strong class="text-indigo-900">Solicitudes anónimas o de identidad reservada:</strong> en caso de que tu solicitud sea anónima o de identidad reservada, selecciona la opción <strong>"Anónimo"</strong> en el campo "Tipo de persona". Si no lo haces, tu solicitud deberá efectuarse directamente ante la Procuraduría General de la Nación, conforme al artículo 38 de la Ley 190 de 1995; artículo 69 de la Ley 734 de 2002 y artículo 81 de la Ley 962 de 2005.
+                                    <a href="https://www.procuraduria.gov.co" target="_blank" rel="noopener" class="text-violet-700 font-bold underline">Accede a la página de la Procuraduría General de la Nación.</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-violet-600 to-indigo-800 text-white font-bold px-8 py-3.5 rounded-xl hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                            <i data-lucide="send" width="18" height="18"></i> Radicar PQRS
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ===== LISTAS (combobox: escribir o seleccionar) ===== -->
+    <datalist id="ciudades">
+        <option value="Armenia"></option><option value="Manizales"></option><option value="La Dorada"></option>
+        <option value="Pereira"></option><option value="Ibagué"></option><option value="Bogotá D.C."></option>
+        <option value="Medellín"></option><option value="Cali"></option><option value="Neiva"></option>
+        <option value="Villavicencio"></option><option value="Tunja"></option><option value="Girardot"></option>
+    </datalist>
+    <datalist id="productos">
+        <option value="Servicios de salud"></option><option value="Atención médica / consulta"></option>
+        <option value="Medicamentos"></option><option value="Procedimientos"></option>
+        <option value="Autorizaciones y remisiones"></option><option value="Citas y agendamiento"></option>
+        <option value="Odontología"></option><option value="Laboratorio clínico"></option><option value="Otro"></option>
+    </datalist>
+    <datalist id="motivos">
+        <option value="Petición"></option><option value="Queja"></option><option value="Reclamo"></option>
+        <option value="Sugerencia"></option><option value="Felicitación"></option>
+        <option value="Oportunidad en la atención"></option><option value="Calidad del servicio"></option>
+        <option value="Atención al usuario"></option>
+    </datalist>
+    <datalist id="etnias">
+        <option value="Ninguno / No aplica"></option><option value="Indígena"></option>
+        <option value="Afrocolombiano / Negro / Mulato"></option><option value="Raizal"></option>
+        <option value="Palenquero"></option><option value="Rom (Gitano)"></option><option value="Otro"></option>
+    </datalist>
+    <datalist id="poblaciones">
+        <option value="Ninguna"></option><option value="Persona privada de la libertad (PPL)"></option>
+        <option value="Víctima del conflicto armado"></option><option value="Persona con discapacidad"></option>
+        <option value="Adulto mayor"></option><option value="Gestante"></option><option value="Primera infancia"></option>
+        <option value="Población LGBTIQ+"></option><option value="Habitante de calle"></option>
+        <option value="Migrante"></option><option value="Otra"></option>
+    </datalist>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="bg-indigo-950 text-indigo-300 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+            <div class="flex items-center gap-3">
+                <img src="LOGOSALUDCENTRALUT.png" alt="SALUD CENTRAL UT" class="h-12 w-auto object-contain" />
+                <div>
+                    <p class="font-black text-white">SALUD CENTRAL <span class="text-teal-400">UT</span></p>
+                    <p class="text-[10px] text-teal-300 font-semibold tracking-[0.2em] uppercase">Humanizando la Salud</p>
+                </div>
+            </div>
+            <p class="text-xs md:text-sm font-medium">Atención a PPL — Regional Central</p>
+        </div>
+    </footer>
+
+    <!-- ===== MODAL DE ÉXITO ===== -->
+    <div id="modal-exito" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-indigo-950/60 backdrop-blur-sm" onclick="cerrarModal()"></div>
+        <div class="modal-box relative bg-white rounded-[1.8rem] max-w-md w-full p-8 text-center corporate-shadow">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="check-circle-2" width="38" height="38"></i></div>
+            <h3 class="text-2xl font-black text-indigo-950 mb-2">¡Información enviada!</h3>
+            <p id="modal-msg" class="text-gray-600 font-medium mb-6 leading-relaxed"></p>
+            <button onclick="cerrarModal()" class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-700 to-teal-600 text-white font-bold px-8 py-3 rounded-xl hover:-translate-y-1 hover:shadow-lg transition-all duration-300">Entendido</button>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        document.querySelectorAll('.reveal').forEach((el, i) => setTimeout(() => el.classList.add('on'), 120 + i * 90));
+
+        const paneles = ['doc', 'buzon'];
+        function abrir(id) {
+            document.getElementById('opciones').style.display = 'none';
+            document.getElementById('volver-opciones').classList.remove('hidden');
+            paneles.forEach(p => document.getElementById('panel-' + p).classList.toggle('active', p === id));
+            lucide.createIcons();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        function cerrar() {
+            document.getElementById('opciones').style.display = 'block';
+            document.getElementById('volver-opciones').classList.add('hidden');
+            paneles.forEach(p => document.getElementById('panel-' + p).classList.remove('active'));
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        function mostrarArchivos(input, targetId) {
+            const n = input.files.length;
+            let txt = '';
+            if (n === 1) txt = 'Archivo: ' + input.files[0].name;
+            else if (n > 1) txt = n + ' archivos seleccionados';
+            if (n > 30) txt = 'Has seleccionado ' + n + ' archivos (máximo 30).';
+            document.getElementById(targetId).textContent = txt;
+        }
+        function cerrarModal() { document.getElementById('modal-exito').classList.add('hidden'); history.replaceState(null, '', location.pathname); }
+
+        const params = new URLSearchParams(location.search);
+        const ir = params.get('ir');
+        if (['doc', 'buzon'].indexOf(ir) !== -1) setTimeout(() => abrir(ir), 200);
+
+        if (params.get('enviado') === '1') {
+            const tipo = (params.get('tipo') || '').toLowerCase();
+            let msg = 'Hemos recibido tu información. Nuestro equipo te dará respuesta por el medio registrado de acuerdo con los tiempos establecidos en la normatividad vigente.';
+            if (tipo.indexOf('pqrs') !== -1 || tipo.indexOf('buz') !== -1) {
+                msg = 'Una vez enviada la información, nuestro equipo de atención al usuario realizará la validación, radicación y gestión correspondiente. Te daremos respuesta de acuerdo con los tiempos establecidos en la normatividad vigente.';
+            } else if (tipo.indexOf('historia') !== -1 || tipo.indexOf('documento') !== -1) {
+                msg = 'Hemos recibido tu solicitud. Estará sujeta a la validación de identidad, legitimación y documentación correspondiente antes de autorizar la entrega de la información. Te daremos respuesta al correo registrado según la normatividad vigente.';
+            }
+            document.getElementById('modal-msg').textContent = msg;
+            document.getElementById('modal-exito').classList.remove('hidden');
+            lucide.createIcons();
+        }
+        if (params.get('error') === '1') document.getElementById('banner-error').classList.remove('hidden');
+    </script>
+</body>
+</html>
