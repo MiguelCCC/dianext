@@ -330,10 +330,42 @@
                     <form action="enviar.php" method="POST" enctype="multipart/form-data" class="p-6 md:p-8 space-y-8">
                         <input type="hidden" name="tipo_formulario" value="Radicación de PQRS">
 
-                        <!-- Información del paciente -->
+                        <!-- ¿Quién radica? -->
                         <div>
                             <div class="flex items-center gap-3 mb-4">
                                 <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-100 text-violet-700 font-black text-sm">1</span>
+                                <h3 class="text-base md:text-lg font-black text-indigo-950">¿Quién radica la PQRS?</h3>
+                            </div>
+                            <label class="field-label">Selecciona quién está radicando la solicitud <span class="req">*</span></label>
+                            <div class="grid sm:grid-cols-2 gap-2.5 mb-2">
+                                <label class="radio-item justify-center"><input type="radio" name="radica" value="El propio paciente" required class="w-4 h-4 accent-violet-600" onchange="toggleTercero()"> El propio paciente</label>
+                                <label class="radio-item justify-center"><input type="radio" name="radica" value="Un tercero" class="w-4 h-4 accent-violet-600" onchange="toggleTercero()"> Un tercero (familiar, acudiente...)</label>
+                            </div>
+                            <p class="text-xs text-gray-400 font-medium">Si eres el propio paciente, continúa diligenciando tus datos abajo. Si eres un tercero, cuéntanos quién eres.</p>
+
+                            <div id="bloque-tercero" style="display:none;" class="mt-4 bg-violet-50/60 border border-violet-100 rounded-2xl p-4 md:p-5">
+                                <p class="text-sm font-black text-indigo-900 mb-3 flex items-center gap-2"><i data-lucide="user-plus" width="18" height="18" class="text-violet-600"></i> Datos de quien radica (tercero)</p>
+                                <div class="grid sm:grid-cols-2 gap-4 md:gap-5">
+                                    <div class="sm:col-span-2">
+                                        <label class="field-label">Nombres y apellidos de quien radica <span class="req">*</span></label>
+                                        <input type="text" name="tercero_nombres" class="field-input" placeholder="Nombres y apellidos del solicitante">
+                                    </div>
+                                    <div>
+                                        <label class="field-label">Número de cédula de quien radica <span class="req">*</span></label>
+                                        <input type="text" name="tercero_documento" class="field-input" placeholder="Cédula del solicitante">
+                                    </div>
+                                    <div>
+                                        <label class="field-label">Parentesco o relación con el paciente <span class="req">*</span></label>
+                                        <input type="text" name="tercero_parentesco" list="parentescos" class="field-input" placeholder="Ej: madre, hijo, esposo(a), apoderado...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Información del paciente -->
+                        <div class="pt-6 border-t border-gray-100">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-100 text-violet-700 font-black text-sm">2</span>
                                 <h3 class="text-base md:text-lg font-black text-indigo-950">Información del paciente</h3>
                             </div>
                             <label class="field-label">Tipo de persona <span class="req">*</span></label>
@@ -373,7 +405,7 @@
                         <!-- Datos de los hechos -->
                         <div class="pt-6 border-t border-gray-100">
                             <div class="flex items-center gap-3 mb-4">
-                                <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-100 text-violet-700 font-black text-sm">2</span>
+                                <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-100 text-violet-700 font-black text-sm">3</span>
                                 <h3 class="text-base md:text-lg font-black text-indigo-950">Datos de los hechos</h3>
                             </div>
                             <div class="grid sm:grid-cols-2 gap-4 md:gap-5">
@@ -397,7 +429,7 @@
                         <!-- Datos sociodemográficos -->
                         <div class="pt-6 border-t border-gray-100">
                             <div class="flex items-center gap-3 mb-4">
-                                <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-100 text-violet-700 font-black text-sm">3</span>
+                                <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-100 text-violet-700 font-black text-sm">4</span>
                                 <h3 class="text-base md:text-lg font-black text-indigo-950">Datos sociodemográficos</h3>
                             </div>
                             <div class="grid sm:grid-cols-2 gap-4 md:gap-5 mb-5">
@@ -417,7 +449,7 @@
                         <!-- Adjuntar archivos -->
                         <div class="pt-6 border-t border-gray-100">
                             <div class="flex items-center gap-3 mb-4">
-                                <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-100 text-violet-700 font-black text-sm">4</span>
+                                <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-100 text-violet-700 font-black text-sm">5</span>
                                 <h3 class="text-base md:text-lg font-black text-indigo-950">Adjuntar archivos</h3>
                             </div>
                             <label for="buzon-soportes" class="block cursor-pointer border-2 border-dashed border-gray-200 hover:border-violet-400 hover:bg-violet-50/50 rounded-2xl p-6 text-center transition-all">
@@ -493,6 +525,12 @@
         <option value="CPMS Fusagasuga"></option><option value="CPMS Gacheta"></option><option value="CPMS Moniquira"></option>
         <option value="CPMMSF Facatativa"></option>
     </datalist>
+    <datalist id="parentescos">
+        <option value="Madre"></option><option value="Padre"></option><option value="Hijo(a)"></option>
+        <option value="Esposo(a) / Compañero(a)"></option><option value="Hermano(a)"></option><option value="Abuelo(a)"></option>
+        <option value="Tío(a)"></option><option value="Primo(a)"></option><option value="Acudiente"></option>
+        <option value="Representante legal / Apoderado"></option><option value="Amigo(a)"></option><option value="Otro"></option>
+    </datalist>
 
     <!-- ===== FOOTER ===== -->
     <footer class="bg-indigo-950 text-indigo-300 py-8">
@@ -549,6 +587,19 @@
             else if (n > 1) txt = n + ' archivos seleccionados';
             if (n > 30) txt = 'Has seleccionado ' + n + ' archivos (máximo 30).';
             document.getElementById(targetId).textContent = txt;
+        }
+        function toggleTercero() {
+            const sel = document.querySelector('input[name="radica"]:checked');
+            const esTercero = sel && sel.value === 'Un tercero';
+            const bloque = document.getElementById('bloque-tercero');
+            if (bloque) bloque.style.display = esTercero ? 'block' : 'none';
+            ['tercero_nombres', 'tercero_documento', 'tercero_parentesco'].forEach(function (n) {
+                const el = document.querySelector('[name="' + n + '"]');
+                if (!el) return;
+                if (esTercero) { el.setAttribute('required', 'required'); }
+                else { el.removeAttribute('required'); el.value = ''; }
+            });
+            if (window.lucide) lucide.createIcons();
         }
         function cerrarModal() { document.getElementById('modal-exito').classList.add('hidden'); history.replaceState(null, '', location.pathname); }
 
