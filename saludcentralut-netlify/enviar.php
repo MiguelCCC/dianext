@@ -66,7 +66,15 @@ if (isset($_FILES['soportes']) && is_array($_FILES['soportes']['name'])) {
 }
 
 // ---- Asunto (UTF-8) ----
-$asunto = "=?UTF-8?B?" . base64_encode("[$tipo] Nueva solicitud web") . "?=";
+if (stripos($tipo, 'Historia') !== false || stripos($tipo, 'Documento') !== false) {
+    $pn = una_linea($_POST['paciente_nombres'] ?? '');
+    $pd = una_linea($_POST['paciente_numero_documento'] ?? '');
+    $pe = una_linea($_POST['paciente_establecimiento'] ?? '');
+    $asunto_txt = "Solicitud Documentos - " . trim($pn . " " . $pd) . ($pe !== '' ? " - " . $pe : "");
+} else {
+    $asunto_txt = "[$tipo] Nueva solicitud web";
+}
+$asunto = "=?UTF-8?B?" . base64_encode($asunto_txt) . "?=";
 
 // ---- Envío ----
 if (count($adjuntos) > 0) {

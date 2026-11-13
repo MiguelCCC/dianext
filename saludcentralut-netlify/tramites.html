@@ -217,9 +217,9 @@
                                     <label class="field-label">Número de documento <span class="req">*</span></label>
                                     <input type="text" name="paciente_numero_documento" required class="field-input" placeholder="Número">
                                 </div>
-                                <div>
-                                    <label class="field-label">Fecha de nacimiento <span class="text-gray-400 font-medium normal-case">(opcional)</span></label>
-                                    <input type="date" name="paciente_fecha_nacimiento" class="field-input">
+                                <div class="sm:col-span-2">
+                                    <label class="field-label">Establecimiento penitenciario donde se encuentra <span class="req">*</span></label>
+                                    <input type="text" name="paciente_establecimiento" list="establecimientos" required class="field-input" placeholder="Escriba o seleccione el establecimiento">
                                 </div>
                                 <div>
                                     <label class="field-label">Número de contacto <span class="text-gray-400 font-medium normal-case">(opcional)</span></label>
@@ -294,7 +294,7 @@
                             <div class="bg-gray-50 border border-gray-100 rounded-2xl p-5 text-sm text-gray-600 font-medium space-y-2 mb-4">
                                 <p>• Declaro que la información suministrada en este formulario es veraz y corresponde a la solicitud que deseo realizar.</p>
                                 <p>• Manifiesto que cuento con la autorización o facultad legal necesaria para solicitar y recibir la información clínica del paciente, cuando actúo en nombre de otra persona.</p>
-                                <p>• Autorizo el tratamiento de mis datos personales para la gestión de esta solicitud, conforme a la política de tratamiento de datos personales de <strong>NP MEDICAL SAS</strong> y la normativa vigente.</p>
+                                <p>• Autorizo el tratamiento de mis datos personales para la gestión de esta solicitud, conforme a la política de tratamiento de datos personales de <strong>SALUD CENTRAL UT</strong> y la normativa vigente.</p>
                                 <p>• Entiendo que la solicitud estará sujeta a la validación de identidad, legitimación y documentación correspondiente antes de autorizar la entrega de la información.</p>
                             </div>
                             <label class="flex items-start gap-3 cursor-pointer">
@@ -326,11 +326,11 @@
                     <form action="enviar.php" method="POST" enctype="multipart/form-data" class="p-6 md:p-8 space-y-8">
                         <input type="hidden" name="tipo_formulario" value="Radicación de PQRS">
 
-                        <!-- Información del afiliado -->
+                        <!-- Información del paciente -->
                         <div>
                             <div class="flex items-center gap-3 mb-4">
                                 <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-100 text-violet-700 font-black text-sm">1</span>
-                                <h3 class="text-base md:text-lg font-black text-indigo-950">Información del afiliado</h3>
+                                <h3 class="text-base md:text-lg font-black text-indigo-950">Información del paciente</h3>
                             </div>
                             <label class="field-label">Tipo de persona <span class="req">*</span></label>
                             <div class="grid grid-cols-3 gap-2.5 mb-5">
@@ -340,24 +340,20 @@
                             </div>
                             <div class="grid sm:grid-cols-2 gap-4 md:gap-5">
                                 <div>
-                                    <label class="field-label">Teléfono fijo</label>
-                                    <input type="tel" name="telefono_fijo" class="field-input" placeholder="Número de teléfono del afectado">
+                                    <label class="field-label">Celular 1</label>
+                                    <input type="tel" name="celular_1" class="field-input" placeholder="Número de celular del paciente">
                                 </div>
                                 <div>
-                                    <label class="field-label">Celular</label>
-                                    <input type="tel" name="celular" class="field-input" placeholder="Número de celular del afiliado">
+                                    <label class="field-label">Celular 2</label>
+                                    <input type="tel" name="celular_2" class="field-input" placeholder="Otro número de celular">
                                 </div>
                                 <div>
                                     <label class="field-label">Correo electrónico</label>
-                                    <input type="email" name="correo" class="field-input" placeholder="Correo electrónico del afiliado">
+                                    <input type="email" name="correo" class="field-input" placeholder="Correo electrónico del paciente">
                                 </div>
                                 <div>
                                     <label class="field-label">Ciudad</label>
                                     <input type="text" name="ciudad" list="ciudades" class="field-input" placeholder="Escriba o seleccione la ciudad">
-                                </div>
-                                <div class="sm:col-span-2">
-                                    <label class="field-label">Dirección</label>
-                                    <input type="text" name="direccion" class="field-input" placeholder="Dirección del afiliado">
                                 </div>
                             </div>
                         </div>
@@ -398,17 +394,12 @@
                                     <input type="text" name="grupo_etnico" list="etnias" required class="field-input" placeholder="Escriba o seleccione el grupo étnico">
                                 </div>
                                 <div>
-                                    <label class="field-label">Población especial <span class="req">*</span></label>
-                                    <input type="text" name="poblacion_especial" list="poblaciones" required class="field-input" placeholder="Escriba o seleccione la población especial">
+                                    <label class="field-label">Establecimiento penitenciario donde se encuentra <span class="req">*</span></label>
+                                    <input type="text" name="establecimiento" list="establecimientos" required class="field-input" placeholder="Escriba o seleccione el establecimiento">
                                 </div>
                             </div>
-                            <label class="field-label">Selecciona el medio por el cual deseas recibir la respuesta <span class="req">*</span></label>
-                            <div class="grid sm:grid-cols-2 gap-2.5">
-                                <label class="radio-item"><input type="radio" name="medio_respuesta" value="Correo electrónico" required class="w-4 h-4 accent-violet-600"> Correo electrónico</label>
-                                <label class="radio-item"><input type="radio" name="medio_respuesta" value="Llamada telefónica" class="w-4 h-4 accent-violet-600"> Llamada telefónica</label>
-                                <label class="radio-item"><input type="radio" name="medio_respuesta" value="Carta física" class="w-4 h-4 accent-violet-600"> Carta física</label>
-                                <label class="radio-item"><input type="radio" name="medio_respuesta" value="No requiere respuesta" class="w-4 h-4 accent-violet-600"> No requiere respuesta</label>
-                            </div>
+                            <label class="field-label">Relaciona el correo donde deseas que llegue la información <span class="req">*</span></label>
+                            <input type="email" name="correo_respuesta" required class="field-input" placeholder="correo@ejemplo.com">
                         </div>
 
                         <!-- Adjuntar archivos -->
@@ -462,26 +453,33 @@
     <datalist id="productos">
         <option value="Servicios de salud"></option><option value="Atención médica / consulta"></option>
         <option value="Medicamentos"></option><option value="Procedimientos"></option>
-        <option value="Autorizaciones y remisiones"></option><option value="Citas y agendamiento"></option>
-        <option value="Odontología"></option><option value="Laboratorio clínico"></option><option value="Otro"></option>
+        <option value="Citas y agendamiento"></option><option value="Odontología"></option>
+        <option value="Laboratorio clínico"></option><option value="Otro"></option>
     </datalist>
     <datalist id="motivos">
         <option value="Petición"></option><option value="Queja"></option><option value="Reclamo"></option>
-        <option value="Sugerencia"></option><option value="Felicitación"></option>
-        <option value="Oportunidad en la atención"></option><option value="Calidad del servicio"></option>
-        <option value="Atención al usuario"></option>
+        <option value="Sugerencia"></option><option value="Felicitación"></option><option value="Tutela"></option>
     </datalist>
     <datalist id="etnias">
         <option value="Ninguno / No aplica"></option><option value="Indígena"></option>
         <option value="Afrocolombiano / Negro / Mulato"></option><option value="Raizal"></option>
         <option value="Palenquero"></option><option value="Rom (Gitano)"></option><option value="Otro"></option>
     </datalist>
-    <datalist id="poblaciones">
-        <option value="Ninguna"></option><option value="Persona privada de la libertad (PPL)"></option>
-        <option value="Víctima del conflicto armado"></option><option value="Persona con discapacidad"></option>
-        <option value="Adulto mayor"></option><option value="Gestante"></option><option value="Primera infancia"></option>
-        <option value="Población LGBTIQ+"></option><option value="Habitante de calle"></option>
-        <option value="Migrante"></option><option value="Otra"></option>
+    <datalist id="establecimientos">
+        <option value="EPMSC Girardot"></option><option value="EPMSC Granada"></option><option value="EPMSC Guamo"></option>
+        <option value="EPMSC Guateque"></option><option value="CPMS La Mesa"></option><option value="EPMSC La Plata"></option>
+        <option value="EPMSC Leticia"></option><option value="CPMS Melgar"></option><option value="EPMSC Neiva"></option>
+        <option value="EPMSC Garzón"></option><option value="CPMS Paz de Ariporo"></option><option value="EPMSC Pitalito"></option>
+        <option value="CPMS Ramiriqui"></option><option value="EPMSC Sogamoso"></option><option value="EPMSC Santa Rosa de Viterbo"></option>
+        <option value="CPMS Tunja"></option><option value="CPMS Ubaté"></option><option value="EPMSC Villavicencio"></option>
+        <option value="CPMS Villeta"></option><option value="EPMSC Yopal"></option><option value="CPAMSM Bogotá Buen Pastor"></option>
+        <option value="Camis Acacías"></option><option value="Complejo Penitenciario y Carcelario de Bogotá Picota"></option>
+        <option value="CPMS Bogotá Modelo"></option><option value="EP Heliconias"></option><option value="CPAMS El Barne"></option>
+        <option value="EPC Caqueza"></option><option value="EPC La Esperanza de Guaduas"></option><option value="EPMS Duitama"></option>
+        <option value="EPMSC Acacias"></option><option value="EPMSC Chaparral"></option><option value="CPMS Chiquinquirá"></option>
+        <option value="CPMS Chocontá"></option><option value="EPMSC Espinal"></option><option value="EPMSC Florencia"></option>
+        <option value="CPMS Fusagasuga"></option><option value="CPMS Gacheta"></option><option value="CPMS Moniquira"></option>
+        <option value="CPMMSF Facatativa"></option>
     </datalist>
 
     <!-- ===== FOOTER ===== -->
