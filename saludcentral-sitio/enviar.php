@@ -125,13 +125,13 @@ if (count($adjuntos) > 0) {
     }
     $msg .= "--$sep--";
 
-    $ok = @mail($DESTINO, $asunto, $msg, $headers);
+    $ok = @mail($DESTINO, $asunto, $msg, $headers, "-f no-reply@saludcentralut.com");
 } else {
     $headers  = "MIME-Version: 1.0\r\n";
     $headers .= "From: $FROM\r\n";
     if ($reply) $headers .= "Reply-To: $reply\r\n";
     $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-    $ok = @mail($DESTINO, $asunto, $cuerpo, $headers);
+    $ok = @mail($DESTINO, $asunto, $cuerpo, $headers, "-f no-reply@saludcentralut.com");
 }
 
 // Registro de trazabilidad para PQRS
