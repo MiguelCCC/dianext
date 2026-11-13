@@ -120,9 +120,10 @@ if (stripos($tipo, 'Historia') !== false || stripos($tipo, 'Documento') !== fals
 }
 
 $ok = false;
+$usar_smtp = ($SMTP_HABILITADO && $SMTP_USER !== '' && $SMTP_PASS !== '' && is_dir(__DIR__ . '/PHPMailer'));
 
 // ===================== ENVÍO POR SMTP (recomendado) =====================
-if ($SMTP_HABILITADO && $SMTP_USER !== '' && $SMTP_PASS !== '' && is_dir(__DIR__ . '/PHPMailer')) {
+if ($usar_smtp) {
     require_once __DIR__ . '/PHPMailer/Exception.php';
     require_once __DIR__ . '/PHPMailer/PHPMailer.php';
     require_once __DIR__ . '/PHPMailer/SMTP.php';
@@ -149,8 +150,8 @@ if ($SMTP_HABILITADO && $SMTP_USER !== '' && $SMTP_PASS !== '' && is_dir(__DIR__
     }
 }
 
-// ===================== ENVÍO POR mail() (respaldo) =====================
-if (!$ok) {
+// ===================== ENVÍO POR mail() (solo si SMTP NO está configurado) =====================
+if (!$usar_smtp && !$ok) {
     $asunto = "=?UTF-8?B?" . base64_encode($asunto_txt) . "?=";
     if (count($adjuntos) > 0) {
         $sep = "==BORDE_" . md5(uniqid((string)time(), true));
