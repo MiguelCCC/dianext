@@ -146,53 +146,53 @@
                     <form action="enviar.php" method="POST" enctype="multipart/form-data" class="p-6 md:p-8 space-y-8">
                         <input type="hidden" name="tipo_formulario" value="Solicitud de Historia Clínica y/o Documentos Médicos">
 
-                        <!-- 1. Datos del solicitante -->
+                        <!-- 1. ¿Quién solicita? -->
                         <div>
                             <div class="flex items-center gap-3 mb-4">
                                 <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 font-black text-sm">1</span>
-                                <h3 class="text-base md:text-lg font-black text-indigo-950">Datos del solicitante</h3>
+                                <h3 class="text-base md:text-lg font-black text-indigo-950">¿Quién solicita la historia clínica?</h3>
                             </div>
-                            <div class="grid sm:grid-cols-2 gap-4 md:gap-5">
-                                <div class="sm:col-span-2">
-                                    <label class="field-label">¿Quién realiza la solicitud? <span class="req">*</span></label>
-                                    <select name="quien_solicita" required class="field-input">
-                                        <option value="">Seleccione...</option>
-                                        <option>Paciente</option>
-                                        <option>Familiar del paciente</option>
-                                        <option>Representante legal</option>
-                                        <option>Tercero autorizado</option>
-                                    </select>
-                                </div>
-                                <div class="sm:col-span-2">
-                                    <label class="field-label">Nombres y apellidos completos <span class="req">*</span></label>
-                                    <input type="text" name="solicitante_nombres" required class="field-input" placeholder="Nombres y apellidos del solicitante">
-                                </div>
-                                <div>
-                                    <label class="field-label">Tipo de documento <span class="req">*</span></label>
-                                    <select name="solicitante_tipo_documento" required class="field-input">
-                                        <option value="">Seleccione...</option>
-                                        <option>Cédula de ciudadanía</option>
-                                        <option>Tarjeta de identidad</option>
-                                        <option>Cédula de extranjería</option>
-                                        <option>Pasaporte</option>
-                                        <option>Otro</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="field-label">Número de documento <span class="req">*</span></label>
-                                    <input type="text" name="solicitante_numero_documento" required class="field-input" placeholder="Número">
-                                </div>
-                                <div>
-                                    <label class="field-label">Número de contacto <span class="req">*</span></label>
-                                    <input type="tel" name="solicitante_contacto" required class="field-input" placeholder="Teléfono / Celular">
-                                </div>
-                                <div>
-                                    <label class="field-label">Correo electrónico <span class="req">*</span></label>
-                                    <input type="email" name="correo" required class="field-input" placeholder="correo@ejemplo.com">
-                                </div>
-                                <div class="sm:col-span-2">
-                                    <label class="field-label">Parentesco o relación con el paciente <span class="text-gray-400 font-medium normal-case">(si aplica)</span></label>
-                                    <input type="text" name="parentesco" class="field-input" placeholder="Ej: madre, hijo, representante legal...">
+                            <label class="field-label">Selecciona quién está realizando la solicitud <span class="req">*</span></label>
+                            <div class="grid sm:grid-cols-2 gap-2.5 mb-2">
+                                <label class="radio-item justify-center"><input type="radio" name="solicita_quien" value="El propio paciente" required class="w-4 h-4 accent-indigo-600" onchange="toggleSolicitante()"> El propio paciente</label>
+                                <label class="radio-item justify-center"><input type="radio" name="solicita_quien" value="Un tercero" class="w-4 h-4 accent-indigo-600" onchange="toggleSolicitante()"> Un tercero (familiar, acudiente...)</label>
+                            </div>
+                            <p class="text-xs text-gray-400 font-medium">Si eres el propio paciente, continúa diligenciando los datos del paciente abajo. Si eres un tercero, cuéntanos quién eres.</p>
+
+                            <div id="bloque-solicitante" style="display:none;" class="mt-4 bg-indigo-50/60 border border-indigo-100 rounded-2xl p-4 md:p-5">
+                                <p class="text-sm font-black text-indigo-900 mb-3 flex items-center gap-2"><i data-lucide="user-plus" width="18" height="18" class="text-indigo-600"></i> Datos de quien solicita (tercero)</p>
+                                <div class="grid sm:grid-cols-2 gap-4 md:gap-5">
+                                    <div class="sm:col-span-2">
+                                        <label class="field-label">Nombres y apellidos de quien solicita <span class="req">*</span></label>
+                                        <input type="text" name="solicitante_nombres" class="field-input" placeholder="Nombres y apellidos del solicitante">
+                                    </div>
+                                    <div>
+                                        <label class="field-label">Tipo de documento <span class="req">*</span></label>
+                                        <select name="solicitante_tipo_documento" class="field-input">
+                                            <option value="">Seleccione...</option>
+                                            <option>Cédula de ciudadanía</option>
+                                            <option>Tarjeta de identidad</option>
+                                            <option>Cédula de extranjería</option>
+                                            <option>Pasaporte</option>
+                                            <option>Otro</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="field-label">Número de documento (cédula) <span class="req">*</span></label>
+                                        <input type="text" name="solicitante_numero_documento" class="field-input" placeholder="Número de cédula del solicitante">
+                                    </div>
+                                    <div>
+                                        <label class="field-label">Número de contacto <span class="req">*</span></label>
+                                        <input type="tel" name="solicitante_contacto" class="field-input" placeholder="Teléfono / Celular">
+                                    </div>
+                                    <div>
+                                        <label class="field-label">Correo electrónico <span class="req">*</span></label>
+                                        <input type="email" name="correo" class="field-input" placeholder="correo@ejemplo.com">
+                                    </div>
+                                    <div class="sm:col-span-2">
+                                        <label class="field-label">Parentesco o relación con el paciente <span class="req">*</span></label>
+                                        <input type="text" name="parentesco" list="parentescos" class="field-input" placeholder="Ej: madre, hijo, esposo(a), apoderado...">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -595,6 +595,20 @@
             if (bloque) bloque.style.display = esTercero ? 'block' : 'none';
             ['tercero_nombres', 'tercero_documento', 'tercero_parentesco'].forEach(function (n) {
                 const el = document.querySelector('[name="' + n + '"]');
+                if (!el) return;
+                if (esTercero) { el.setAttribute('required', 'required'); }
+                else { el.removeAttribute('required'); el.value = ''; }
+            });
+            if (window.lucide) lucide.createIcons();
+        }
+        function toggleSolicitante() {
+            const panel = document.getElementById('panel-doc');
+            const sel = panel.querySelector('input[name="solicita_quien"]:checked');
+            const esTercero = sel && sel.value === 'Un tercero';
+            const bloque = document.getElementById('bloque-solicitante');
+            if (bloque) bloque.style.display = esTercero ? 'block' : 'none';
+            ['solicitante_nombres', 'solicitante_tipo_documento', 'solicitante_numero_documento', 'solicitante_contacto', 'correo', 'parentesco'].forEach(function (n) {
+                const el = panel.querySelector('[name="' + n + '"]');
                 if (!el) return;
                 if (esTercero) { el.setAttribute('required', 'required'); }
                 else { el.removeAttribute('required'); el.value = ''; }
