@@ -339,6 +339,14 @@
                                 <label class="radio-item justify-center"><input type="radio" name="tipo_persona" value="Anónimo" class="w-4 h-4 accent-violet-600"> Anónimo</label>
                             </div>
                             <div class="grid sm:grid-cols-2 gap-4 md:gap-5">
+                                <div class="sm:col-span-2">
+                                    <label class="field-label">Nombres y apellidos del paciente</label>
+                                    <input type="text" name="paciente_nombres" class="field-input" placeholder="Nombres y apellidos del paciente">
+                                </div>
+                                <div>
+                                    <label class="field-label">Número de documento del paciente</label>
+                                    <input type="text" name="paciente_numero_documento" class="field-input" placeholder="Número de documento">
+                                </div>
                                 <div>
                                     <label class="field-label">Celular 1</label>
                                     <input type="tel" name="celular_1" class="field-input" placeholder="Número de celular del paciente">
@@ -502,7 +510,11 @@
         <div class="modal-box relative bg-white rounded-[1.8rem] max-w-md w-full p-8 text-center corporate-shadow">
             <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="check-circle-2" width="38" height="38"></i></div>
             <h3 class="text-2xl font-black text-indigo-950 mb-2">¡Información enviada!</h3>
-            <p id="modal-msg" class="text-gray-600 font-medium mb-6 leading-relaxed"></p>
+            <p id="modal-msg" class="text-gray-600 font-medium mb-5 leading-relaxed"></p>
+            <div id="modal-radicado" class="hidden mb-6 bg-violet-50 border border-violet-200 rounded-xl px-4 py-3">
+                <p class="text-[10px] font-bold text-violet-500 uppercase tracking-widest mb-0.5">Número de radicado</p>
+                <p id="modal-rad-num" class="text-xl font-black text-violet-800"></p>
+            </div>
             <button onclick="cerrarModal()" class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-700 to-teal-600 text-white font-bold px-8 py-3 rounded-xl hover:-translate-y-1 hover:shadow-lg transition-all duration-300">Entendido</button>
         </div>
     </div>
@@ -542,13 +554,18 @@
 
         if (params.get('enviado') === '1') {
             const tipo = (params.get('tipo') || '').toLowerCase();
+            const radicado = params.get('radicado');
             let msg = 'Hemos recibido tu información. Nuestro equipo te dará respuesta por el medio registrado de acuerdo con los tiempos establecidos en la normatividad vigente.';
             if (tipo.indexOf('pqrs') !== -1 || tipo.indexOf('buz') !== -1) {
-                msg = 'Una vez enviada la información, nuestro equipo de atención al usuario realizará la validación, radicación y gestión correspondiente. Te daremos respuesta de acuerdo con los tiempos establecidos en la normatividad vigente.';
+                msg = 'Tu PQRSFT fue enviada correctamente. Nuestro equipo realizará la validación, radicación y gestión correspondiente. Podrás realizar seguimiento a través del siguiente número de radicado:';
             } else if (tipo.indexOf('historia') !== -1 || tipo.indexOf('documento') !== -1) {
                 msg = 'Hemos recibido tu solicitud. Estará sujeta a la validación de identidad, legitimación y documentación correspondiente antes de autorizar la entrega de la información. Te daremos respuesta al correo registrado según la normatividad vigente.';
             }
             document.getElementById('modal-msg').textContent = msg;
+            if (radicado) {
+                document.getElementById('modal-rad-num').textContent = radicado;
+                document.getElementById('modal-radicado').classList.remove('hidden');
+            }
             document.getElementById('modal-exito').classList.remove('hidden');
             lucide.createIcons();
         }

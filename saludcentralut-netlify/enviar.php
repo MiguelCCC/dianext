@@ -19,16 +19,37 @@ function limpiar($v) {
 function una_linea($v) {
     return preg_replace('/[\r\n]+/', ' ', limpiar($v));
 }
+// Genera un radicado consecutivo con trazabilidad: UT.PQRSFT.001, UT.PQRSFT.002, ...
+function generarRadicado($dir) {
+    $archivo = $dir . '/contador_pqrsft.txt';
+    $num = 0;
+    $fp = @fopen($archivo, 'c+');
+    if ($fp) {
+        flock($fp, LOCK_EX);
+        $contenido = trim(stream_get_contents($fp));
+        $num = ($contenido === '' ? 0 : intval($contenido)) + 1;
+        rewind($fp); ftruncate($fp, 0); fwrite($fp, (string)$num); fflush($fp);
+        flock($fp, LOCK_UN); fclose($fp);
+    } else {
+        $num = (int)(time() % 1000); // respaldo si no se puede escribir el contador
+    }
+    return 'UT.PQRSFT.' . str_pad((string)$num, 3, '0', STR_PAD_LEFT);
+}
 
 // Tipo de formulario (para asunto y redirección)
 $tipo = una_linea($_POST['tipo_formulario'] ?? 'Formulario web');
+$es_pqrs = (stripos($tipo, 'PQRS') !== false || stripos($tipo, 'Buz') !== false);
 
-// Correo del solicitante (para Reply-To)
-$reply = filter_var($_POST['correo'] ?? ($_POST['correo_entrega'] ?? ''), FILTER_VALIDATE_EMAIL);
+// Radicado (solo para PQRS)
+$radicado = $es_pqrs ? generarRadicado(__DIR__) : '';
+
+// Correo para respuesta (Reply-To)
+$reply = filter_var($_POST['correo_respuesta'] ?? ($_POST['correo'] ?? ($_POST['correo_entrega'] ?? '')), FILTER_VALIDATE_EMAIL);
 
 // ---- Construir cuerpo del mensaje ----
 $cuerpo  = "Nueva solicitud recibida desde el sitio web.\n";
 $cuerpo .= "Formulario: " . $tipo . "\n";
+if ($radicado !== '') $cuerpo .= "Radicado: " . $radicado . "\n";
 $cuerpo .= str_repeat("=", 55) . "\n\n";
 
 foreach ($_POST as $campo => $valor) {
@@ -71,6 +92,12 @@ if (stripos($tipo, 'Historia') !== false || stripos($tipo, 'Documento') !== fals
     $pd = una_linea($_POST['paciente_numero_documento'] ?? '');
     $pe = una_linea($_POST['paciente_establecimiento'] ?? '');
     $asunto_txt = "Solicitud Documentos - " . trim($pn . " " . $pd) . ($pe !== '' ? " - " . $pe : "");
+} elseif ($es_pqrs) {
+    $mot = una_linea($_POST['motivo'] ?? 'PQRS');
+    $pn = una_linea($_POST['paciente_nombres'] ?? '');
+    $pd = una_linea($_POST['paciente_numero_documento'] ?? '');
+    $pe = una_linea($_POST['establecimiento'] ?? '');
+    $asunto_txt = $mot . " - " . trim($pn . " " . $pd) . ($pe !== '' ? " - " . $pe : "");
 } else {
     $asunto_txt = "[$tipo] Nueva solicitud web";
 }
@@ -107,7 +134,15 @@ if (count($adjuntos) > 0) {
     $ok = @mail($DESTINO, $asunto, $cuerpo, $headers);
 }
 
+// Registro de trazabilidad para PQRS
+if ($radicado !== '') {
+    @file_put_contents(__DIR__ . '/radicados_pqrsft.log',
+        date('Y-m-d H:i:s') . " | " . $radicado . " | " . una_linea($_POST['motivo'] ?? '') . " | " . una_linea($_POST['paciente_nombres'] ?? '') . " | " . ($ok ? 'ENVIADO' : 'ERROR') . "\n",
+        FILE_APPEND | LOCK_EX);
+}
+
 $estado = $ok ? "enviado=1" : "error=1";
-header("Location: tramites.html?$estado&tipo=" . rawurlencode($tipo));
+$extra = ($radicado !== '') ? "&radicado=" . rawurlencode($radicado) : "";
+header("Location: tramites.html?$estado&tipo=" . rawurlencode($tipo) . $extra);
 exit;
 ?>
