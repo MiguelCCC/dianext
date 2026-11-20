@@ -639,6 +639,35 @@
             lucide.createIcons();
         }
         if (params.get('error') === '1') document.getElementById('banner-error').classList.remove('hidden');
+
+        // ===== Validación de escritura (formato condicional) =====
+        // Nombres: solo letras (sin números, comas ni puntos). Documentos y celulares: solo números.
+        (function () {
+            const soloLetras = ['solicitante_nombres', 'paciente_nombres', 'tercero_nombres'];
+            const soloNumeros = ['solicitante_numero_documento', 'paciente_numero_documento', 'tercero_documento', 'solicitante_contacto', 'paciente_contacto', 'celular_1', 'celular_2'];
+            const reLetras = /[^A-Za-zÁÉÍÓÚáéíóúÑñÜü '-]/g;   // permite letras, tildes, ñ, espacio, apóstrofo y guion
+            const reNumeros = /[^0-9]/g;                      // solo dígitos
+
+            function aplicar(nombres, regex, attrs) {
+                nombres.forEach(function (n) {
+                    document.querySelectorAll('[name="' + n + '"]').forEach(function (el) {
+                        Object.keys(attrs).forEach(function (k) { el.setAttribute(k, attrs[k]); });
+                        function limpiar() {
+                            const limpio = el.value.replace(regex, '');
+                            if (limpio !== el.value) {
+                                const pos = el.selectionStart - (el.value.length - limpio.length);
+                                el.value = limpio;
+                                try { el.setSelectionRange(pos, pos); } catch (e) { }
+                            }
+                        }
+                        el.addEventListener('input', limpiar);
+                        el.addEventListener('paste', function () { setTimeout(limpiar, 0); });
+                    });
+                });
+            }
+            aplicar(soloLetras, reLetras, { pattern: "[A-Za-zÁÉÍÓÚáéíóúÑñÜü '-]+", title: 'Solo se permiten letras (sin números ni símbolos).', autocomplete: 'off' });
+            aplicar(soloNumeros, reNumeros, { inputmode: 'numeric', pattern: '[0-9]+', title: 'Solo se permiten números.', autocomplete: 'off' });
+        })();
     </script>
 </body>
 </html>
