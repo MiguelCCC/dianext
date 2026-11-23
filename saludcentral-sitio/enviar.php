@@ -38,6 +38,49 @@ function limpiar($v) {
 function una_linea($v) {
     return preg_replace('/[\r\n]+/', ' ', limpiar($v));
 }
+
+// ===== Validación de datos en el servidor (anti-spam) =====
+function _sin_digitos($v) { return preg_match('/\d/u', $v) !== 1; }
+function _tiene_vocal($v) { return preg_match('/[aeiouáéíóúü]/iu', $v) === 1; }
+// Nombres: solo letras/espacios, con vocal, sin dígitos ni símbolos raros.
+function nombre_valido($v) {
+    $v = trim($v);
+    if ($v === '') return true;
+    if (mb_strlen($v) < 2) return false;
+    if (!_sin_digitos($v)) return false;
+    if (!_tiene_vocal($v)) return false;
+    return preg_match('~^[\p{L}\s.\'-]+$~u', $v) === 1;
+}
+// Texto (parentesco, establecimiento, etc.): sin dígitos y con vocal (admite / y paréntesis).
+function texto_valido($v) {
+    $v = trim($v);
+    if ($v === '') return true;
+    if (!_sin_digitos($v)) return false;
+    return _tiene_vocal($v);
+}
+// Documentos: solo dígitos, 4 a 11.
+function doc_valido($v) {
+    $v = trim($v);
+    if ($v === '') return true;
+    return preg_match('/^\d{4,11}$/', $v) === 1;
+}
+// Celulares/teléfonos: solo dígitos, 7 a 11.
+function tel_valido($v) {
+    $v = trim($v);
+    if ($v === '') return true;
+    return preg_match('/^\d{7,11}$/', $v) === 1;
+}
+function datos_validos($p) {
+    foreach (['paciente_nombres', 'solicitante_nombres', 'tercero_nombres'] as $c)
+        if (!nombre_valido($p[$c] ?? '')) return false;
+    foreach (['parentesco', 'tercero_parentesco', 'paciente_establecimiento', 'establecimiento', 'grupo_etnico', 'ciudad'] as $c)
+        if (!texto_valido($p[$c] ?? '')) return false;
+    foreach (['paciente_numero_documento', 'solicitante_numero_documento', 'tercero_documento'] as $c)
+        if (!doc_valido($p[$c] ?? '')) return false;
+    foreach (['solicitante_contacto', 'paciente_contacto', 'celular_1', 'celular_2'] as $c)
+        if (!tel_valido($p[$c] ?? '')) return false;
+    return true;
+}
 // Radicado consecutivo con trazabilidad: UT.PQRSFT.001, UT.PQRSFT.002, ...
 function generarRadicado($dir) {
     $archivo = $dir . '/contador_pqrsft.txt';
@@ -58,6 +101,18 @@ function generarRadicado($dir) {
 // Tipo de formulario
 $tipo = una_linea($_POST['tipo_formulario'] ?? 'Formulario web');
 $es_pqrs = (stripos($tipo, 'PQRS') !== false || stripos($tipo, 'Buz') !== false);
+
+// ===== Filtro anti-spam (antes de generar radicado o enviar) =====
+// 1) Honeypot: campo oculto que solo los bots llenan.
+if (!empty($_POST['no_rellenar']) || !empty($_POST['campo_oculto'])) {
+    header("Location: tramites.html");   // descarte silencioso
+    exit;
+}
+// 2) Validación de formato en el servidor (nombres, documentos, celulares...).
+if (!datos_validos($_POST)) {
+    header("Location: tramites.html?error=1&motivo=formato");
+    exit;
+}
 
 // Radicado (solo para PQRS)
 $radicado = $es_pqrs ? generarRadicado(__DIR__) : '';

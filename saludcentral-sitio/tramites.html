@@ -145,6 +145,11 @@
                     </div>
                     <form action="enviar.php" method="POST" enctype="multipart/form-data" class="p-6 md:p-8 space-y-8">
                         <input type="hidden" name="tipo_formulario" value="Solicitud de Historia Clínica y/o Documentos Médicos">
+                        <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:0;height:0;overflow:hidden;" tabindex="-1">
+                            <label>No llenar este campo</label>
+                            <input type="text" name="no_rellenar" tabindex="-1" autocomplete="off">
+                            <input type="text" name="campo_oculto" tabindex="-1" autocomplete="off">
+                        </div>
 
                         <!-- 1. ¿Quién solicita? -->
                         <div>
@@ -329,6 +334,11 @@
                     </div>
                     <form action="enviar.php" method="POST" enctype="multipart/form-data" class="p-6 md:p-8 space-y-8">
                         <input type="hidden" name="tipo_formulario" value="Radicación de PQRS">
+                        <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:0;height:0;overflow:hidden;" tabindex="-1">
+                            <label>No llenar este campo</label>
+                            <input type="text" name="no_rellenar" tabindex="-1" autocomplete="off">
+                            <input type="text" name="campo_oculto" tabindex="-1" autocomplete="off">
+                        </div>
 
                         <!-- ¿Quién radica? -->
                         <div>
