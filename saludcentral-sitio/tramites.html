@@ -257,8 +257,22 @@
                             </div>
                             <div class="grid gap-4 md:gap-5">
                                 <div>
-                                    <label class="field-label">Periodo o fecha de atención requerida</label>
-                                    <input type="text" name="periodo_atencion" class="field-input" placeholder="Indique las fechas o el periodo de atención de los documentos que necesita">
+                                    <label class="field-label">Mes de atención requerido</label>
+                                    <select name="periodo_atencion" class="field-input">
+                                        <option value="">Seleccione el mes...</option>
+                                        <option>Enero</option>
+                                        <option>Febrero</option>
+                                        <option>Marzo</option>
+                                        <option>Abril</option>
+                                        <option>Mayo</option>
+                                        <option>Junio</option>
+                                        <option>Julio</option>
+                                        <option>Agosto</option>
+                                        <option>Septiembre</option>
+                                        <option>Octubre</option>
+                                        <option>Noviembre</option>
+                                        <option>Diciembre</option>
+                                    </select>
                                 </div>
                                 <div>
                                     <label class="field-label">Motivo de la solicitud <span class="text-gray-400 font-medium normal-case">(opcional)</span></label>
@@ -347,11 +361,12 @@
                                 <h3 class="text-base md:text-lg font-black text-indigo-950">¿Quién radica la PQRS?</h3>
                             </div>
                             <label class="field-label">Selecciona quién está radicando la solicitud <span class="req">*</span></label>
-                            <div class="grid sm:grid-cols-2 gap-2.5 mb-2">
+                            <div class="grid sm:grid-cols-3 gap-2.5 mb-2">
                                 <label class="radio-item justify-center"><input type="radio" name="radica" value="El propio paciente" required class="w-4 h-4 accent-violet-600" onchange="toggleTercero()"> El propio paciente</label>
-                                <label class="radio-item justify-center"><input type="radio" name="radica" value="Un tercero" class="w-4 h-4 accent-violet-600" onchange="toggleTercero()"> Un tercero (familiar, acudiente...)</label>
+                                <label class="radio-item justify-center"><input type="radio" name="radica" value="Un tercero" class="w-4 h-4 accent-violet-600" onchange="toggleTercero()"> Un tercero</label>
+                                <label class="radio-item justify-center"><input type="radio" name="radica" value="Anónimo" class="w-4 h-4 accent-violet-600" onchange="toggleTercero()"> Anónimo</label>
                             </div>
-                            <p class="text-xs text-gray-400 font-medium">Si eres el propio paciente, continúa diligenciando tus datos abajo. Si eres un tercero, cuéntanos quién eres.</p>
+                            <p class="text-xs text-gray-400 font-medium">Si eres el propio paciente o un tercero, diligencia los datos correspondientes. Si la solicitud es anónima, puedes omitir los datos personales del paciente.</p>
 
                             <div id="bloque-tercero" style="display:none;" class="mt-4 bg-violet-50/60 border border-violet-100 rounded-2xl p-4 md:p-5">
                                 <p class="text-sm font-black text-indigo-900 mb-3 flex items-center gap-2"><i data-lucide="user-plus" width="18" height="18" class="text-violet-600"></i> Datos de quien radica (tercero)</p>
@@ -378,36 +393,33 @@
                                 <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-100 text-violet-700 font-black text-sm">2</span>
                                 <h3 class="text-base md:text-lg font-black text-indigo-950">Información del paciente</h3>
                             </div>
-                            <label class="field-label">Tipo de persona <span class="req">*</span></label>
-                            <div class="grid grid-cols-3 gap-2.5 mb-5">
-                                <label class="radio-item justify-center"><input type="radio" name="tipo_persona" value="Natural" required class="w-4 h-4 accent-violet-600"> Natural</label>
-                                <label class="radio-item justify-center"><input type="radio" name="tipo_persona" value="Jurídica" class="w-4 h-4 accent-violet-600"> Jurídica</label>
-                                <label class="radio-item justify-center"><input type="radio" name="tipo_persona" value="Anónimo" class="w-4 h-4 accent-violet-600"> Anónimo</label>
-                            </div>
                             <div class="grid sm:grid-cols-2 gap-4 md:gap-5">
                                 <div class="sm:col-span-2">
                                     <label class="field-label">Nombres y apellidos del paciente</label>
                                     <input type="text" name="paciente_nombres" class="field-input" placeholder="Nombres y apellidos del paciente">
                                 </div>
                                 <div>
+                                    <label class="field-label">Tipo de documento del paciente</label>
+                                    <select name="paciente_tipo_documento" class="field-input">
+                                        <option value="">Seleccione...</option>
+                                        <option>Cédula de ciudadanía</option>
+                                        <option>Tarjeta de identidad</option>
+                                        <option>Cédula de extranjería</option>
+                                        <option>Pasaporte</option>
+                                        <option>Otro</option>
+                                    </select>
+                                </div>
+                                <div>
                                     <label class="field-label">Número de documento del paciente</label>
                                     <input type="text" name="paciente_numero_documento" class="field-input" placeholder="Número de documento">
                                 </div>
                                 <div>
-                                    <label class="field-label">Celular 1</label>
+                                    <label class="field-label">Celular</label>
                                     <input type="tel" name="celular_1" class="field-input" placeholder="Número de celular del paciente">
-                                </div>
-                                <div>
-                                    <label class="field-label">Celular 2</label>
-                                    <input type="tel" name="celular_2" class="field-input" placeholder="Otro número de celular">
                                 </div>
                                 <div>
                                     <label class="field-label">Correo electrónico</label>
                                     <input type="email" name="correo" class="field-input" placeholder="Correo electrónico del paciente">
-                                </div>
-                                <div>
-                                    <label class="field-label">Ciudad</label>
-                                    <input type="text" name="ciudad" list="ciudades" class="field-input" placeholder="Escriba o seleccione la ciudad">
                                 </div>
                             </div>
                         </div>
@@ -481,7 +493,7 @@
 
                             <div class="mt-4 bg-violet-50 border-l-4 border-violet-400 p-4 rounded-r-xl">
                                 <p class="text-xs md:text-sm text-gray-700 font-medium leading-relaxed">
-                                    <strong class="text-indigo-900">Solicitudes anónimas o de identidad reservada:</strong> en caso de que tu solicitud sea anónima o de identidad reservada, selecciona la opción <strong>"Anónimo"</strong> en el campo "Tipo de persona". Si no lo haces, tu solicitud deberá efectuarse directamente ante la Procuraduría General de la Nación, conforme al artículo 38 de la Ley 190 de 1995; artículo 69 de la Ley 734 de 2002 y artículo 81 de la Ley 962 de 2005.
+                                    <strong class="text-indigo-900">Solicitudes anónimas o de identidad reservada:</strong> en caso de que tu solicitud sea anónima o de identidad reservada, selecciona la opción <strong>"Anónimo"</strong> en <strong>"¿Quién radica la PQRS?"</strong>. Si no lo haces, tu solicitud deberá efectuarse directamente ante la Procuraduría General de la Nación, conforme al artículo 38 de la Ley 190 de 1995; artículo 69 de la Ley 734 de 2002 y artículo 81 de la Ley 962 de 2005.
                                     <a href="https://www.procuraduria.gov.co" target="_blank" rel="noopener" class="text-violet-700 font-bold underline">Accede a la página de la Procuraduría General de la Nación.</a>
                                 </p>
                             </div>
